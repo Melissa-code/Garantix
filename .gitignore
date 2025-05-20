@@ -1,2 +1,9 @@
+# Environnement virtuel
 env
+
+# Variables d’environnement
 .env
+
+# Fichiers Python temporaires
+__pycache__/
+*.pyc
