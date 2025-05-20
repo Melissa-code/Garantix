@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% block title %}
+<title></title>
+{% endblock %} 
+
+{% block content %}
+<h1>Liste des garanties </h1>
+  
+    {% for warranty in warranties %}
+        <article>
+            <!-- card produit -->
+            <sl-card class="card-header">
+                <div slot="header">
+                    {{ warranty.product_name }}
+                </div>
+                <div>
+                    <ul>
+                        <li>Date d'achat : {{ warranty.purchase_date }} </li>
+                        <li>Garantie : {{ warranty.warranty_duration_months }} mois</li>
+                    </ul>
+                    <form action="">
+                        <button class="btn btn-submit">voir la garnatie</button>
+                    </form>
+                    {% if request.user.is_authenticated %}
+                        <a href="">Modifier</a>
+                        <a href="">Supprimer</a>
+                    {% endif %}
+                </div>
+                
+               
+            </sl-card>
+            
+        </article>
+    {% endfor %}
+
+{% endblock %}
