@@ -12,7 +12,7 @@ class Warranty(models.Model):
     notes = models.TextField(blank=True, null=True, verbose_name="Notes")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Crée le")
 
-    # requête du type Warranty.objects.all() retournera les résultats triés par ordre alphabétique du nom
+    # Warranty.objects.all() return les résultats triés par ordre alphabétique du nom
     class Meta:
         ordering = ['product_name', 'brand'] # tri par nom d'abord puis par marque si même nom 
         verbose_name = "Garanties"

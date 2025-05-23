@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.conf import settings
-
 from django.views.generic import ListView
 from django.views.generic import CreateView
 from warranty.models import Warranty

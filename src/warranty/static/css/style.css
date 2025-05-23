@@ -3,6 +3,7 @@
 
 body {
     font-family: "Jost", sans-serif;
+    font-size: 18px;
 }
 
 header {
@@ -23,8 +24,18 @@ header {
 
 h1 {
     margin: 3rem 0; 
-    display: flex;
-    justify-content: center;
+    text-align: center;
+    font-size: 40px;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+h3{
+  font-weight: 500;
+  font-size: 18px;
 }
 
 nav {
@@ -36,6 +47,11 @@ nav {
 main {
     margin: 0 3rem;
     height: 75vh;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
 }
 
 .card-header {
@@ -55,3 +71,76 @@ main {
   .card-header sl-icon-button {
     font-size: var(--sl-font-size-medium);
   }
+
+  /**************************
+  warranties list 
+  ***************************/
+  #warranties_list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+
+  #search-warranty-title {
+    text-align: center;
+    font-size: 25px;
+  }
+
+  .searchbar  {
+    display: flex;
+    gap: .2rem;
+  }
+
+  #search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+  .card-header {
+    margin: 0 1rem;
+  }
+
+  .btns-action {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+
+ .icon-large {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+
+sl-card::part(header) {
+  background-color: #e6e8e6; 
+  height: 6.5rem;
+}
+
+.card-header-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.truncate-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;        /* nombre max de lignes */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+}
