@@ -18,18 +18,20 @@
     
     <sl-divider></sl-divider>
 
-    <!-- breadcrumb -->
-    <sl-breadcrumb>
-        <sl-breadcrumb-item>
-            <sl-icon slot="prefix" name="house"></sl-icon>
-            Accueil
-        </sl-breadcrumb-item>
-        <sl-breadcrumb-item>Mes garanties</sl-breadcrumb-item>
-    </sl-breadcrumb>
-
-
     <!-- List warranties section -->
     <section id="warranties">
+
+        <!-- breadcrumb -->
+        <sl-breadcrumb>
+            <sl-breadcrumb-item >
+                <a href="{% url 'warranty:home' %}">
+                    <sl-icon slot="prefix" name="house"></sl-icon>
+                    Accueil
+                </a>
+            </sl-breadcrumb-item>
+            <sl-breadcrumb-item>Mes garanties</sl-breadcrumb-item>
+        </sl-breadcrumb>
+
         <div class="title">
             <h1>Mes garanties</h1>
 
@@ -60,8 +62,8 @@
                     <div class="btns-action">
                         <form action="">
                             <!-- Detail Warranty link -->
-                            <sl-button size="large" circle class="icon-btn"  variant="neutral" outline href="">
-                                <sl-icon name="file-earmark-text-fill" label="Edit" class="icon-large"></sl-icon>
+                            <sl-button size="large" circle class="icon-btn"  variant="neutral" outline href={% url 'warranty:warranty_detail' warranty.pk %}>
+                                <sl-icon name="file-earmark-fill" label="garantie" class="icon-large" style="color:black;"></sl-icon>
                             </sl-button>
                         </form>
                         <!-- Action buttons -->
@@ -69,16 +71,15 @@
                             {% if request.user.is_authenticated %}
                                 <!-- Edit button -->
                                 <sl-button size="large" circle class="icon-btn"  variant="warning" outline href="">
-                                    <sl-icon name="pencil" label="Edit" class="icon-large"></sl-icon>
+                                    <sl-icon name="pencil-square" label="modifier" class="icon-large"></sl-icon>
                                 </sl-button>
                                 <!-- Delete button -->
                                 <sl-button size="large" circle class="icon-btn" variant="danger" outline href="">
-                                    <sl-icon name="trash" label="Trash" class="icon-large"></sl-icon>
+                                    <sl-icon name="trash2" label="supprimer" class="icon-large"></sl-icon>
                                 </sl-button>
                             {% endif %}
                         </div>
                     </div>
-
                 </div>
             </sl-card>
         {% endfor %}

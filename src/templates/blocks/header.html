@@ -1,11 +1,32 @@
-<header>
+<header class="">
+  <!-- Logo / home -->
   <div class="logo-div">
     <a id="logo-nav" href="/">Garantix</a
     >
   </div>
-  <nav style="display: flex; gap: 1rem">
-    <a href="/warranties/">Garanties</a>
-    <a href="/admin/">Connexion</a>
-    <a href="#">Profil</a>
+  <nav style="">
+    <!-- home -->
+    <a href="/" title="Accueil">
+      <sl-icon name="house-door-fill" label="Accueil" class="icon-large menu-icon" style="color:black;"></sl-icon>
+      <span style="color:black;">Accueil</span>
+    </a>
+    {% if  not request.user.is_authenticated %}
+      <!-- login -->
+      <a href="/admin/"  title="Se connecter">
+        <sl-icon name="person-fill" label="connexion" class="icon-large menu-icon" style="color:black;"></sl-icon>
+        <span style="color:black;">Connexion</span>
+      </a>
+    {% else %}
+      <!-- warranties -->
+      <a href="/warranties/" title="Mes garanties">
+        <sl-icon name="file-earmark-fill" label="garanties" class="icon-large menu-icon" style="color:black;"></sl-icon>
+        <span style="color:black;">Garanties</span>
+      </a>
+      <!-- logout -->
+      <a href="/admin/" title="Se déconnecter">
+        <sl-icon name="person-fill-slash" label="déconnexion" class="icon-large menu-icon" style="color:black;"></sl-icon>
+        <span style="color:black;">Déconnexion</span>
+      </a>
+      {% endif %}
   </nav>
 </header>
