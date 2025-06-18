@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.conf import settings
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 from warranty.models import Warranty
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -49,4 +50,10 @@ class WarrantyUpdate(UpdateView):
     model = Warranty
     template_name = "warranty/warranty_update.html"
     fields = ["product_name", "brand", "purchase_date", "warranty_duration_months", "vendor", "imageReceipt", "notes", ]
-    
+
+@method_decorator(login_required, name="dispatch")
+class WarrantyDelete(DeleteView): 
+    """ Page Supprimer une garantie """
+    model = Warranty
+    context_object_name = "warranty"
+    success_url = reverse_lazy("warranty:home")
