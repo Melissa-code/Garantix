@@ -19,7 +19,7 @@ class Warranty(models.Model):
 
     # redirection apres ajout d'une garantie 
     def get_absolute_url(self):
-        return reverse('warranty:garantix-create') 
+        return reverse('warranty:warranties_list') 
     
     @property
     def warranty_expiry_date(self): 

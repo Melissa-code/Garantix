@@ -19,7 +19,7 @@
     <sl-divider></sl-divider>
 
     <!-- List warranties section -->
-    <section id="warranties">
+    <section id="warranties" class="container">
 
         <!-- breadcrumb -->
         <sl-breadcrumb>
@@ -37,8 +37,8 @@
 
             <!-- Add Warranty button -->
             <sl-tooltip content="Ajouter une garantie">
-                <sl-button size="large" circle class="icon-btn" variant="neutral" outline href="">
-                    <sl-icon name="plus-lg" label="plus-lg" class="icon-large"></sl-icon>
+                <sl-button size="medium" circle class="icon-btn" variant="neutral" outline href={% url 'warranty:warranty_create' %}>
+                    <sl-icon name="plus-lg" label="plus-lg" class="icon-medium"></sl-icon>
                 </sl-button>
             </sl-tooltip>
         </div>
@@ -62,20 +62,20 @@
                     <div class="btns-action">
                         <form action="">
                             <!-- Detail Warranty link -->
-                            <sl-button size="large" circle class="icon-btn"  variant="neutral" outline href={% url 'warranty:warranty_detail' warranty.pk %}>
-                                <sl-icon name="file-earmark-fill" label="garantie" class="icon-large" style="color:black;"></sl-icon>
+                            <sl-button size="medium" circle class="icon-btn"  variant="neutral" outline href={% url 'warranty:warranty_detail' warranty.pk %}>
+                                <sl-icon name="file-earmark-fill" label="garantie" class="icon-medium" style="color:black;"></sl-icon>
                             </sl-button>
                         </form>
                         <!-- Action buttons -->
                         <div class="action-btns">
                             {% if request.user.is_authenticated %}
                                 <!-- Edit button -->
-                                <sl-button size="large" circle class="icon-btn"  variant="warning" outline href="">
-                                    <sl-icon name="pencil-square" label="modifier" class="icon-large"></sl-icon>
+                                <sl-button size="medium" circle class="icon-btn"  variant="warning" outline href="">
+                                    <sl-icon name="pencil-square" label="modifier" class="icon-medium"></sl-icon>
                                 </sl-button>
                                 <!-- Delete button -->
-                                <sl-button size="large" circle class="icon-btn" variant="danger" outline href="">
-                                    <sl-icon name="trash2" label="supprimer" class="icon-large"></sl-icon>
+                                <sl-button size="medium" circle class="icon-btn" variant="danger" outline href="">
+                                    <sl-icon name="trash2" label="supprimer" class="icon-medium"></sl-icon>
                                 </sl-button>
                             {% endif %}
                         </div>
