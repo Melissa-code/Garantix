@@ -10,7 +10,7 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.views import View
 from django.db.models import Q
-
+from warranty.mixins import ContextDataMixin, WarrantySearchMixin
 
 class Home(TemplateView): 
     """ Page Accueil """
@@ -22,10 +22,10 @@ class Home(TemplateView):
         return context
 
 @method_decorator(login_required, name="dispatch")
-class WarrantiesList(ListView): 
+class WarrantiesList(ContextDataMixin, WarrantySearchMixin, ListView): 
     """ Page Liste de mes garanties """
     model = Warranty
-    context_object_name = "warranties" # variable
+    context_object_name = "warranties" # variable in template
     template_name = "warranty/warranties_list.html"
     fields = ["product_name", "brand", "purchase_date", "warranty_duration_months", "vendor", "imageReceipt", "notes", "created_at", ]
 

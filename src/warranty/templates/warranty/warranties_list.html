@@ -2,20 +2,27 @@
     <title>Liste des garanties</title>
 {% endblock %} 
 
+
 {% block content %}
 
     <!-- Searchbar section -->
     <section id="search">
-        <h2 id="search-warranty-title">Rechercher une garantie</h1>
+        <h2 id="search-warranty-title">Rechercher une garantie</h2>
 
-        <div class="searchbar">
-            <sl-input placeholder="Saisir le nom d'un produit ou marque" size="large" clearable></sl-input>
-            <sl-button variant="default" size="large">
+        <form method="get" class="searchbar">
+            <sl-input 
+                name="search" 
+                placeholder="Saisir le nom d'un produit ou marque" 
+                size="large" 
+                clearable 
+                value="{{ request.GET.search }}">
+            </sl-input>
+            <sl-button type="submit" variant="default" size="large">
                 <sl-icon name="search" label="Rechercher"></sl-icon>
             </sl-button>
-        </div>
+        </form>
     </section>
-    
+
     <sl-divider></sl-divider>
 
     <!-- List warranties section -->
@@ -32,6 +39,8 @@
             <sl-breadcrumb-item>Mes garanties</sl-breadcrumb-item>
         </sl-breadcrumb>
 
+        <p>{{ warranties|length }} garanties trouvées</p>
+       
         <div class="title">
             <h1>Mes garanties</h1>
 
@@ -70,11 +79,11 @@
                         <div class="action-btns">
                             {% if request.user.is_authenticated %}
                                 <!-- Edit button -->
-                                <sl-button size="medium" circle class="icon-btn"  variant="warning" outline href="">
+                                <sl-button size="medium" circle class="icon-btn"  variant="warning" outline href="{% url 'warranty:warranty_update' warranty.pk %}">
                                     <sl-icon name="pencil-square" label="modifier" class="icon-medium"></sl-icon>
                                 </sl-button>
                                 <!-- Delete button -->
-                                <sl-button size="medium" circle class="icon-btn" variant="danger" outline href="">
+                                <sl-button size="medium" circle class="icon-btn" variant="danger" outline href="{% url 'warranty:warranty_delete' warranty.pk %}">
                                     <sl-icon name="trash2" label="supprimer" class="icon-medium"></sl-icon>
                                 </sl-button>
                             {% endif %}
@@ -82,6 +91,8 @@
                     </div>
                 </div>
             </sl-card>
+            {% empty %}
+            Aucune garantie trouvée pour votre recherche</p>
         {% endfor %}
         </article>
     </section>
