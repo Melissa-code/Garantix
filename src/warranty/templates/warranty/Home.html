@@ -1,8 +1,57 @@
-{% extends "base.html" %} {% block title %}
-<title></title>
-{% endblock %} {% block content %}
-<h1>Bienvenue sur le site de Garantix</h1>
-  
+{% extends "base.html" %} 
 
-<sl-button type="primary">Bouton Shoelace</sl-button>
-{% endblock %}
+{% block title %}
+<title>Garantix - Accueil</title>
+{% endblock title %} 
+
+{% block content %}
+
+    <!-- slogan -->
+    <section class="slogan">
+        <h1>Bienvenue sur Garantix</h1>
+        <p>Centralisez vos garanties. Ne perdez plus un seul reçu.</p>
+        <sl-button variant="primary" size="large">Créer un compte</sl-button>
+        <sl-button variant="default" size="large">Se connecter</sl-button>
+    </section>
+
+  <!-- features -->
+  <section class="features">
+    <sl-card>
+      <sl-icon name="archive" style="font-size: 40px; color: #4f46e5;"></sl-icon>
+      <h3>Stockez vos garanties</h3>
+      <p>Centralisez tous vos documents et reçus en un seul endroit, accessible partout.</p>
+    </sl-card>
+
+    <sl-card>
+      <sl-icon name="alarm" style="font-size: 40px; color: #4f46e5;"></sl-icon>
+      <h3>Alertes avant expiration</h3>
+      <p>Recevez des notifications pour ne jamais oublier une garantie importante.</p>
+    </sl-card>
+
+    <sl-card>
+      <sl-icon name="search" style="font-size: 40px; color: #4f46e5;"></sl-icon>
+      <h3>Retrouvez facilement</h3>
+      <p>Recherchez vos produits et garanties rapidement grâce à notre interface intuitive.</p>
+    </sl-card>
+
+    <sl-card>
+      <sl-icon name="cloud" style="font-size: 40px; color: #4f46e5;"></sl-icon>
+      <h3>Accès sécurisé</h3>
+      <p>Vos données sont sauvegardées dans le cloud et accessibles partout, en toute sécurité.</p>
+    </sl-card>
+  </section>
+
+  <!-- mockup -->
+  <section class="mockup">
+    <img src="https://via.placeholder.com/600x400.png?text=Dashboard+Garantix" alt="Mockup Garantix">
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Rejoignez Garantix dès aujourd'hui</h2>
+    <p>Ne perdez plus vos garanties et facilitez votre suivi.</p>
+    <sl-button variant="primary" size="large">S'inscrire gratuitement</sl-button>
+  </section>
+
+
+{% endblock content %}
