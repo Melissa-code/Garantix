@@ -1,0 +1,99 @@
+{% extends "base.html" %} {% block title %}
+    <title>Liste des garanties</title>
+{% endblock %} 
+
+
+{% block content %}
+
+    <!-- Searchbar section -->
+    <section id="search">
+        <h2 id="search-warranty-title">Rechercher une garantie</h2>
+
+        <form method="get" class="searchbar">
+            <sl-input 
+                name="search" 
+                placeholder="Saisir le nom d'un produit ou marque" 
+                size="large" 
+                clearable 
+                value="{{ request.GET.search }}">
+            </sl-input>
+            <sl-button type="submit" variant="default" size="large">
+                <sl-icon name="search" label="Rechercher"></sl-icon>
+            </sl-button>
+        </form>
+    </section>
+
+    <sl-divider></sl-divider>
+
+    <!-- List warranties section -->
+    <section id="warranties" class="container">
+
+        <!-- breadcrumb -->
+        <sl-breadcrumb>
+            <sl-breadcrumb-item >
+                <a href="{% url 'warranty:home' %}">
+                    <sl-icon slot="prefix" name="house"></sl-icon>
+                    Accueil
+                </a>
+            </sl-breadcrumb-item>
+            <sl-breadcrumb-item>Mes garanties</sl-breadcrumb-item>
+        </sl-breadcrumb>
+
+        <p>{{ warranties|length }} garanties trouvées</p>
+       
+        <div class="title">
+            <h1>Mes garanties</h1>
+
+            <!-- Add Warranty button -->
+            <sl-tooltip content="Ajouter une garantie">
+                <sl-button size="medium" circle class="icon-btn" variant="neutral" outline href={% url 'warranty:warranty_create' %}>
+                    <sl-icon name="plus-lg" label="plus-lg" class="icon-medium"></sl-icon>
+                </sl-button>
+            </sl-tooltip>
+        </div>
+            
+        <!-- List warranties -->
+        <article id="warranties_list">
+        {% for warranty in warranties %}
+            <!-- card produit -->
+            <sl-card class="card-header">
+                <div slot="header" class="card-header-title">
+                    <h2 class="truncate-title">{{ warranty.product_name }}</h2>
+                    <h3>{{ warranty.brand }}</h3>
+                </div>
+                
+                <div>
+                    <ul>
+                        <li>Date d'achat : {{ warranty.purchase_date }} </li>
+                        <li>Garantie : {{ warranty.warranty_duration_months }} mois</li>
+                    </ul>
+
+                    <div class="btns-action">
+                        <form action="">
+                            <!-- Detail Warranty link -->
+                            <sl-button size="medium" circle class="icon-btn"  variant="neutral" outline href={% url 'warranty:warranty_detail' warranty.pk %}>
+                                <sl-icon name="file-earmark-fill" label="garantie" class="icon-medium" style="color:black;"></sl-icon>
+                            </sl-button>
+                        </form>
+                        <!-- Action buttons -->
+                        <div class="action-btns">
+                            {% if request.user.is_authenticated %}
+                                <!-- Edit button -->
+                                <sl-button size="medium" circle class="icon-btn"  variant="warning" outline href="{% url 'warranty:warranty_update' warranty.pk %}">
+                                    <sl-icon name="pencil-square" label="modifier" class="icon-medium"></sl-icon>
+                                </sl-button>
+                                <!-- Delete button -->
+                                <sl-button size="medium" circle class="icon-btn" variant="danger" outline href="{% url 'warranty:warranty_delete' warranty.pk %}">
+                                    <sl-icon name="trash2" label="supprimer" class="icon-medium"></sl-icon>
+                                </sl-button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </sl-card>
+            {% empty %}
+            Aucune garantie trouvée pour votre recherche</p>
+        {% endfor %}
+        </article>
+    </section>
+{% endblock %}

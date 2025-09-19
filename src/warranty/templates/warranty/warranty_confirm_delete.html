@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block title %}
+    <title>Supprimer une garantie</title>
+{% endblock %} 
+
+
+{% block content %}
+
+    <form action="" method="POST">
+    {% csrf_token %}
+        <p>Etes-vous sûr de vouloir supprimer la garantie <b>{{ warranty.product_name }}</b> ?</p>
+        <input type="submit" value="Oui supprimer">
+    </form>
+
+{% endblock %} 

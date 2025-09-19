@@ -1,0 +1,61 @@
+{% extends "base.html" %} 
+
+
+{% block title %}
+    <title>{{ warranty.product_name }}</title>
+{% endblock %} 
+
+
+{% block content %}
+
+<!-- breadcrumb section -->
+<section class="breadcrumb"><q></q>
+    <sl-breadcrumb>
+        <!-- Accueil -->
+        <sl-breadcrumb-item >
+            <a href="{% url 'warranty:home' %}">
+                <sl-icon slot="prefix" name="house"></sl-icon>
+                Accueil
+            </a>
+        </sl-breadcrumb-item>
+        <!-- Mes garanties -->
+        <sl-breadcrumb-item>
+            <a href="{% url 'warranty:warranties_list' %}">
+                <sl-icon slot="prefix" name="file-earmark"></sl-icon>
+                Mes garanties
+            </a>
+        </sl-breadcrumb-item>
+        <!-- Mes garanties -->
+        <sl-breadcrumb-item>
+            <sl-icon slot="prefix" name="file-earmark"></sl-icon>
+            Garantie de {{ warranty.product_name }} {{ warranty.brand }}
+        </sl-breadcrumb-item>
+    </sl-breadcrumb>
+</section>
+
+<!-- Detail warranty section -->
+<section id="warranty-section">
+  <article class="warranty-detail">
+    <header class="warranty-header">
+        <h2>{{ warranty.product_name }}</h2>
+        <h3>{{ warranty.brand }}</h3>
+    </header>
+
+    <div class="warranty-body">
+        <div class="warranty-text">
+            <p><b>Date d'achat:</b> {{ warranty.purchase_date|date:'j F Y' }}</p>
+            <p><b>Durée de garantie:</b> {{ warranty.warranty_duration_months }} mois</p>
+            <p><b>Revendeur:</b> {{ warranty.vendor }}</p>
+            <p><b>Notes:</b> {{ warranty.notes|safe|linebreaks }}</p>
+            <p><b>Enregistré le </b> {{ warranty.created_at|date:'j F Y' }}</p>
+        </div>
+
+        <div class="warranty-image">
+            <img src="" alt="image de l'article">
+        </div>
+    </div>
+</article>
+
+</section>
+
+{% endblock %}

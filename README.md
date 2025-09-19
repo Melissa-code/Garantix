@@ -20,7 +20,7 @@ cd garantix
 ```
 # Windows
 python -m venv env
-.\env\Scripts\activate  
+env\Scripts\activate
 # ou macOS/Linux
 source env/bin/activate  
 ```

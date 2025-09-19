@@ -1,0 +1,53 @@
+{% extends 'base.html' %} 
+
+
+{% block title %}
+    <title>Ajouter une garantie</title>
+{% endblock %} 
+
+
+{% block content %}
+<section class="title">
+    <h1>Ajouter une garantie</h1>
+</section>
+
+
+<!-- form section create -->
+<section class="form-container">
+
+    <sl-card class="form-card">
+
+    <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+     <div class="form-grid">
+        <!-- Colonne de gauche -->
+        <div class="form-column">
+          <sl-input name="product_name" placeholder="Nom du produit" clearable value="{{ form.product_name.value|default:'' }}"></sl-input>
+          <sl-input name="purchase_date" type="date" placeholder="Date d'achat" value="{{ form.purchase_date.value|default:'' }}"></sl-input>
+          <sl-input name="vendor" placeholder="Revendeur" clearable value="{{ form.vendor.value|default:'' }}"></sl-input>
+        </div>
+
+        <!-- Colonne de droite -->
+        <div class="form-column">
+          <sl-input name="brand" placeholder="Marque" clearable value="{{ form.brand.value|default:'' }}"></sl-input>
+          <sl-input name="warranty_duration_months" type="number" placeholder="Durée de garantie (mois)" value="{{ form.warranty_duration_months.value|default:'' }}"></sl-input>
+          <sl-input name="imageReceipt" type="file" placeholder="Image du reçu"></sl-input>
+        </div>
+      </div>
+
+      <!-- Notes (pleine largeur) -->
+      <sl-textarea name="notes" placeholder="Notes sur le produit" rows="4" help-text="Ajoutez une note sur la garantie">{{ form.notes.value|default:'' }}</sl-textarea>
+
+      <!-- Bouton -->
+      <div class="submit-container" >
+        <sl-button variant="secondary"><a href="{% url 'warranty:warranties_list' %}">Retour à la liste</a></sl-button>
+        <sl-button type="submit" variant="primary">Ajouter la garantie</sl-button>
+      </div>
+      
+    </form>
+
+      </sl-card>
+</section>
+
+{% endblock %}
