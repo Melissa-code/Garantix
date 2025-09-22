@@ -1,56 +1,124 @@
 {% extends "base.html" %} 
+{% load static %}
 
 {% block title %}
-<title>Garantix - Accueil</title>
+  <title>Garantix - Accueil</title>
 {% endblock title %} 
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
 
 {% block content %}
 
-    <!-- slogan -->
-    <section class="slogan">
-        <h1>Bienvenue sur Garantix</h1>
-        <p>Centralisez vos garanties. Ne perdez plus un seul reçu.</p>
-        <sl-button variant="primary" size="large">Créer un compte</sl-button>
-        <sl-button variant="default" size="large">Se connecter</sl-button>
-    </section>
-
-  <!-- features -->
-  <section class="features">
-    <sl-card>
-      <sl-icon name="archive" style="font-size: 40px; color: #4f46e5;"></sl-icon>
-      <h3>Stockez vos garanties</h3>
-      <p>Centralisez tous vos documents et reçus en un seul endroit, accessible partout.</p>
-    </sl-card>
-
-    <sl-card>
-      <sl-icon name="alarm" style="font-size: 40px; color: #4f46e5;"></sl-icon>
-      <h3>Alertes avant expiration</h3>
-      <p>Recevez des notifications pour ne jamais oublier une garantie importante.</p>
-    </sl-card>
-
-    <sl-card>
-      <sl-icon name="search" style="font-size: 40px; color: #4f46e5;"></sl-icon>
-      <h3>Retrouvez facilement</h3>
-      <p>Recherchez vos produits et garanties rapidement grâce à notre interface intuitive.</p>
-    </sl-card>
-
-    <sl-card>
-      <sl-icon name="cloud" style="font-size: 40px; color: #4f46e5;"></sl-icon>
-      <h3>Accès sécurisé</h3>
-      <p>Vos données sont sauvegardées dans le cloud et accessibles partout, en toute sécurité.</p>
-    </sl-card>
+  <!-- section hero (slogan) -->
+  <section id="hero">
+    <article>
+      <h1>Bienvenue sur Garantix</h1>
+      <p>Centralisez vos garanties. Ne perdez plus un seul reçu.</p>
+      <sl-button class="btn btn-primary" size="medium">Se connecter</sl-button>
+      <sl-button class="btn btn-white" size="medium">Créer un compte</sl-button>
+    </article>
   </section>
 
-  <!-- mockup -->
-  <section class="mockup">
-    <img src="https://via.placeholder.com/600x400.png?text=Dashboard+Garantix" alt="Mockup Garantix">
+  <!-- section features -->
+  <section id="features" class="contain">
+    <article>
+      <div class="card-group">
+        <sl-card class="custom-card">
+          <sl-icon name="archive" class="custom-card-icon"></sl-icon>
+          <h3>Stockez vos garanties</h3>
+          <p>Centralisez tous vos documents et reçus en un seul endroit, accessible partout.</p>
+        </sl-card>
+
+        <sl-card class="custom-card">
+          <sl-icon name="search" class="custom-card-icon"></sl-icon>
+          <h3>Retrouvez facilement</h3>
+          <p>Recherchez vos produits et garanties rapidement grâce à notre interface intuitive.</p>
+        </sl-card>
+
+        <sl-card class="custom-card">
+          <sl-icon name="cloud" class="custom-card-icon"></sl-icon>
+          <h3>Accès sécurisé</h3>
+          <p>Vos données sont sauvegardées en toute sécurité.</p>
+        </sl-card>
+
+         <sl-card class="custom-card">
+          <sl-icon name="alarm" class="custom-card-icon"></sl-icon>
+          <h3>Alertes avant expiration</h3>
+          <p>Recevez des notifications pour ne jamais oublier une garantie importante.</p>
+        </sl-card>
+      </div>
+    </article>
   </section>
 
-  <!-- CTA -->
-  <section class="cta">
-    <h2>Rejoignez Garantix dès aujourd'hui</h2>
-    <p>Ne perdez plus vos garanties et facilitez votre suivi.</p>
-    <sl-button variant="primary" size="large">S'inscrire gratuitement</sl-button>
+  <!-- section mockup (carousel) -->
+  <section id="mockup" class="contain">
+    <sl-carousel pagination navigation mouse-dragging loop class="carousel-mockup">
+      <sl-carousel-item>
+        <img
+          alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)"
+          src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZGFzaGJvYXJkfGVufDB8fDB8fHww"
+          class="carousel-img" 
+        />
+      </sl-carousel-item>
+      <sl-carousel-item>
+        <img
+          alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)"
+          src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGRhc2hib2FyZHxlbnwwfHwwfHx8MA%3D%3D" 
+          class="carousel-img" 
+        />
+      </sl-carousel-item>
+      <sl-carousel-item>
+        <img
+          alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)"
+          src="https://images.unsplash.com/photo-1532102235608-dc8fc689c9ab?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGRhc2hib2FyZHxlbnwwfHwwfHx8MA%3D%3D" 
+          class="carousel-img" 
+          />
+      </sl-carousel-item>
+    </sl-carousel>
+  </section>
+
+  <!-- section Call to action -->
+  <section id="cta" class="contain">
+    <article>
+      <h2>Rejoignez Garantix dès aujourd'hui</h2>
+      <p>Ne perdez plus vos garanties et facilitez votre suivi.</p>
+      <sl-button class="btn btn-white" size="medium">S'inscrire gratuitement</sl-button>
+    </article>
+  </section>
+
+  <!-- section testimonials -->
+  <section id="testimonials" class="contain">
+    <div class="contain">
+      <h2>Témoignages</h2>
+      <div class="testimonials-card-group">
+        <sl-card class="testimonial-card">
+          <blockquote>« Grâce à Garantix, j’ai pu retrouver ma garantie en quelques secondes. »</blockquote>
+          <div slot="footer">
+            <sl-rating value="4.5" readonly></sl-rating>
+            <span>— Marie, cliente</span>
+          </div>
+        </sl-card>
+
+        <sl-card class="testimonial-card">
+          <blockquote>« Les rappels d’expiration sont super pratiques. Je recommande Garantix. »</blockquote>
+          <div slot="footer">
+            <sl-rating value="5" readonly></sl-rating>
+            <span>— Julien, client</span>
+          </div>
+        </sl-card>
+
+        <sl-card class="testimonial-card">
+          <blockquote>« Enfin une solution simple pour centraliser l'ensemble de mes garanties ! »</blockquote>
+          <div slot="footer">
+            <sl-rating value="4.5" readonly></sl-rating>
+            <span>— Sarah, cliente</span>
+          </div>
+        </sl-card>
+      </div>
+    </div>
   </section>
 
 

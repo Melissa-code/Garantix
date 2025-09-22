@@ -1,25 +1,84 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Poetsen+One&display=swap');
 @import "reset.css"; 
 
+:root {
+  /* custom colors */ 
+  --black: #0A0A0A;
+  --black-middle: #18181B; 
+  --black-light: #1E1E1F; 
+  --white: #FFFFFF;
+  --primary: #2563EB;
+  --secondary: #E5E7EB; 
+  --secondary-light: #F3F4F6;
+  --info: #5498F7;
+  --info-light: #BBD9FB; 
+}
+
+
 body {
-    font-family: "Jost", sans-serif;
-    font-size: 18px;
+  font-family: "Jost", sans-serif;
+  font-size: 18px;
+  color: var(--black);
 }
 
 h1 {
-    margin: 3rem 0; 
-    text-align: center;
-    font-size: 40px;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 35px;
 }
 
 h2 {
   font-weight: 700;
-  font-size: 20px;
+  font-size: 1.4rem;
 }
 
-h3{
-  font-weight: 500;
-  font-size: 18px;
+h3 {
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+.contain {
+  margin: 1rem 8rem;
+}
+
+.btn::part(base) {
+  border: none;
+  padding: 0.3rem; 
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  font-size: 17px;
+  min-width: 160px;
+}
+
+.btn-primary::part(base) {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.btn-primary::part(base):hover {
+  background-color: var(--info);
+}
+
+.btn-white::part(base) {
+  background-color: var(--white);
+  color: var(--black);
+  border: 1px solid var(--secondary);  
+}
+
+.btn-white::part(base):hover {
+  background-color: var(--secondary);
+  color: var(--black-light);
+}
+
+
+/* media queries */ 
+
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: 28px;
+  }
 }
 
 header {
@@ -45,9 +104,26 @@ nav {
     gap: 2rem;
 }
 
-main {
-    height: 75vh;
+/* footer */
+
+footer {
+  padding: 2rem 1rem;
+  border-top: 1px solid var(--black-light);
+  text-align: center;
 }
+
+footer .footer-link::part(base) {
+  color: var(--primary);
+}
+
+footer .footer-link::part(base):hover {
+  color: var(--info);
+}
+
+
+/* main {
+    height: 75vh;
+} */
 
 ul {
   list-style: none;
@@ -243,3 +319,5 @@ warranties forms
   margin-top: 1.5rem;
   gap: 2rem;
 }
+
+
