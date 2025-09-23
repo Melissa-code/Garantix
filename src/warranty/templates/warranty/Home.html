@@ -17,8 +17,12 @@
     <article>
       <h1>Bienvenue sur Garantix</h1>
       <p>Centralisez vos garanties. Ne perdez plus un seul reçu.</p>
-      <sl-button class="btn btn-primary" size="medium">Se connecter</sl-button>
-      <sl-button class="btn btn-white" size="medium">Créer un compte</sl-button>
+      {% if  request.user.is_authenticated %}
+        <sl-button class="btn btn-primary" size="medium">Se déconnecter</sl-button>
+      {% else %}
+        <sl-button class="btn btn-primary" size="medium">Se connecter</sl-button>
+        <sl-button class="btn btn-white" size="medium">Créer un compte</sl-button>
+      {% endif %}
     </article>
   </section>
 
