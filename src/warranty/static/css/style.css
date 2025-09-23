@@ -1,53 +1,191 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Poetsen+One&display=swap');
 @import "reset.css"; 
 
+:root {
+  /* custom colors */ 
+  --black: #0A0A0A;
+  --black-middle: #18181B; 
+  --black-light: #1E1E1F; 
+  --white: #FFFFFF;
+  --primary: #2563EB;
+  --secondary: #E5E7EB; 
+  --secondary-light: #F3F4F6;
+  --info: #5498F7;
+  --info-light: #BBD9FB; 
+}
+
+
 body {
-    font-family: "Jost", sans-serif;
-    font-size: 18px;
+  font-family: "Jost", sans-serif;
+  font-size: 18px;
+  color: var(--black);
 }
 
 h1 {
-    margin: 3rem 0; 
-    text-align: center;
-    font-size: 40px;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 30px;
 }
 
 h2 {
   font-weight: 700;
-  font-size: 20px;
+  font-size: 1.4rem;
 }
 
-h3{
-  font-weight: 500;
-  font-size: 18px;
+h3 {
+  font-weight: 600;
+  font-size: 1.4rem;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #ccc;
+.contain {
+  margin: 1rem 8rem;
 }
 
-#logo-nav {
-    font-family: "Poetsen One", sans-serif;
-    text-decoration: none; 
-    font-weight: bold; 
-    font-size: 3rem; 
-    color: black;
-    margin-left: 3rem;
+.btn::part(base) {
+  border: none;
+  padding: 0.3rem; 
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  font-size: 17px;
+  min-width: 160px;
 }
 
-nav {
-    margin: 0 2rem;
-    display: flex;
-    gap: 2rem;
+.btn-primary::part(base) {
+  background-color: var(--primary);
+  color: var(--white);
 }
 
-main {
+.btn-primary::part(base):hover {
+  background-color: var(--info);
+}
+
+.btn-white::part(base) {
+  background-color: var(--white);
+  color: var(--black);
+  border: 1px solid var(--secondary);  
+}
+
+.btn-white::part(base):hover {
+  background-color: var(--secondary);
+  color: var(--black-light);
+}
+
+
+/* media queries */ 
+
+@media only screen and (max-width: 500px) {
+  h1 {
+    font-size: 28px;
+  }
+  .contain {
+    margin: 1rem 2rem;
+  }
+}
+
+/***************************************************/
+/* Menu Navbar */
+/***************************************************/
+
+header .login-btn-navbar::part(base) {
+  background-color: var(--primary)!important; 
+  color: var(--white)!important; 
+}
+
+#mobile-menu-btn::part(base) {
+  color:  var(--black-light); 
+  border: 1px solid var(--secondary);   
+}
+
+#mobile-menu .login-btn-navbar::part(base) {
+  background-color: var(--primary)!important; 
+  color: var(--white)!important; 
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 8rem;  
+  border-bottom: 1px solid var(--black-light);
+}
+
+.nav-brand {
+  font-family: "Poetsen One", sans-serif;
+  font-size: 2.5rem;
+  font-weight: bold; 
+}
+
+.nav-desktop {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav-desktop sl-button::part(base),
+.nav-mobile sl-button::part(base) {
+  color: var(--black);       
+  font-size: 1rem;             
+  font-weight: 600;
+}
+
+.nav-mobile {
+  display: none;
+  flex-direction: column;
+  padding: 1rem 2rem;
+  background: white;
+  border-bottom: 1px solid var(--black-light);   
+  gap: 0.5rem;
+}
+
+.nav-mobile.open {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .nav-desktop { 
+    display: none; 
+  }
+  .nav-mobile-toggle { 
+    display: block; 
+  }
+  .navbar {
+    padding: 1rem 2rem;  
+  }
+}
+
+@media (min-width: 769px) {
+  .nav-mobile-toggle { 
+    display: none; 
+  }
+  .nav-mobile {
+    display: none !important;
+  }
+}
+
+/***************************************************/
+/* Footer */
+/***************************************************/
+
+footer {
+  padding: 2rem 1rem;
+  border-top: 1px solid var(--black-light);
+  text-align: center;
+}
+
+footer .footer-link::part(base) {
+  color: var(--primary);
+}
+
+footer .footer-link::part(base):hover {
+  color: var(--info);
+}
+
+
+/* main {
     height: 75vh;
-}
+} */
 
 ul {
   list-style: none;
@@ -243,3 +381,4 @@ warranties forms
   margin-top: 1.5rem;
   gap: 2rem;
 }
+

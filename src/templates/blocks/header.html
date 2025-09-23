@@ -1,31 +1,84 @@
-<header class="">
-  <!-- Logo / home -->
-  <div class="logo-div">
-    <a id="logo-nav" href="/">Garantix</a>
-  </div>
-  <nav style="">
-    <!-- home -->
-    <a href="{% url 'warranty:home' %}" title="Accueil">
-      <sl-icon name="house-door-fill" label="accueil" class="icon-medium menu-icon" style="color:black;"></sl-icon>
-      <span style="color:black;">Accueil</span>
-    </a>
-    {% if not request.user.is_authenticated %}
-      <!-- login -->
-      <a href="/admin/"  title="Se connecter">
-        <sl-icon name="person-fill" label="connexion" class="icon-medium menu-icon" style="color:black;"></sl-icon>
-        <span style="color:black;">Connexion</span>
-      </a>
+{% load static %}
+<header class="navbar">
+  <div class="nav-brand">Garantix</div>
+  
+  <!-- Desktop menu -->
+  <nav class="nav-desktop">
+    <sl-button variant="text" href="{% url 'warranty:home' %}" title="Accueil">
+       <sl-icon name="house-door-fill" label="accueil" class="icon-medium menu-icon"></sl-icon>
+       Accueil
+    </sl-button>
+    {% if request.user.is_authenticated %}
+      <sl-button variant="text" href="{% url 'warranty:warranties_list' %}" title="Mes garanties">
+        <sl-icon name="file-earmark-fill" label="garanties" class="icon-medium menu-icon"></sl-icon>
+        Mes garanties
+      </sl-button>
+      <sl-button variant="primary" class="login-btn-navbar" href=""  title="Se déconnecter">
+        <sl-icon name="person-fill" label="deconnexion" class="icon-medium menu-icon"></sl-icon>
+        Se déconnecter
+      </sl-button>
     {% else %}
-      <!-- warranties -->
-      <a href="{% url 'warranty:warranties_list' %}" title="Mes garanties">
-        <sl-icon name="file-earmark-fill" label="garanties" class="icon-medium menu-icon" style="color:black;"></sl-icon>
-        <span style="color:black;">Mes garanties</span>
-      </a>
-      <!-- logout -->
-      <a href="" title="Se déconnecter">
-        <sl-icon name="person-fill-slash" label="déconnexion" class="icon-medium menu-icon" style="color:black;"></sl-icon>
-        <span style="color:black;">Déconnexion</span>
-      </a>
-      {% endif %}
+      <sl-button variant="primary" class="login-btn-navbar" href="/admin/"  title="Se connecter">
+        <sl-icon name="person-fill" label="connexion" class="icon-medium menu-icon"></sl-icon>
+        Se connecter
+      </sl-button>
+    {% endif %}
   </nav>
+  
+  <!-- Mobile menu button -->
+  <sl-button class="nav-mobile-toggle" variant="text" id="mobile-menu-btn">
+    <sl-icon name="list"></sl-icon>
+  </sl-button>
 </header>
+
+<!-- Mobile menu (caché par défaut) -->
+<nav class="nav-mobile" id="mobile-menu">
+  <sl-button variant="text" href="{% url 'warranty:home' %}" title="Accueil">
+    <sl-icon name="house-door-fill" label="accueil" class="icon-small menu-icon" style="color:black;"></sl-icon>
+    Accueil
+  </sl-button>
+  {% if request.user.is_authenticated %}
+  <sl-button variant="text" href="{% url 'warranty:warranties_list' %}" title="Mes garanties">
+    <sl-icon name="file-earmark-fill" label="garanties" class="icon-small menu-icon" style="color:black;"></sl-icon>
+    Mes garanties
+  </sl-button>
+  <sl-button variant="primary" class="login-btn-navbar">
+    <sl-icon name="person-fill" label="deconnexion" class="icon-small menu-icon"></sl-icon>
+    Se déconnecter
+  </sl-button>
+  {% else %}
+  <sl-button variant="primary" class="login-btn-navbar" href="/admin/"  title="Se déconnecter">
+    <sl-icon name="person-fill" label="connexion" class="icon-small menu-icon"></sl-icon>
+    Se connecter
+  </sl-button>
+  {% endif %}
+</nav>
+
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+  
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      // icon burger menu 
+      const icon = mobileMenuBtn.querySelector('sl-icon');
+      if (mobileMenu.classList.contains('open')) {
+        icon.name = 'x';
+      } else {
+        icon.name = 'list';
+      }
+    });
+  
+    const mobileLinks = mobileMenu.querySelectorAll('sl-button');
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        mobileMenuBtn.querySelector('sl-icon').name = 'list';
+      });
+    });
+  });
+</script>
