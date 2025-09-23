@@ -14,8 +14,5 @@ urlpatterns = [
   path('delete/<int:pk>/', WarrantyDelete.as_view(), name='warranty_delete'), 
   path('warranties/', WarrantiesList.as_view(), name='warranties_list'),
   path('create/', WarrantyCreate.as_view(), name='warranty_create'), 
-
+  path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login')
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

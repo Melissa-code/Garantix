@@ -1,3 +1,4 @@
+{% load static %}
 <header class="navbar">
   <div class="nav-brand">Garantix</div>
   
@@ -8,19 +9,19 @@
        Accueil
     </sl-button>
     {% if request.user.is_authenticated %}
-    <sl-button variant="text" href="{% url 'warranty:warranties_list' %}" title="Mes garanties">
-      <sl-icon name="file-earmark-fill" label="garanties" class="icon-medium menu-icon"></sl-icon>
-      Mes garanties
-    </sl-button>
-    <sl-button variant="primary" class="login-btn-navbar" href=""  title="Se déconnecter">
-      <sl-icon name="person-fill" label="deconnexion" class="icon-medium menu-icon"></sl-icon>
-      Se déconnecter
-    </sl-button>
+      <sl-button variant="text" href="{% url 'warranty:warranties_list' %}" title="Mes garanties">
+        <sl-icon name="file-earmark-fill" label="garanties" class="icon-medium menu-icon"></sl-icon>
+        Mes garanties
+      </sl-button>
+      <sl-button variant="primary" class="login-btn-navbar" href=""  title="Se déconnecter">
+        <sl-icon name="person-fill" label="deconnexion" class="icon-medium menu-icon"></sl-icon>
+        Se déconnecter
+      </sl-button>
     {% else %}
-    <sl-button variant="primary" class="login-btn-navbar" href="/admin/"  title="Se connecter">
-      <sl-icon name="person-fill" label="connexion" class="icon-medium menu-icon"></sl-icon>
-      Se connecter
-    </sl-button>
+      <sl-button variant="primary" class="login-btn-navbar" href="/admin/"  title="Se connecter">
+        <sl-icon name="person-fill" label="connexion" class="icon-medium menu-icon"></sl-icon>
+        Se connecter
+      </sl-button>
     {% endif %}
   </nav>
   

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from warranty.models import Warranty
 from django.contrib.auth.decorators import login_required
@@ -12,6 +13,7 @@ from django.views import View
 from django.db.models import Q
 from warranty.mixins import ContextDataMixin, WarrantySearchMixin
 
+
 class Home(TemplateView): 
     """ Page Accueil """
     template_name = "warranty/home.html"
@@ -20,6 +22,7 @@ class Home(TemplateView):
         context = super().get_context_data(**kwargs)
         context['media_url'] = settings.MEDIA_URL
         return context
+
 
 @method_decorator(login_required, name="dispatch")
 class WarrantiesList(ContextDataMixin, WarrantySearchMixin, ListView): 
