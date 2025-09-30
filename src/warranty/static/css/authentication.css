@@ -1,0 +1,63 @@
+/* Login page */
+
+#login, #signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+#login .contain {
+    display: grid;
+    grid-template-columns: 1fr 2fr; 
+    max-width: 40vw;
+    width: 100%;
+    min-height: 400px; 
+    border-radius: 5px;
+    overflow: hidden;
+    background: #fff;
+    padding: 0;     
+}
+
+/* col gauche (icon) */
+#login .icon-login {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    background-color: var(--secondary-light);
+}
+
+#login .icon-login sl-icon {
+  font-size: 8rem;
+  color:  var(--black);
+}
+
+/* Col droite (form) */
+#login .title-authentication {
+    margin-bottom: 3rem;
+}
+
+#login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  height: 100%;
+  padding: 1rem 2rem 3rem 2rem;
+}
+
+#login-form .form-group sl-input {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+#login-form .remember-me {
+  margin: 0.9rem 0;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+#login-form  sl-button[type="submit"] {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+

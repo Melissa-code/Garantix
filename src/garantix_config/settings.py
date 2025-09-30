@@ -50,7 +50,7 @@ TEMPLATES = [
          'DIRS': [
             BASE_DIR / "templates",
         ],
-        'APP_DIRS': True,
+        'APP_DIRS': True,  # True pour chercher dans chaque app
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
@@ -129,4 +129,4 @@ MEDIA_ROOT = BASE_DIR / 'mediafiles'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/garantix_config/'
+LOGIN_REDIRECT_URL = '/warranty/'

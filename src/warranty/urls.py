@@ -1,6 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from warranty.views import Home, WarrantiesList, WarrantyDetail, WarrantyCreate, WarrantyUpdate, WarrantyDelete
+from .views import SignupView
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -14,5 +15,6 @@ urlpatterns = [
   path('delete/<int:pk>/', WarrantyDelete.as_view(), name='warranty_delete'), 
   path('warranties/', WarrantiesList.as_view(), name='warranties_list'),
   path('create/', WarrantyCreate.as_view(), name='warranty_create'), 
-  path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login')
+  path("signup/", SignupView.as_view(), name="signup"), 
+  path('login/', auth_views.LoginView.as_view(template_name='warranty/registration/login.html'), name='login')
 ]

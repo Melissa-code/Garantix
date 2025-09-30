@@ -12,6 +12,8 @@ from django.shortcuts import redirect
 from django.views import View
 from django.db.models import Q
 from warranty.mixins import ContextDataMixin, WarrantySearchMixin
+from django.contrib.auth.forms import UserCreationForm
+from .forms import CustomUserCreationForm
 
 
 class Home(TemplateView): 
@@ -22,6 +24,25 @@ class Home(TemplateView):
         context = super().get_context_data(**kwargs)
         context['media_url'] = settings.MEDIA_URL
         return context
+    
+
+class SignupView(CreateView):
+    """ 
+    Crée un compte utilisateur
+    - le redirige vers la page de connexion
+    """
+    form_class = CustomUserCreationForm
+    template_name = "warranty/registration/signup.html"
+    success_url = reverse_lazy("login") 
+
+
+class CustomLoginView(LoginView):
+    """ 
+    Connecte l'utilisateur 
+    - le redirige vers la page Liste des garanties
+    """
+    template_name = "warranty/registration/login.html"
+
 
 
 @method_decorator(login_required, name="dispatch")
@@ -31,6 +52,7 @@ class WarrantiesList(ContextDataMixin, WarrantySearchMixin, ListView):
     context_object_name = "warranties" # variable in template
     template_name = "warranty/warranties_list.html"
     fields = ["product_name", "brand", "purchase_date", "warranty_duration_months", "vendor", "imageReceipt", "notes", "created_at", ]
+
 
 @method_decorator(login_required, name="dispatch")
 class WarrantyDetail(DetailView):
