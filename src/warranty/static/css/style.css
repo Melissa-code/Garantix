@@ -41,14 +41,9 @@ legend {
   display: none;
 }
 
-a {
-  color: var(--primary);
-}
-
 hr {     
   border: none;        
   border-top: 1px solid var(--secondary);
-  margin: 1.5rem 0;       
   width: 100%;            
 }
 

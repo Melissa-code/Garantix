@@ -22,13 +22,14 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'django.contrib.auth',
+    'django.contrib.auth', #authentication
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'livereload', 
     'django.contrib.staticfiles',
     'warranty', 
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/warranty/'
+# LOGOUT_REDIRECT_URL = '/warranty/home/' 

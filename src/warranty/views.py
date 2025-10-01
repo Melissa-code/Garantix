@@ -2,18 +2,14 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from warranty.models import Warranty
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.views import View
 from django.db.models import Q
 from warranty.mixins import ContextDataMixin, WarrantySearchMixin
-from django.contrib.auth.forms import UserCreationForm
-from .forms import CustomUserCreationForm
 
 
 class Home(TemplateView): 
@@ -24,25 +20,6 @@ class Home(TemplateView):
         context = super().get_context_data(**kwargs)
         context['media_url'] = settings.MEDIA_URL
         return context
-    
-
-class SignupView(CreateView):
-    """ 
-    Crée un compte utilisateur
-    - le redirige vers la page de connexion
-    """
-    form_class = CustomUserCreationForm
-    template_name = "warranty/registration/signup.html"
-    success_url = reverse_lazy("login") 
-
-
-class CustomLoginView(LoginView):
-    """ 
-    Connecte l'utilisateur 
-    - le redirige vers la page Liste des garanties
-    """
-    template_name = "warranty/registration/login.html"
-
 
 
 @method_decorator(login_required, name="dispatch")
