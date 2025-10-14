@@ -16,8 +16,21 @@ class CustomUserCreationForm(UserCreationForm):
         model = User
         fields = ("username", "password1", "password2")
 
+
+    def clean_username(self):
+        """
+        Vérifie que l'email n'est pas déjà utilisé
+        """
+        email = self.cleaned_data.get("username")
+        
+        if User.objects.filter(username=email).exists():
+            raise ValidationError("Un compte avec cet email existe déjà.")
+        return email
+
     def clean_password1(self):
-        """Check complexity of password (8 char, 1 maj, 1 number, 1 symbole)"""
+        """
+        Check complexity of password (8 char, 1 maj, 1 number, 1 symbole)
+        """
         password = self.cleaned_data.get("password1")
         pattern = r'^(?=.*[A-Z])(?=.*\d)(?=.*[-_!@#$%^&*]).+$'
 
