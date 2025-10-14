@@ -15,7 +15,10 @@
   <!-- section hero (slogan) -->
   <section id="hero">
     <article>
+      {% include 'partials/_messages.html' %}
+
       <h1>Bienvenue sur Garantix</h1>
+      
       <p>Centralisez vos garanties. Ne perdez plus un seul reçu.</p>
       {% if user.is_authenticated %}
         <sl-button href="{% url 'accounts:logout' %}" class="btn btn-primary" size="medium">

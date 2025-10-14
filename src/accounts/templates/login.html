@@ -12,10 +12,13 @@
 
 {% block content %}
 
+  <section class="section-message">
+      {% include 'partials/_messages.html' %}
+  </section>
+
   <!-- section login -->
   <section class="authentication" id="login">
     <fieldset class="contain"><legend></legend>
-
       <!-- icon user (col left) -->
       <div class="icon-user">
         <sl-icon name="person-fill"></sl-icon>

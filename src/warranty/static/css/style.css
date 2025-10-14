@@ -391,3 +391,74 @@ warranties forms
   gap: 2rem;
 }
 
+/*************** Messages ***************/ 
+
+.section-message {
+  display: flex;
+  justify-content: center;
+}
+
+.messages-container {
+  margin-bottom: 1.5rem;
+  max-width: 600px; 
+  width: 100%; 
+}
+
+.alert-message {
+  margin-bottom: 0.75rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.alert-message::part(base) {
+  padding: 0.875rem 1rem;
+  font-size: 0.95rem;
+  align-items: center; 
+}
+
+.alert-message::part(icon) {
+  font-size: 1.25rem;
+}
+
+.alert-message::part(message) {
+  padding: 0 0.5rem;
+}
+
+.alert-message::part(close-button) {
+  font-size: 1.25rem;
+}
+
+.alert-message::part(close-button):hover {
+  color: var(--sl-color-neutral-900);
+}
+
+/* Animation appear */
+.alert-message {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .messages-container {
+    max-width: 100%; 
+  }
+
+  .alert-message::part(base) {
+    padding: 0.875rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .alert-message::part(icon) {
+    font-size: 1.25rem;
+  }
+}

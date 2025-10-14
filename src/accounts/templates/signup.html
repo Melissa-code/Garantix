@@ -12,117 +12,121 @@
 
 {% block content %}
 
-<!-- section sign up -->
-<section class="authentication" id="sigup">
-  <fieldset class="contain"><legend></legend>
+  <section class="section-message">
+      {% include 'partials/_messages.html' %}
+  </section>
 
-    <!-- icon user (col left) -->
-    <div class="icon-user">
-      <sl-icon name="person-fill"></sl-icon>
-    </div>
+  <!-- section sign up -->
+  <section class="authentication" id="sigup">
+    <fieldset class="contain"><legend></legend>
 
-    <!-- form (col right) -->
-    <form action="" method="POST" class="authentication-form" id="signup-form">
-    {% csrf_token %}
-      <!-- title h1 -->
-      <h1 class="title-authentication">Créer un compte</h1> 
-
-      <!-- Errors messages sl-alert -->
-      {% if form.non_field_errors %}
-        <sl-alert variant="danger" open class="alert-msg-danger">
-          <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
-          {% for error in form.non_field_errors %}
-            <div>{{ error }}</div>
-          {% endfor %}
-        </sl-alert>
-      {% endif %}
-
-      <div class="form-group">
-        <!-- Email field -->
-        <div class="form-field">
-          <sl-input
-            id="username"
-            type="email"
-            placeholder="Entrez votre Email"
-            name="username"
-            size="medium"
-            value="{{ form.username.value|default:'' }}"
-            {% if form.username.errors %}class="invalid"{% endif %}>
-            <sl-icon name="envelope-fill" slot="prefix"></sl-icon>
-          </sl-input>
-          {% if form.username.errors %}
-            <div class="error-msg-field">
-              {% for error in form.username.errors %}
-                {{ error }}
-              {% endfor %}
-            </div>
-          {% endif %}
-        </div>
-        
-        <!-- Password field -->  
-        <div class="form-field">
-          <sl-input
-            id="password1"
-            type="password"
-            placeholder="Entrez votre mot de passe"
-            name="password1"
-            password-toggle
-            size="medium"
-            {% if form.password1.errors %}class="invalid"{% endif %}>
-            <sl-icon name="lock-fill" slot="prefix"></sl-icon>
-          </sl-input>
-          {% if form.password1.errors %}
-            <div class="error-msg-field">
-              {% for error in form.password1.errors %}
-                {{ error }}
-              {% endfor %}
-            </div>
-          {% endif %}
-        </div>
-        
-        <!-- Confirm password field -->  
-        <div class="form-field">
-          <sl-input
-            id="password2"
-            type="password"
-            placeholder="Confirmez votre mot de passe"
-            name="password2"
-            password-toggle
-            size="medium"
-            {% if form.password2.errors %}class="invalid"{% endif %}>
-            <sl-icon name="lock-fill" slot="prefix"></sl-icon>
-          </sl-input>
-          {% if form.password2.errors %}
-            <div class="error-msg-field">
-              {% for error in form.password2.errors %}
-                {{ error }}
-              {% endfor %}
-            </div>
-          {% endif %}
-        </div>
+      <!-- icon user (col left) -->
+      <div class="icon-user">
+        <sl-icon name="person-fill"></sl-icon>
       </div>
 
-      <!-- submit button -->
-      <div class="authentication-btn-submit">
-        <sl-button type="submit" class="btn btn-primary" size="medium">
-          Créer un compte
-        </sl-button>
-      </div>
+      <!-- form (col right) -->
+      <form action="" method="POST" class="authentication-form" id="signup-form">
+      {% csrf_token %}
+        <!-- title h1 -->
+        <h1 class="title-authentication">Créer un compte</h1> 
 
-      <hr>
+        <!-- Errors messages sl-alert -->
+        {% if form.non_field_errors %}
+          <sl-alert variant="danger" open class="alert-msg-danger">
+            <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
+            {% for error in form.non_field_errors %}
+              <div>{{ error }}</div>
+            {% endfor %}
+          </sl-alert>
+        {% endif %}
 
-      <!--lien se connecter -->
-      <div class="infos-login">
-          <p>Déjà client chez nous, 
-            <a href="{% url 'accounts:login' %}">
-              <strong class="link-account">se connecter !</strong>
-            </a>
-          </p>
-      </div>
+        <div class="form-group">
+          <!-- Email field -->
+          <div class="form-field">
+            <sl-input
+              id="username"
+              type="email"
+              placeholder="Entrez votre Email"
+              name="username"
+              size="medium"
+              value="{{ form.username.value|default:'' }}"
+              {% if form.username.errors %}class="invalid"{% endif %}>
+              <sl-icon name="envelope-fill" slot="prefix"></sl-icon>
+            </sl-input>
+            {% if form.username.errors %}
+              <div class="error-msg-field">
+                {% for error in form.username.errors %}
+                  {{ error }}
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+          
+          <!-- Password field -->  
+          <div class="form-field">
+            <sl-input
+              id="password1"
+              type="password"
+              placeholder="Entrez votre mot de passe"
+              name="password1"
+              password-toggle
+              size="medium"
+              {% if form.password1.errors %}class="invalid"{% endif %}>
+              <sl-icon name="lock-fill" slot="prefix"></sl-icon>
+            </sl-input>
+            {% if form.password1.errors %}
+              <div class="error-msg-field">
+                {% for error in form.password1.errors %}
+                  {{ error }}
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+          
+          <!-- Confirm password field -->  
+          <div class="form-field">
+            <sl-input
+              id="password2"
+              type="password"
+              placeholder="Confirmez votre mot de passe"
+              name="password2"
+              password-toggle
+              size="medium"
+              {% if form.password2.errors %}class="invalid"{% endif %}>
+              <sl-icon name="lock-fill" slot="prefix"></sl-icon>
+            </sl-input>
+            {% if form.password2.errors %}
+              <div class="error-msg-field">
+                {% for error in form.password2.errors %}
+                  {{ error }}
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
 
-    </form>
-  </fieldset>
-</section>
+        <!-- submit button -->
+        <div class="authentication-btn-submit">
+          <sl-button type="submit" class="btn btn-primary" size="medium">
+            Créer un compte
+          </sl-button>
+        </div>
+
+        <hr>
+
+        <!--lien se connecter -->
+        <div class="infos-login">
+            <p>Déjà client chez nous, 
+              <a href="{% url 'accounts:login' %}">
+                <strong class="link-account">se connecter !</strong>
+              </a>
+            </p>
+        </div>
+
+      </form>
+    </fieldset>
+  </section>
 
 
 {% endblock content %}

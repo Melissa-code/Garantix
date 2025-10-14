@@ -7,10 +7,8 @@ from django.contrib.auth import logout, login, authenticate
 from django.views.generic import CreateView
 from django.contrib.auth.views import LoginView
 from django.views import View
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import CustomUserCreationForm
-# from django.contrib.auth.forms import UserCreationForm
 
 
 @method_decorator(login_required, name="dispatch")
@@ -21,7 +19,7 @@ class CustomLogoutView(View):
     """
     def get(self, request): 
         logout(request)
-        messages.success(request, "Vous êtes déconnecté.")
+        messages.success(request, "Déconnexion effectuée. A bientôt !")
 
         return redirect('warranty:home')
 
@@ -29,24 +27,24 @@ class CustomLogoutView(View):
 class SignupView(CreateView):
     """ 
     Crée un compte utilisateur
-    - le redirige vers la page de connexion
+    - le redirige vers la page de connexion + affiche un message de succès/erreur 
     """
     form_class = CustomUserCreationForm
     template_name = "signup.html"
-    success_url = reverse_lazy("accounts:login") 
+    success_url = reverse_lazy("warranty:home") 
 
-    def form_valid(self, form, request): 
-        # appelle form.save() : create user DB
+    def form_valid(self, form): 
+        """appelle form.save(): create user DB"""
         response = super().form_valid(form)
         login(self.request, self.object)
+        messages.success(self.request, "Bienvenue ! Votre compte a été créé avec succès.")
 
         return response
     
     # TODO : logs
     def form_invalid(self, form):
-        print("Formulaire INVALIDE")
-        print("Erreurs:", form.errors)
-        print("POST data:", self.request.POST)
+        messages.error(self.request, "Erreur lors de la création du compte. Vérifiez les informations.")
+
         return super().form_invalid(form)
 
 
@@ -58,4 +56,5 @@ class CustomLoginView(LoginView):
     template_name = "login.html"
     
     def get_success_url(self):
+        messages.success(self.request, "Bienvenue !")
         return reverse_lazy('warranty:warranties_list')
