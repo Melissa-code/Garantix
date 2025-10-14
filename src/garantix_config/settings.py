@@ -131,3 +131,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/warranty/'
+
+
+# Durée de session par défaut (si "remember me" est coché)
+SESSION_COOKIE_AGE = 1209600  # 14 jours en secondes
+# La session expire à la fermeture du navigateur par défaut
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+# Nom du cookie de session
+SESSION_COOKIE_NAME = 'sessionid'
+
+# Sécurité (recommandé en production)
+SESSION_COOKIE_SECURE = True        # Cookie envoyé uniquement en HTTPS
+SESSION_COOKIE_HTTPONLY = True      # Protection XSS (JavaScript ne peut pas lire le cookie)
+SESSION_COOKIE_SAMESITE = 'Lax'     # Protection contre les attaques CSRF

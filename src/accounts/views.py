@@ -57,8 +57,21 @@ class CustomLoginView(LoginView):
     
     def form_valid(self, form):
         user = form.get_user()
+        self.remember_me()
         messages.success(self.request, f"Bienvenue {user.get_full_name() or user.username} !")
         return super().form_valid(form)
    
+    def remember_me(self): 
+        """ 
+        Cookie de session Django à la connexion, utilisé dans la navigation (ex Cookie: sessionid=h3k5j2n4m6p8q1r9) 
+        - Session destroyed by closing browser 
+        - or Session 2 weeks (par défaut Django: 14j en secondes)
+        """
+        remember_me_action = self.request.POST.get('remember_me')
+        if not remember_me_action:
+            self.request.session.set_expiry(0)
+        else:
+            self.request.session.set_expiry(1209600) 
+
     def get_success_url(self):
         return reverse_lazy('warranty:warranties_list')
