@@ -55,6 +55,10 @@ class CustomLoginView(LoginView):
     """
     template_name = "login.html"
     
+    def form_valid(self, form):
+        user = form.get_user()
+        messages.success(self.request, f"Bienvenue {user.get_full_name() or user.username} !")
+        return super().form_valid(form)
+   
     def get_success_url(self):
-        messages.success(self.request, "Bienvenue !")
         return reverse_lazy('warranty:warranties_list')
