@@ -19,6 +19,7 @@ body {
   font-family: "Jost", sans-serif;
   font-size: 18px;
   color: var(--black);
+  height: 100%;
 }
 
 h1 {
@@ -193,9 +194,7 @@ footer .footer-link::part(base):hover {
 }
 
 
-/* main {
-    height: 75vh;
-} */
+
 
 ul {
   list-style: none;

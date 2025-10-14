@@ -1,4 +1,4 @@
-/* Login / Signup page */
+/* Login & Sign-up */
 .authentication {
   display: flex;
   justify-content: center;
@@ -9,13 +9,20 @@
 .authentication .contain {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  max-width: 40vw;
+  max-width: 900px;
   width: 100%;
-  min-height: 400px;
+  background: var(--white);
+  border: 1px solid var(--black-light);
   border-radius: 5px;
   overflow: hidden;
-  background: #fff;
-  padding: 0;    
+}
+
+.authentication fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+  display: contents; 
 }
 
 /* Col gauche (icon) */
@@ -84,6 +91,48 @@ sl-input.invalid::part(base):focus-within {
 }
 
 /* link create account */
-.authentication .link-create-account {
+.authentication .link-account {
   color: var(--primary);
+}
+
+
+/**************** Mobile ****************/ 
+
+@media (max-width: 768px) {
+
+  .authentication .contain {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    margin: 0 1rem;
+    overflow: visible;
+  }
+  
+  .authentication .icon-user {
+    display: none;
+  }
+  
+  .authentication-form {
+    padding: 2rem 1.5rem;
+    overflow: visible;
+  }
+
+  .authentication-form sl-input {
+    width: 100%;
+    min-width: 0;  
+  }
+  
+  .authentication-form sl-input::part(base) {
+    min-width: 0; 
+  }
+} 
+
+
+@media (max-width: 400px) {
+  .authentication .contain {
+    margin: 0 0.5rem; 
+  }
+  
+  .authentication-form {
+    padding: 1.5rem 1rem;
+  }
 }
