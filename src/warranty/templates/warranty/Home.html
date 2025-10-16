@@ -15,13 +15,22 @@
   <!-- section hero (slogan) -->
   <section id="hero">
     <article>
+      {% include 'partials/_messages.html' %}
+
       <h1>Bienvenue sur Garantix</h1>
+      
       <p>Centralisez vos garanties. Ne perdez plus un seul reçu.</p>
-      {% if  request.user.is_authenticated %}
-        <sl-button class="btn btn-primary" size="medium">Se déconnecter</sl-button>
+      {% if user.is_authenticated %}
+        <sl-button href="{% url 'accounts:logout' %}" class="btn btn-primary" size="medium">
+          Se déconnecter
+        </sl-button>
       {% else %}
-        <sl-button class="btn btn-primary" size="medium">Se connecter</sl-button>
-        <sl-button class="btn btn-white" size="medium">Créer un compte</sl-button>
+        <sl-button href="{% url 'accounts:login' %}" class="btn btn-primary" size="medium">
+          Se connecter
+        </sl-button>
+        <sl-button href="{% url 'accounts:signup' %}" class="btn btn-white" size="medium">
+          Créer un compte
+        </sl-button>
       {% endif %}
     </article>
   </section>
