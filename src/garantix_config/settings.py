@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'warranty', 
     'accounts',
+    'gunicorn', # serveur HTTP Python WSGI pour Unix
 ]
 
 MIDDLEWARE = [
