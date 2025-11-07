@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py~ 
+
+# Django
+*.log
+db.sqlite3
+/media/
+staticfiles/
+
+# Virtual environments
+venv/
+env/
+.env/
+.env.local
+.env.prod
+*.env
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose.yml
+entrypoint.sh
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
