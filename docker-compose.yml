@@ -1,29 +1,17 @@
-#liste des conteneurs à lancer
 services: 
   web:
-    # Construit l'image depuis le Dockerfile
     build: .
-
     container_name: garantix_web
-    # command: python manage.py runserver 0.0.0.0:8000
-
     env_file:
       - .env
-
     environment:
-      # Variables d'environnement passées au conteneur accessibles dans Django via os.environ.get('DB_HOST')
+      - DJANGO_ENV=development
       - DB_HOST=host.docker.internal
-      # Adresse spéciale pour accéder à votre machine depuis Docker (Windows/Mac)
-      # Linux: utilisez 172.17.0.1 ou l'IP de votre machine
-      
     volumes: 
-      # synchronisation des fichiers entre machine locale et conteneur
-      - .:/app
-
+      - ./src:/app
     ports:
-      - '8000:8000'
-
+      - "8000:8000"
+      - "35729:35729" # Port LiveReload
     extra_hosts:
       - "host.docker.internal:host-gateway"
-
-      
+    command: runserver

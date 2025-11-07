@@ -3,6 +3,7 @@ env
 
 # Variables d’environnement
 .env
+.env.prod
 
 # Fichiers Python temporaires
 __pycache__/
