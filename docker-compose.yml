@@ -1,0 +1,17 @@
+services: 
+  web:
+    build: .
+    container_name: garantix_web
+    env_file:
+      - .env
+    environment:
+      - DJANGO_ENV=development
+      - DB_HOST=host.docker.internal
+    volumes: 
+      - ./src:/app
+    ports:
+      - "8000:8000"
+      - "35729:35729" # Port LiveReload
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command: runserver
