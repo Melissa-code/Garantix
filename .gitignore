@@ -8,3 +8,5 @@ env
 # Fichiers Python temporaires
 __pycache__/
 *.pyc
+
+infos.txt

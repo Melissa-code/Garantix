@@ -12,13 +12,13 @@ fi
 echo "Application des migrations..."
 python manage.py migrate --noinput
 
-# Collecter les fichiers statiques en production seulement
+# Collecte  fichiers statiques en prod seulement
 if [ "$DJANGO_ENV" = "production" ]; then
     echo "Collection des fichiers statiques..."
     python manage.py collectstatic --noinput --clear
 fi
 
-# Créer un superuser si les variables sont définies (optionnel)
+# Crée un superuser si les variables sont définies (optionnel)
 if [ -n "$DJANGO_SUPERUSER_USERNAME" ] && [ -n "$DJANGO_SUPERUSER_PASSWORD" ]; then
     echo "Vérification du superuser..."
     python manage.py shell << END
@@ -34,7 +34,7 @@ fi
 
 echo "=== Application prête ==="
 
-# Lancer la commande appropriée selon l'environnement
+# Lance la commande appropriée selon l'environnement
 if [ "$1" = "runserver" ] || [ "$DJANGO_ENV" = "development" ]; then
     echo "Démarrage du serveur de développement..."
     exec python manage.py runserver 0.0.0.0:8000
