@@ -12,8 +12,10 @@ from django.db.models import Q
 from warranty.mixins import ContextDataMixin, WarrantySearchMixin
 
 
-class Home(TemplateView): 
-    """ Page Accueil """
+class HomeView(TemplateView): 
+    """ 
+    Accueil 
+    """
     template_name = "warranty/home.html"
 
     def get_context_data(self, **kwargs):
@@ -23,8 +25,10 @@ class Home(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class WarrantiesList(ContextDataMixin, WarrantySearchMixin, ListView): 
-    """ Page Liste de mes garanties """
+class WarrantiesListView(ContextDataMixin, WarrantySearchMixin, ListView): 
+    """
+    Liste des garanties 
+    """
     model = Warranty
     context_object_name = "warranties" # variable in template
     template_name = "warranty/warranties_list.html"

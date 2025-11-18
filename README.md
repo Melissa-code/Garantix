@@ -29,9 +29,9 @@ source env/bin/activate
 
 - Pour récupérer les dépendances mises dans requirements.txt : `pip install -r requirements.txt`
 
-## 5 Base de données
+## 5. Base de données
 
 `cd "C:/Program Files/PostgreSQL/17/bin"`
 
-(env) PS C:\Program Files\PostgreSQL\17\bin> `./psql -U postgres`
+(env) PS C:\Program Files\PostgreSQL\17\bin> `./psql -U username`
 
