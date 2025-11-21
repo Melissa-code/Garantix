@@ -20,11 +20,11 @@ jobs:
       DEBUG: ${{ vars.DEBUG}}
       DJANGO_ENV: ${{ vars.DJANGO_ENV}}
       ALLOWED_HOSTS: ${{ vars.ALLOWED_HOSTS}}
-      DB_ENGINE: "django.db.backends.postgresql"
-      DB_NAME: "test"
-      DB_USER: "test"
-      DB_PASSWORD: "test"
-      DB_HOST: "postgres"
+      DB_ENGINE: django.db.backends.postgresql
+      DB_NAME: test
+      DB_USER: test
+      DB_PASSWORD: test
+      DB_HOST: localhost
       DB_PORT: 5432
 
     services:
