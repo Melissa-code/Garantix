@@ -43,6 +43,11 @@ class WarrantyDetail(DetailView):
     template_name = "warranty/warranty_detail.html"
     fields = ["product_name", "brand", "purchase_date", "warranty_duration_months", "vendor", "imageReceipt", "notes", "created_at", ]
 
+    # def get_queryset(self):
+    #     """ne retourne que les garanties de l'utilisateur connecté"""
+    #     return Warranty.objects.filter(user=self.request.user)
+
+
 @method_decorator(login_required, name="dispatch")
 class WarrantyCreate(CreateView): 
     """ Page Créer une nouvelle garantie """

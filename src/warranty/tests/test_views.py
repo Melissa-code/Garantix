@@ -50,3 +50,75 @@ class test_warranties_list_view(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Produit_1")
         self.assertContains(response, "Produit_2")
+
+
+class WarrantyDetailViewTest(TestCase):
+
+    def setUp(self):
+        self.user = User.objects.create_user(username='testuser', password='testpassword')
+        self.warranty = Warranty.objects.create(
+            product_name="Produit_Detail",
+            brand="Marque_Detail",
+            purchase_date="2025-11-21",
+            warranty_duration_months="24",
+            vendor="Revendeur_Detail",
+            imageReceipt="",
+            notes="Observations_Detail",
+            created_at="2025-11-21"
+        )
+
+    def test_redirect_if_not_logged(self):
+        """
+        Test redirect to login
+        """
+        response = self.client.get(reverse('warranty:warranty_detail', args=[self.warranty.id]))
+        self.assertEqual(response.status_code, 302)
+
+    # def test_user_cannot_access_other_user_warranty(self):
+    #     """Un utilisateur ne peut pas voir la garantie d'un autre"""
+    #     other_user = User.objects.create_user(username='otheruser', password='otherpass123')
+    #     self.client.login(username='otheruser', password='otherpass123')
+    #     url = reverse('warranty:warranty_detail', args=[self.warranty.pk])  
+    #     response = self.client.get(url)
+    #     self.assertEqual(response.status_code, 404)
+
+    def test_access_if_logged_in(self):
+        """
+        Test access to detail page (user authorized)
+        """
+        self.client.login(username="testuser", password="testpassword")
+        response = self.client.get(reverse('warranty:warranty_detail', args=[self.warranty.id]))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Produit_Detail")
+        self.assertContains(response, "Marque_Detail")
+
+    def test_warranty_not_found(self):
+        """
+        Test for non-existing warranty
+        """
+        self.client.login(username="testuser", password="testpassword")
+        response = self.client.get(reverse('warranty:warranty_detail', args=[999]))
+        self.assertEqual(response.status_code, 404)
+
+    def test_warranty_fields_in_context(self):
+        """
+        Test des champs de la garantie dans le contexte
+        """
+        self.client.login(username="testuser", password="testpassword")
+        response = self.client.get(reverse('warranty:warranty_detail', args=[self.warranty.id]))
+        warranty = response.context['warranty']
+        self.assertEqual(warranty.product_name, "Produit_Detail")
+        self.assertEqual(warranty.brand, "Marque_Detail")
+        self.assertEqual(str(warranty.purchase_date), "2025-11-21")
+        self.assertEqual(warranty.warranty_duration_months, 24)
+        self.assertEqual(warranty.vendor, "Revendeur_Detail")
+        self.assertEqual(warranty.notes, "Observations_Detail")
+  
+    def test_warranty_imageReceipt_field(self):
+        """
+        Test du champ imageReceipt de la garantie
+        """
+        self.client.login(username="testuser", password="testpassword")
+        response = self.client.get(reverse('warranty:warranty_detail', args=[self.warranty.id]))
+        warranty = response.context['warranty']
+        self.assertEqual(warranty.imageReceipt, "")
