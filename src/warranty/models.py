@@ -1,6 +1,9 @@
 from django.db import models
 from django.urls import reverse
+from django.core.exceptions import ValidationError
+from django.utils import timezone
 from datetime import timedelta
+
 
 class Warranty(models.Model): 
     product_name = models.CharField(max_length=200, verbose_name="Nom du produit")
