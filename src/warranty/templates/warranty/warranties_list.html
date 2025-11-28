@@ -32,18 +32,10 @@
     <!-- List warranties section -->
     <section id="warranties" class="container">
 
-        <!-- breadcrumb -->
-        <sl-breadcrumb>
-            <sl-breadcrumb-item >
-                <a href="{% url 'warranty:home' %}">
-                    <sl-icon slot="prefix" name="house"></sl-icon>
-                    Accueil
-                </a>
-            </sl-breadcrumb-item>
-            <sl-breadcrumb-item>Mes garanties</sl-breadcrumb-item>
-        </sl-breadcrumb>
-
-        <p>{{ warranties|length }} garanties trouvées</p>
+        <!-- total warranties found -->
+        <div>
+            <p>{{ warranties|length }} garanties trouvées</p>
+        </div>
        
         <div class="title">
             <h1>Mes garanties</h1>
