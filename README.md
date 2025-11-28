@@ -35,3 +35,8 @@ source env/bin/activate
 
 (env) PS C:\Program Files\PostgreSQL\17\bin> `./psql -U username`
 
+## 6. Tests 
+
+- dans Docker: `docker-compose exec web python manage.py test`
+- local: dans `src` : `python manage.py test`
+
