@@ -1,6 +1,7 @@
 from django.contrib import admin
 from warranty.models import Warranty
 
+
 class WarrantyAdmin(admin.ModelAdmin): 
     list_display = (
         "product_name", 

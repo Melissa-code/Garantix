@@ -8,31 +8,6 @@
 
 {% block content %}
 
-<!-- breadcrumb section -->
-<section class="breadcrumb"><q></q>
-    <sl-breadcrumb>
-        <!-- Accueil -->
-        <sl-breadcrumb-item >
-            <a href="{% url 'warranty:home' %}">
-                <sl-icon slot="prefix" name="house"></sl-icon>
-                Accueil
-            </a>
-        </sl-breadcrumb-item>
-        <!-- Mes garanties -->
-        <sl-breadcrumb-item>
-            <a href="{% url 'warranty:warranties_list' %}">
-                <sl-icon slot="prefix" name="file-earmark"></sl-icon>
-                Mes garanties
-            </a>
-        </sl-breadcrumb-item>
-        <!-- Mes garanties -->
-        <sl-breadcrumb-item>
-            <sl-icon slot="prefix" name="file-earmark"></sl-icon>
-            Garantie de {{ warranty.product_name }} {{ warranty.brand }}
-        </sl-breadcrumb-item>
-    </sl-breadcrumb>
-</section>
-
 <!-- Detail warranty section -->
 <section id="warranty-section">
   <article class="warranty-detail">
@@ -48,11 +23,20 @@
             <p><b>Revendeur:</b> {{ warranty.vendor }}</p>
             <p><b>Notes:</b> {{ warranty.notes|safe|linebreaks }}</p>
             <p><b>Enregistré le </b> {{ warranty.created_at|date:'j F Y' }}</p>
+            
         </div>
-
+        <!-- Image of receipt -->
+        {% if warranty.imageReceipt %}
         <div class="warranty-image">
-            <img src="" alt="image de l'article">
+            <img 
+                src="{{ warranty.imageReceipt.url }}" 
+                alt="photo du ticket de caisse de {{ warranty.product_name }}" 
+                width="200">
         </div>
+        {% else %}
+            <p></p>
+        {% endif %}
+        
     </div>
 </article>
 

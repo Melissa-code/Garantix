@@ -1,0 +1,138 @@
+/* Login & Sign-up */
+.authentication {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.authentication .contain {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  max-width: 900px;
+  width: 100%;
+  background: var(--white);
+  border: 1px solid var(--black-light);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.authentication fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+  display: contents; 
+}
+
+/* Col gauche (icon) */
+.authentication .icon-user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary-light);
+}
+
+.authentication .icon-user sl-icon {
+  font-size: 8rem;
+  color: var(--black);
+}
+
+/* Col droite (form) */
+.authentication-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: 1rem 2rem 3rem 2rem;
+}
+
+.title-authentication {
+  margin-bottom: 2rem;
+}
+
+/* space between fields */
+.authentication-form .form-field {
+  margin-bottom: 1.5rem;
+}
+
+.authentication-form sl-input {
+  width: 100%;
+}
+
+/* error msg */
+.error-msg-field {
+  color: var(--sl-color-danger-600);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.alert-msg-danger {
+  margin-bottom: 1rem;
+}
+
+/* invalid inputs */
+sl-input.invalid::part(base) {
+  border-color: var(--sl-color-danger-600);
+  color: var(--sl-color-danger-600);
+}
+
+sl-input.invalid::part(base):focus-within {
+  box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-danger-600);
+}
+
+/* btn submit */
+.authentication-btn-submit {
+  margin: 1rem 0;
+}
+
+.authentication-btn-submit sl-button {
+  width: 100%;
+}
+
+/* link create account */
+.authentication .link-account {
+  color: var(--primary);
+}
+
+
+/**************** Mobile ****************/ 
+
+@media (max-width: 768px) {
+
+  .authentication .contain {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    margin: 0 1rem;
+    overflow: visible;
+  }
+  
+  .authentication .icon-user {
+    display: none;
+  }
+  
+  .authentication-form {
+    padding: 2rem 1.5rem;
+    overflow: visible;
+  }
+
+  .authentication-form sl-input {
+    width: 100%;
+    min-width: 0;  
+  }
+  
+  .authentication-form sl-input::part(base) {
+    min-width: 0; 
+  }
+} 
+
+
+@media (max-width: 400px) {
+  .authentication .contain {
+    margin: 0 0.5rem; 
+  }
+  
+  .authentication-form {
+    padding: 1.5rem 1rem;
+  }
+}

@@ -60,7 +60,7 @@
                 
                 <div>
                     <ul>
-                        <li>Date d'achat : {{ warranty.purchase_date }} </li>
+                        <li>Date d'achat : {{ warranty.purchase_date|date:"d/m/Y" }} </li>
                         <li>Garantie : {{ warranty.warranty_duration_months }} mois</li>
                     </ul>
 

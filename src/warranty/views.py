@@ -10,7 +10,7 @@ from django.shortcuts import redirect
 from django.views import View
 from django.db.models import Q
 from warranty.mixins import ContextDataMixin, WarrantySearchMixin
-
+from .forms import WarrantyForm
 
 class HomeView(TemplateView): 
     """ 
@@ -55,13 +55,33 @@ class WarrantyCreateView(CreateView):
     template_name = "warranty/warranty_create.html"
     fields = ["product_name", "brand", "purchase_date", "warranty_duration_months", "vendor", "imageReceipt", "notes", ]
 
+
 @method_decorator(login_required, name="dispatch")
 class WarrantyUpdateView(UpdateView):
     """ Page Modifier une garantie """
     model = Warranty
     template_name = "warranty/warranty_update.html"
     fields = ["product_name", "brand", "purchase_date", "warranty_duration_months", "vendor", "imageReceipt", "notes", ]
-
+    # success_url = reverse_lazy('warranty:warranties_list')
+        
+    def post(self, request, *args, **kwargs):
+        """Surcharge pour forcer la prise en compte des fichiers"""
+        print("📁 REQUEST.FILES:", request.FILES)
+        print("📝 REQUEST.POST:", request.POST)
+        return super().post(request, *args, **kwargs)
+    
+    def form_valid(self, form):
+        print("✅ Form valide!")
+        print("📁 FILES dans form:", self.request.FILES)
+        
+        # Si un nouveau fichier est uploadé, l'assigner manuellement
+        if 'imageReceipt' in self.request.FILES:
+            form.instance.imageReceipt = self.request.FILES['imageReceipt']
+            print("🖼️ Nouvelle image assignée!")
+        
+        return super().form_valid(form)
+    
+        
 @method_decorator(login_required, name="dispatch")
 class WarrantyDeleteView(DeleteView): 
     """ Page Supprimer une garantie """
