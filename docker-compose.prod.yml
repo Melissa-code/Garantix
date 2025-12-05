@@ -1,6 +1,8 @@
 services:
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: unless-stopped
     environment:
       - DEBUG=${DEBUG}
@@ -22,7 +24,7 @@ services:
       - static_volume:/app/staticfiles
       - media_volume:/app/media
     expose:
-      - 80000
+      - 8000
     command: gunicorn
     networks:
       - garantix_network
@@ -31,7 +33,6 @@ services:
 
   db:
     image: postgres:15-alpine
-    container_name: garantix_db
     restart: unless-stopped
     environment:
       - POSTGRES_DB=${DB_NAME}
