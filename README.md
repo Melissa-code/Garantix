@@ -40,3 +40,11 @@ source env/bin/activate
 - dans Docker: `docker-compose exec web python manage.py test`
 - local: dans `src` : `python manage.py test`
 
+Dans DOcker
+```
+docker-compose exec web python manage.py makemigrations
+docker-compose exec web python manage.py migrate
+
+docker-compose exec web python manage.py test
+```
+

@@ -33,8 +33,8 @@ class WarrantyListViewTest(TestCase):
         Preparation des tests (ne commence pas par test)
         """
         self.user = User.objects.create_user(username='testuser', password='testpassword')
-        Warranty.objects.create(product_name="Produit_1", brand="Marque_1", purchase_date="2025-11-19", warranty_duration_months="12", vendor="Revendeur_1", imageReceipt="", notes="Observations_1", created_at="2025-11-19")
-        Warranty.objects.create(product_name="Produit_2", brand="Marque_2", purchase_date="2025-11-20", warranty_duration_months="6", vendor="Revendeur_2", imageReceipt="", notes="Observations_2", created_at="2025-11-20")
+        Warranty.objects.create(product_name="Produit_1", brand="Marque_1", purchase_date="2025-11-19", warranty_duration_months="12", vendor="Revendeur_1", imageReceipt="", notes="Observations_1", created_at="2025-11-19", user=self.user )
+        Warranty.objects.create(product_name="Produit_2", brand="Marque_2", purchase_date="2025-11-20", warranty_duration_months="6", vendor="Revendeur_2", imageReceipt="", notes="Observations_2", created_at="2025-11-20", user=self.user)
         
     def test_warranties_created_in_setup(self):
         """
@@ -75,7 +75,8 @@ class WarrantyDetailViewTest(TestCase):
             vendor="Revendeur_Detail",
             imageReceipt="",
             notes="Observations_Detail",
-            created_at="2025-11-21"
+            created_at="2025-11-21", 
+            user=self.user 
         )
 
     def test_redirect_if_not_logged(self):
@@ -85,13 +86,13 @@ class WarrantyDetailViewTest(TestCase):
         response = self.client.get(reverse('warranty:warranty_detail', args=[self.warranty.id]))
         self.assertEqual(response.status_code, 302)
 
-    # def test_user_cannot_access_other_user_warranty(self):
-    #     """Un utilisateur ne peut pas voir la garantie d'un autre"""
-    #     other_user = User.objects.create_user(username='otheruser', password='otherpass123')
-    #     self.client.login(username='otheruser', password='otherpass123')
-    #     url = reverse('warranty:warranty_detail', args=[self.warranty.pk])  
-    #     response = self.client.get(url)
-    #     self.assertEqual(response.status_code, 404)
+    def test_user_cannot_access_other_user_warranty(self):
+        """Un utilisateur ne peut pas voir la garantie d'un autre"""
+        other_user = User.objects.create_user(username='otheruser', password='otherpass123')
+        self.client.login(username='otheruser', password='otherpass123')
+        url = reverse('warranty:warranty_detail', args=[self.warranty.pk])  
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
 
     def test_access_if_logged_in(self):
         """
@@ -352,7 +353,8 @@ class WarrantyUpdateViewTest(TestCase):
             vendor="Revendeur_Update",
             imageReceipt="",
             notes="Observations_Update",
-            created_at="2025-11-30"
+            created_at="2025-11-30",
+            user=self.user 
         )   
 
     def test_redirect_if_not_logged(self):
@@ -451,7 +453,8 @@ class WarrantyDeleteViewTest(TestCase):
             vendor="Revendeur_Delete",
             imageReceipt="",
             notes="Observations_Delete",
-            created_at="2025-12-03"
+            created_at="2025-12-03",
+            user=self.user 
         )   
 
     def test_redirect_if_not_logged(self):

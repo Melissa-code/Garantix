@@ -3,9 +3,11 @@ from django.urls import reverse
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from datetime import timedelta
+from django.contrib.auth.models import User
 
 
 class Warranty(models.Model): 
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='warranties', verbose_name="Utilisateur", null=True, blank=True)
     product_name = models.CharField(max_length=200, verbose_name="Nom du produit")
     brand = models.CharField(max_length=150, verbose_name="Nom de la marque")
     purchase_date = models.DateField(verbose_name="Date d'achat")
