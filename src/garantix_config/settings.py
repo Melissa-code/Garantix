@@ -33,17 +33,19 @@ INSTALLED_APPS = [
     'warranty', 
     'accounts',
     'gunicorn', # serveur HTTP Python WSGI pour Unix
+    'whitenoise.runserver_nostatic', # pour servir les fichiers statiques en production
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # for  serving static files in production CSS, JS, images
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'livereload.middleware.LiveReloadScript', 
+    'livereload.middleware.LiveReloadScript', # pour recharger automatiquement les pages lors du développement
 ]
 
 ROOT_URLCONF = 'garantix_config.urls'
@@ -146,3 +148,12 @@ SESSION_COOKIE_NAME = 'sessionid'
 SESSION_COOKIE_SECURE = True        # Cookie envoyé uniquement en HTTPS
 SESSION_COOKIE_HTTPONLY = True      # Protection XSS (JavaScript ne peut pas lire le cookie)
 SESSION_COOKIE_SAMESITE = 'Lax'     # Protection contre les attaques CSRF
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
