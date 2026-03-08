@@ -151,11 +151,19 @@ SESSION_COOKIE_SAMESITE = 'Lax'     # Protection contre les attaques CSRF
 
 # WhiteNoise sert les fichiers + les compresse et leur donner un nom unique (hachage) 
 # pour que le cache des navigateurs fonctionne parfaitement
+# STORAGES = {
+#     "default": {
+#         "BACKEND": "django.core.files.storage.FileSystemStorage",
+#     },
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",  # ← ENLEVÉ "Manifest"
     },
 }
