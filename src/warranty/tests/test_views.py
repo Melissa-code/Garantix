@@ -151,7 +151,7 @@ class WarrantyCreateViewTest(TestCase):
         response = self.client.get(reverse('warranty:warranty_create'))
         self.assertEqual(response.status_code, 302)
 
-    def test_access_if_logged_in(self):
+    def test_access_if_logged_in(self):   
         """
         Test access to create page (user authorized)
         """

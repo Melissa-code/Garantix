@@ -116,14 +116,14 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
-
+# Static files (CSS, JavaScript, Images) https://docs.djangoproject.com/en/5.2/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / 'warranty' / 'static',  
 ]
+
+# Media files (ex: img uploads)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -149,6 +149,8 @@ SESSION_COOKIE_SECURE = True        # Cookie envoyé uniquement en HTTPS
 SESSION_COOKIE_HTTPONLY = True      # Protection XSS (JavaScript ne peut pas lire le cookie)
 SESSION_COOKIE_SAMESITE = 'Lax'     # Protection contre les attaques CSRF
 
+# WhiteNoise sert les fichiers + les compresse et leur donner un nom unique (hachage) 
+# pour que le cache des navigateurs fonctionne parfaitement
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",

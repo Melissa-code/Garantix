@@ -48,3 +48,28 @@ docker-compose exec web python manage.py migrate
 docker-compose exec web python manage.py test
 ```
 
+## 7. Servir les fichiers statiques en production sans serveur externe Nginx 
+
+- installer la bilbiothèque WhiteNoise `docker exec -it garantix_web pip install whitenoise`
+- mettre à jour requirements.txt `docker exec -it garantix_web pip freeze > requirements.txt`
+- reconstruit l'image `docker-compose build garantix_web`
+- idem en local 
+
+- ajouter whitenoise dans `settings.py` :
+```
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # DOIT ÊTRE ICI
+    # ... le reste ...
+]
+...
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+```
+
