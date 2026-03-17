@@ -3,11 +3,9 @@ from django.urls import reverse
 from django.conf import settings 
 from django.contrib.auth.models import User
 from warranty.models import Warranty
+from warranty.tests.factories import UserFactory, WarrantyFactory
 
-
-####################################################################
-### Home View Tests
-####################################################################
+#---------------------------------- Warranty Home View Tests ----------------------------------#
 
 class HomeViewTest(TestCase):
 
@@ -22,9 +20,8 @@ class HomeViewTest(TestCase):
         self.assertIn('media_url', response.context)
         self.assertEqual(response.context['media_url'], settings.MEDIA_URL)
 
-####################################################################
-### Warranty List View Tests
-####################################################################
+
+#---------------------------------- Warranty List View Tests ----------------------------------#
 
 class WarrantyListViewTest(TestCase):
     
@@ -59,9 +56,8 @@ class WarrantyListViewTest(TestCase):
         self.assertContains(response, "Produit_1")
         self.assertContains(response, "Produit_2")
 
-####################################################################
-### Warranty Detail View Tests
-####################################################################
+
+#---------------------------------- Warranty Detail View Tests ----------------------------------#
 
 class WarrantyDetailViewTest(TestCase):
 
@@ -135,9 +131,8 @@ class WarrantyDetailViewTest(TestCase):
         warranty = response.context['warranty']
         self.assertEqual(warranty.imageReceipt, "")
 
-####################################################################
-### Warranty Create View Tests
-####################################################################
+
+#---------------------------------- Warranty Create View Tests ----------------------------------#
 
 class WarrantyCreateViewTest(TestCase):
 
@@ -337,9 +332,8 @@ class WarrantyCreateViewTest(TestCase):
         self.assertEqual(response.status_code, 200)  
         self.assertEqual(Warranty.objects.count(), 0)
 
-####################################################################
-### Warranty Update View Tests  
-####################################################################
+
+#---------------------------------- Warranty Update View Tests  ----------------------------------#
 
 class WarrantyUpdateViewTest(TestCase):
 
@@ -437,42 +431,28 @@ class WarrantyUpdateViewTest(TestCase):
         self.assertEqual(warranty_after_attempt.vendor, "Revendeur_Update")
         self.assertEqual(warranty_after_attempt.notes, "Observations_Update")   
 
-####################################################################
-### Warranty Delete View Tests  
-####################################################################
+
+#---------------------------------- Warranty Delete View Tests ----------------------------------#
 
 class WarrantyDeleteViewTest(TestCase):
 
     def setUp(self):
-        self.user = User.objects.create_user(username='testuser', password='testpassword')
-        self.warranty = Warranty.objects.create(
-            product_name="Produit_Delete",
-            brand="Marque_Delete",
-            purchase_date="2025-12-03",
-            warranty_duration_months="12",
-            vendor="Revendeur_Delete",
-            imageReceipt="",
-            notes="Observations_Delete",
-            created_at="2025-12-03",
-            user=self.user 
-        )   
+        self.user = UserFactory(username='testuser')
+        self.warranty = WarrantyFactory(user=self.user, product_name="Produit_Delete")
 
     def test_redirect_if_not_logged(self):
-        """ Test redirect to login 
-        """
+        """Test redirect to login"""
         response = self.client.get(reverse('warranty:warranty_delete', args=[self.warranty.id]))
         self.assertEqual(response.status_code, 302) 
 
     def test_access_if_logged_in(self):
-        """ Test access to delete page (user authorized) 
-        """
+        """Test access to delete page (user authorized)"""
         self.client.login(username="testuser", password="testpassword")
         response = self.client.get(reverse('warranty:warranty_delete', args=[self.warranty.id]))
         self.assertEqual(response.status_code, 200)
          
     def test_delete_warranty(self):
-        """ Test suppression d'une garantie existante 
-        """
+        """Test suppression d'une garantie existante"""
         self.client.login(username="testuser", password="testpassword")
         response = self.client.post(reverse('warranty:warranty_delete', args=[self.warranty.id]))
         self.assertEqual(response.status_code, 302) 
@@ -480,15 +460,13 @@ class WarrantyDeleteViewTest(TestCase):
             Warranty.objects.get(id=self.warranty.id)   
 
     def test_delete_nonexistent_warranty(self):
-        """ Test suppression d'une garantie inexistante 
-        """
+        """Test suppression d'une garantie inexistante"""
         self.client.login(username="testuser", password="testpassword")
         response = self.client.post(reverse('warranty:warranty_delete', args=[999]))
         self.assertEqual(response.status_code, 404)
     
     def test_warranty_still_exists_after_cancel(self):
-        """ Test que la garantie existe toujours après une annulation de suppression 
-        """
+        """Test: la garantie existe toujours après une annulation de suppression"""
         self.client.login(username="testuser", password="testpassword")
         response = self.client.get(reverse('warranty:warranty_delete', args=[self.warranty.id]))
         self.assertEqual(response.status_code, 200)
@@ -496,8 +474,7 @@ class WarrantyDeleteViewTest(TestCase):
         self.assertTrue(warranty_still_exists)
     
     def test_delete_warranty_twice(self):
-        """ Test suppression de la même garantie deux fois 
-        """
+        """Test suppression de la même garantie deux fois"""
         self.client.login(username="testuser", password="testpassword")
         response1 = self.client.post(reverse('warranty:warranty_delete', args=[self.warranty.id]))
         self.assertEqual(response1.status_code, 302) 
@@ -505,8 +482,7 @@ class WarrantyDeleteViewTest(TestCase):
         self.assertEqual(response2.status_code, 404)
     
     def test_delete_warranty_invalid_method(self):
-        """ Test suppression avec une méthode HTTP invalide 
-        """
+        """Test suppression avec une méthode HTTP invalide (GET au lieu de POST)"""
         self.client.login(username="testuser", password="testpassword")
         response = self.client.get(reverse('warranty:warranty_delete', args=[self.warranty.id]))
         self.assertEqual(response.status_code, 200)  
@@ -514,21 +490,20 @@ class WarrantyDeleteViewTest(TestCase):
         self.assertTrue(warranty_still_exists)
 
     def test_delete_warranty_different_user(self):
-        """ Test qu'un utilisateur ne peut pas supprimer la garantie d'un autre 
-        """
-        other_user = User.objects.create_user(username='otheruser', password='otherpass123')
-        self.client.login(username='otheruser', password='otherpass123')
+        """Test qu'un utilisateur ne peut pas supprimer la garantie d'un autre"""
+        other_user = UserFactory()  
+        self.client.login(username=other_user.username, password='testpassword')
         response = self.client.post(reverse('warranty:warranty_delete', args=[self.warranty.id]))
         self.assertEqual(response.status_code, 404)
         warranty_still_exists = Warranty.objects.filter(id=self.warranty.id).exists()
         self.assertTrue(warranty_still_exists)
 
-    # def test_delete_warranty_confirmation_page(self):
-    #     """ Test de la page de confirmation de suppression 
-    #     """
-    #     self.client.login(username="testuser", password="testpassword")
-    #     response = self.client.get(reverse('warranty:warranty_delete', args=[self.warranty.id]))
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertContains(response, f"Etes-vous sûr de vouloir supprimer la garantie {self.warranty.product_name} ?")
-
-    
+    def test_delete_warranty_confirmation_page(self):
+        """Test de la page de confirmation de suppression"""
+        self.client.login(username="testuser", password="testpassword")
+        response = self.client.get(reverse('warranty:warranty_delete', args=[self.warranty.id]))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Etes-vous sûr de vouloir supprimer la garantie")
+        self.assertContains(response, self.warranty.product_name)
+        self.assertContains(response, "Oui supprimer")
+        

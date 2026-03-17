@@ -48,11 +48,17 @@ docker-compose exec web python manage.py migrate
 docker-compose exec web python manage.py test
 ```
 
+- `factory-boy` : Génération de données de test: `docker exec -it garantix_web pip install whitenoise`
+- puis `docker exec -it garantix_web pip freeze > requirements.txt` et `docker-compose build web`
+
+et idem en local  
+
+
 ## 7. Servir les fichiers statiques en production sans serveur externe Nginx 
 
 - installer la bilbiothèque WhiteNoise `docker exec -it garantix_web pip install whitenoise`
 - mettre à jour requirements.txt `docker exec -it garantix_web pip freeze > requirements.txt`
-- reconstruit l'image `docker-compose build garantix_web`
+- reconstruit l'image `docker-compose build web`
 - idem en local 
 
 - ajouter whitenoise dans `settings.py` :
