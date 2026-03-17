@@ -513,15 +513,15 @@ class WarrantyDeleteViewTest(TestCase):
         warranty_still_exists = Warranty.objects.filter(id=self.warranty.id).exists()
         self.assertTrue(warranty_still_exists)
 
-    # def test_delete_warranty_different_user(self):
-    #     """ Test qu'un utilisateur ne peut pas supprimer la garantie d'un autre 
-    #     """
-    #     other_user = User.objects.create_user(username='otheruser', password='otherpass123')
-    #     self.client.login(username='otheruser', password='otherpass123')
-    #     response = self.client.post(reverse('warranty:warranty_delete', args=[self.warranty.id]))
-    #     self.assertEqual(response.status_code, 404)
-    #     warranty_still_exists = Warranty.objects.filter(id=self.warranty.id).exists()
-    #     self.assertTrue(warranty_still_exists)
+    def test_delete_warranty_different_user(self):
+        """ Test qu'un utilisateur ne peut pas supprimer la garantie d'un autre 
+        """
+        other_user = User.objects.create_user(username='otheruser', password='otherpass123')
+        self.client.login(username='otheruser', password='otherpass123')
+        response = self.client.post(reverse('warranty:warranty_delete', args=[self.warranty.id]))
+        self.assertEqual(response.status_code, 404)
+        warranty_still_exists = Warranty.objects.filter(id=self.warranty.id).exists()
+        self.assertTrue(warranty_still_exists)
 
     # def test_delete_warranty_confirmation_page(self):
     #     """ Test de la page de confirmation de suppression 

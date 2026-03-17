@@ -12,10 +12,9 @@ from django.db.models import Q
 from warranty.mixins import ContextDataMixin, WarrantySearchMixin
 from .forms import WarrantyForm
 
+
 class HomeView(TemplateView): 
-    """ 
-    Accueil 
-    """
+    """Accueil - redirige vers la liste des garanties si connecté sinon affiche une page d'accueil"""
     template_name = "warranty/home.html"
 
     def get_context_data(self, **kwargs):
@@ -26,9 +25,7 @@ class HomeView(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 class WarrantiesListView(ContextDataMixin, WarrantySearchMixin, ListView): 
-    """
-    Liste des garanties 
-    """
+    """Liste des garanties de l'utilisateur connecté avec barre de recherche"""
     model = Warranty
     context_object_name = "warranties" # variable in template
     template_name = "warranty/warranties_list.html"
@@ -37,7 +34,7 @@ class WarrantiesListView(ContextDataMixin, WarrantySearchMixin, ListView):
 
 @method_decorator(login_required, name="dispatch")
 class WarrantyDetailView(DetailView):
-    """ Page Détail de la garantie """
+    """Page Détail de la garantie - affiche les détails d'une garantie spécifique"""
     model = Warranty
     context_object_name = "warranty"
     template_name = "warranty/warranty_detail.html"
@@ -50,15 +47,24 @@ class WarrantyDetailView(DetailView):
 
 @method_decorator(login_required, name="dispatch")
 class WarrantyCreateView(CreateView): 
-    """ Page Créer une nouvelle garantie """
+    """Page Créer une nouvelle garantie - formulaire pour ajouter une nouvelle garantie"""
     model = Warranty
     template_name = "warranty/warranty_create.html"
     fields = ["product_name", "brand", "purchase_date", "warranty_duration_months", "vendor", "imageReceipt", "notes", ]
 
+    def form_valid(self, form):
+        """Assigne l'utilisateur connecté à la nouvelle garantie"""
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def get_queryset(self):
+        """ne retourne que les garanties de l'utilisateur connecté"""
+        return Warranty.objects.filter(user=self.request.user)
+    
 
 @method_decorator(login_required, name="dispatch")
 class WarrantyUpdateView(UpdateView):
-    """ Page Modifier une garantie """
+    """Page Modifier une garantie - formulaire pré-rempli pour éditer une garantie existante"""
     model = Warranty
     template_name = "warranty/warranty_update.html"
     fields = ["product_name", "brand", "purchase_date", "warranty_duration_months", "vendor", "imageReceipt", "notes", ]
@@ -81,10 +87,18 @@ class WarrantyUpdateView(UpdateView):
         
         return super().form_valid(form)
     
+    def get_queryset(self):
+        """ne retourne que les garanties de l'utilisateur connecté"""
+        return Warranty.objects.filter(user=self.request.user)
+    
         
 @method_decorator(login_required, name="dispatch")
 class WarrantyDeleteView(DeleteView): 
-    """ Page Supprimer une garantie """
+    """Page Supprimer une garantie - confirmation avant de supprimer une garantie existante"""
     model = Warranty
     context_object_name = "warranty"
     success_url = reverse_lazy("warranty:home")
+
+    def get_queryset(self):
+        """ne retourne que les garanties de l'utilisateur connecté"""
+        return Warranty.objects.filter(user=self.request.user)
