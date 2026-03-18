@@ -72,18 +72,18 @@ class WarrantyUpdateView(UpdateView):
         
     def post(self, request, *args, **kwargs):
         """Surcharge pour forcer la prise en compte des fichiers"""
-        print("📁 REQUEST.FILES:", request.FILES)
-        print("📝 REQUEST.POST:", request.POST)
+        # print("REQUEST.FILES:", request.FILES)
+        # print("" REQUEST.POST:", request.POST)
         return super().post(request, *args, **kwargs)
     
     def form_valid(self, form):
-        print("✅ Form valide!")
-        print("📁 FILES dans form:", self.request.FILES)
+        # print("Form valide!")
+        # print("FILES dans form:", self.request.FILES)
         
         # Si un nouveau fichier est uploadé, l'assigner manuellement
         if 'imageReceipt' in self.request.FILES:
             form.instance.imageReceipt = self.request.FILES['imageReceipt']
-            print("🖼️ Nouvelle image assignée!")
+            # print(" Nouvelle image assignée!")
         
         return super().form_valid(form)
     
