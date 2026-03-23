@@ -64,6 +64,36 @@ class WarrantyListViewTest(WarrantyTestCase):
         })
         self.assertEqual(response.status_code, 200) 
         self.assertContains(response, "Produit_Test")
+
+    def test_user_cannot_access_other_user_warranty(self):
+        """Un utilisateur ne peut pas voir les garanties d'un autre"""
+        other_user = UserFactory(username="otheruser", password="otherpass123")
+        self.client.force_login(other_user)
+        url = reverse('warranty:warranties_list')  
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, "Produit_Test")
+
+    def test_user_sees_empty_list_when_no_warranties(self):
+        """Test : un utilisateur sans garanties ne voit pas les garanties d'un autre et voit une liste vide"""
+        self.client.force_login(self.user)
+        response = self.client.get(reverse('warranty:warranties_list'), {
+            'product_name': f"Produit_Test",
+            'brand': f"Marque_Test",
+            'purchase_date': "2025-11-28",
+            'warranty_duration_months': "24",
+            'vendor': f"Revendeur_Test",
+            'imageReceipt': "",
+            'notes': f"Observations_Test",
+        })
+        # autre utilisateur sans garantie
+        other_user = UserFactory(username="otheruser", password="otherpass123")
+        self.client.force_login(other_user)
+
+        url = reverse('warranty:warranties_list')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['warranties']), 0)
     
 
 #---------------------------------- Warranty Detail View Tests ----------------------------------#

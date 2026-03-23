@@ -9,7 +9,7 @@ from django.utils.decorators import method_decorator
 from django.shortcuts import redirect
 from django.views import View
 from django.db.models import Q
-from warranty.mixins import ContextDataMixin, WarrantySearchMixin
+from warranty.mixins import ContextDataMixin, WarrantySearchMixin, UserWarrantyMixin
 from .forms import WarrantyForm
 
 
@@ -24,7 +24,7 @@ class HomeView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class WarrantiesListView(ContextDataMixin, WarrantySearchMixin, ListView): 
+class WarrantiesListView(ContextDataMixin, WarrantySearchMixin, UserWarrantyMixin, ListView):
     """Liste des garanties de l'utilisateur connecté avec barre de recherche"""
     model = Warranty
     context_object_name = "warranties" # variable in template
@@ -33,20 +33,16 @@ class WarrantiesListView(ContextDataMixin, WarrantySearchMixin, ListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class WarrantyDetailView(DetailView):
+class WarrantyDetailView(UserWarrantyMixin, DetailView):
     """Page Détail de la garantie - affiche les détails d'une garantie spécifique"""
     model = Warranty
     context_object_name = "warranty"
     template_name = "warranty/warranty_detail.html"
     fields = ["product_name", "brand", "purchase_date", "warranty_duration_months", "vendor", "imageReceipt", "notes", "created_at", ]
 
-    def get_queryset(self):
-        """ne retourne que les garanties de l'utilisateur connecté"""
-        return Warranty.objects.filter(user=self.request.user)
-
 
 @method_decorator(login_required, name="dispatch")
-class WarrantyCreateView(CreateView): 
+class WarrantyCreateView(UserWarrantyMixin, CreateView):
     """Page Créer une nouvelle garantie - formulaire pour ajouter une nouvelle garantie"""
     model = Warranty
     template_name = "warranty/warranty_create.html"
@@ -57,13 +53,9 @@ class WarrantyCreateView(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-    def get_queryset(self):
-        """ne retourne que les garanties de l'utilisateur connecté"""
-        return Warranty.objects.filter(user=self.request.user)
-    
 
 @method_decorator(login_required, name="dispatch")
-class WarrantyUpdateView(UpdateView):
+class WarrantyUpdateView(UserWarrantyMixin, UpdateView):
     """Page Modifier une garantie - formulaire pré-rempli pour éditer une garantie existante"""
     model = Warranty
     template_name = "warranty/warranty_update.html"
@@ -72,14 +64,9 @@ class WarrantyUpdateView(UpdateView):
         
     def post(self, request, *args, **kwargs):
         """Surcharge pour forcer la prise en compte des fichiers"""
-        # print("REQUEST.FILES:", request.FILES)
-        # print("" REQUEST.POST:", request.POST)
         return super().post(request, *args, **kwargs)
     
     def form_valid(self, form):
-        # print("Form valide!")
-        # print("FILES dans form:", self.request.FILES)
-        
         # Si un nouveau fichier est uploadé, l'assigner manuellement
         if 'imageReceipt' in self.request.FILES:
             form.instance.imageReceipt = self.request.FILES['imageReceipt']
@@ -87,18 +74,10 @@ class WarrantyUpdateView(UpdateView):
         
         return super().form_valid(form)
     
-    def get_queryset(self):
-        """ne retourne que les garanties de l'utilisateur connecté"""
-        return Warranty.objects.filter(user=self.request.user)
-    
         
 @method_decorator(login_required, name="dispatch")
-class WarrantyDeleteView(DeleteView): 
+class WarrantyDeleteView(UserWarrantyMixin, DeleteView):
     """Page Supprimer une garantie - confirmation avant de supprimer une garantie existante"""
     model = Warranty
     context_object_name = "warranty"
     success_url = reverse_lazy("warranty:home")
-
-    def get_queryset(self):
-        """ne retourne que les garanties de l'utilisateur connecté"""
-        return Warranty.objects.filter(user=self.request.user)
