@@ -6,11 +6,8 @@ from django.urls import reverse_lazy
 from warranty.models import Warranty
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.shortcuts import redirect
-from django.views import View
-from django.db.models import Q
 from warranty.mixins import ContextDataMixin, WarrantySearchMixin, UserWarrantyMixin
-from .forms import WarrantyForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class HomeView(TemplateView): 
@@ -23,8 +20,7 @@ class HomeView(TemplateView):
         return context
 
 
-@method_decorator(login_required, name="dispatch")
-class WarrantiesListView(ContextDataMixin, WarrantySearchMixin, UserWarrantyMixin, ListView):
+class WarrantiesListView(LoginRequiredMixin, ContextDataMixin, WarrantySearchMixin, UserWarrantyMixin, ListView):
     """Liste des garanties de l'utilisateur connecté avec barre de recherche"""
     model = Warranty
     context_object_name = "warranties" # variable in template
@@ -32,8 +28,7 @@ class WarrantiesListView(ContextDataMixin, WarrantySearchMixin, UserWarrantyMixi
     fields = ["product_name", "brand", "purchase_date", "warranty_duration_months", "vendor", "imageReceipt", "notes", "created_at", ]
 
 
-@method_decorator(login_required, name="dispatch")
-class WarrantyDetailView(UserWarrantyMixin, DetailView):
+class WarrantyDetailView(LoginRequiredMixin, UserWarrantyMixin, DetailView):
     """Page Détail de la garantie - affiche les détails d'une garantie spécifique"""
     model = Warranty
     context_object_name = "warranty"
@@ -41,8 +36,7 @@ class WarrantyDetailView(UserWarrantyMixin, DetailView):
     fields = ["product_name", "brand", "purchase_date", "warranty_duration_months", "vendor", "imageReceipt", "notes", "created_at", ]
 
 
-@method_decorator(login_required, name="dispatch")
-class WarrantyCreateView(UserWarrantyMixin, CreateView):
+class WarrantyCreateView(LoginRequiredMixin, UserWarrantyMixin, CreateView):
     """Page Créer une nouvelle garantie - formulaire pour ajouter une nouvelle garantie"""
     model = Warranty
     template_name = "warranty/warranty_create.html"
@@ -54,8 +48,7 @@ class WarrantyCreateView(UserWarrantyMixin, CreateView):
         return super().form_valid(form)
 
 
-@method_decorator(login_required, name="dispatch")
-class WarrantyUpdateView(UserWarrantyMixin, UpdateView):
+class WarrantyUpdateView(LoginRequiredMixin, UserWarrantyMixin, UpdateView):
     """Page Modifier une garantie - formulaire pré-rempli pour éditer une garantie existante"""
     model = Warranty
     template_name = "warranty/warranty_update.html"
@@ -75,8 +68,7 @@ class WarrantyUpdateView(UserWarrantyMixin, UpdateView):
         return super().form_valid(form)
     
         
-@method_decorator(login_required, name="dispatch")
-class WarrantyDeleteView(UserWarrantyMixin, DeleteView):
+class WarrantyDeleteView(LoginRequiredMixin, UserWarrantyMixin, DeleteView):
     """Page Supprimer une garantie - confirmation avant de supprimer une garantie existante"""
     model = Warranty
     context_object_name = "warranty"
