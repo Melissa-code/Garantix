@@ -1,9 +1,9 @@
 from django.db import models
 from django.urls import reverse
 from django.core.exceptions import ValidationError
-from django.utils import timezone
-from datetime import timedelta
 from django.contrib.auth.models import User
+from django.urls import reverse
+from datetime import timedelta
 
 
 class Warranty(models.Model): 
@@ -17,17 +17,19 @@ class Warranty(models.Model):
     notes = models.TextField(blank=True, null=True, verbose_name="Notes")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Crée le")
 
-    # Warranty.objects.all() return les résultats triés par ordre alphabétique du nom
     class Meta:
+        """return les résultats triés par ordre alphabétique du nom puis par marque si même nom"""
         ordering = ['product_name', 'brand'] # tri par nom d'abord puis par marque si même nom 
         verbose_name = "Garanties"
 
-    # redirection apres ajout d'une garantie 
     def get_absolute_url(self):
+        """redirection après ajout/modification d'une garantie vers la liste des garanties"""
+
         return reverse('warranty:warranties_list') 
     
     @property
     def warranty_expiry_date(self): 
+        """calcule la date d'expiration de la garantie en ajoutant la durée de garantie à la date d'achat"""
         return self.purchase_date + timedelta(days=self.warranty_duration_months * 30)
     
     def __str__(self):
