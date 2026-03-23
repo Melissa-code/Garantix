@@ -1,29 +1,10 @@
-from datetime import date
-
-from django.test import TestCase
 from django.urls import reverse
 from django.conf import settings 
-from django.contrib.auth.models import User
 from warranty.models import Warranty
-from warranty.tests.factories import UserFactory, WarrantyFactory
-
-
-class WarrantyTestCase(TestCase):
-    """Classe de base commune pour tous les tests de Warranty"""
-    
-    def setUp(self):
-        """classes filles héritent automatiquement de setup()"""
-
-        self.user = UserFactory(username='testuser@example.com')
-        self.warranty = WarrantyFactory(
-            user=self.user,
-            product_name="Produit_Test",
-            brand="Marque_Test",
-            purchase_date=date(2025, 12, 3), 
-            warranty_duration_months=24,
-            vendor="Revendeur_Test",
-            notes="Observations_Test"
-        )
+from warranty.tests.factories import UserFactory
+from warranty.tests.base import WarrantyTestCase
+from datetime import date, timedelta
+from django.utils import timezone
 
 #---------------------------------- Warranty Home View Tests ----------------------------------#
 
