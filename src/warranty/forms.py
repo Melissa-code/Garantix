@@ -15,4 +15,12 @@ class CustomUserCreationForm(UserCreationForm):
 class WarrantyForm(forms.ModelForm):
     class Meta:
         model = Warranty
-        fields = ["product_name", "brand", "purchase_date", "warranty_duration_months", "vendor", "imageReceipt", "notes"]
+        fields = [
+            "product_name", 
+            "brand", 
+            "purchase_date", 
+            "warranty_duration_months", 
+            "vendor", 
+            "imageReceipt", 
+            "notes"
+        ]

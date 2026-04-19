@@ -30,8 +30,8 @@
                 <div class="form-column">
                     <sl-input name="brand" placeholder="Marque" clearable value="{{ warranty.brand }}" required></sl-input>
                     <sl-input name="warranty_duration_months" type="number" placeholder="Durée de garantie (mois)" value="{{ warranty.warranty_duration_months }}" required></sl-input>
-                    <!-- img -->
-                    <sl-input name="imageReceipt" type="file" placeholder="Image du reçu"></sl-input>
+                    <!-- Input pour l'image du reçu -->
+                    <input type="file" name="imageReceipt" class="imageReceipt" accept="image/png, image/jpeg">
                 </div>
             </div>
 

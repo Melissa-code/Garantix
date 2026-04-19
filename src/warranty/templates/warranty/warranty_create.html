@@ -11,7 +11,6 @@
     <h1>Ajouter une garantie</h1>
 </section>
 
-
 <!-- form section create -->
 <section class="form-container">
 
@@ -32,7 +31,8 @@
         <div class="form-column">
           <sl-input name="brand" placeholder="Marque" clearable value="{{ form.brand.value|default:'' }}" required></sl-input>
           <sl-input name="warranty_duration_months" type="number" placeholder="Durée de garantie (mois)" value="{{ form.warranty_duration_months.value|default:'' }}" required></sl-input>
-          <sl-input name="imageReceipt" type="file" placeholder="Image du reçu"></sl-input>
+          <!-- Input pour l'image du reçu -->
+          <input type="file" name="imageReceipt" class="imageReceipt" accept="image/png, image/jpeg">
         </div>
       </div>
 

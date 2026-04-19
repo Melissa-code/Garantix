@@ -78,4 +78,12 @@ STORAGES = {
     },
 }
 ```
+Voir pour prod: 
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"
+        if IS TEST else
+        "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+    },
+}
 
