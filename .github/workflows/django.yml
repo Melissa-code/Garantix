@@ -13,10 +13,11 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.13]
+        python-version: [3.11]
 
     env:
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      # SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      SECRET_KEY: 'test-key-for-ci-only'
       DEBUG: ${{ vars.DEBUG}}
       DJANGO_ENV: ${{ vars.DJANGO_ENV}}
       ALLOWED_HOSTS: ${{ vars.ALLOWED_HOSTS}}

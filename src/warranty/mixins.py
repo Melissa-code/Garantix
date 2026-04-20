@@ -16,7 +16,7 @@ class ContextDataMixin:
         if self.request.user.is_authenticated:
             context['nom_complet'] = f"{self.request.user.first_name} {self.request.user.last_name}".strip()
             context['nom_affichage'] = context['nom_complet'] if context['nom_complet'] else self.request.user.username
-        # total officiers 
+        # total de garanties
         if hasattr(self, 'model') and self.model: 
             context['total_warranties'] = self.model.objects.count()
 
@@ -25,7 +25,6 @@ class ContextDataMixin:
 
 class WarrantySearchMixin:
     """ Mixin pour rechercher une garnatie via un paramètre GET """
-
     search_param = "search"
 
     def get_queryset(self): 
@@ -40,4 +39,11 @@ class WarrantySearchMixin:
             )
 
         return queryset.order_by('product_name')
+
+
+class UserWarrantyMixin:
+    """ Filtre les garanties par utilisateur connecté """
+    
+    def get_queryset(self):
+        return super().get_queryset().filter(user=self.request.user)
     

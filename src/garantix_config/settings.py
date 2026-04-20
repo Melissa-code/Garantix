@@ -15,7 +15,8 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = [config('ALLOWED_HOSTS')]
+# ALLOWED_HOSTS = [config('ALLOWED_HOSTS')]
+ALLOWED_HOSTS = config('ALLOWED_HOSTS').split(',')
 
 CSRF_TRUSTED_ORIGINS = ['https://garantix.melisite.fr']
 
@@ -32,17 +33,19 @@ INSTALLED_APPS = [
     'warranty', 
     'accounts',
     'gunicorn', # serveur HTTP Python WSGI pour Unix
+    'whitenoise.runserver_nostatic', # pour servir les fichiers statiques en production
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # for  serving static files in production CSS, JS, images
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'livereload.middleware.LiveReloadScript', 
+    'livereload.middleware.LiveReloadScript', # pour recharger automatiquement les pages lors du développement
 ]
 
 ROOT_URLCONF = 'garantix_config.urls'
@@ -113,14 +116,14 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
-
+# Static files (CSS, JavaScript, Images) https://docs.djangoproject.com/en/5.2/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / 'warranty' / 'static',  
 ]
+
+# Media files (ex: img uploads)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -145,3 +148,22 @@ SESSION_COOKIE_NAME = 'sessionid'
 SESSION_COOKIE_SECURE = True        # Cookie envoyé uniquement en HTTPS
 SESSION_COOKIE_HTTPONLY = True      # Protection XSS (JavaScript ne peut pas lire le cookie)
 SESSION_COOKIE_SAMESITE = 'Lax'     # Protection contre les attaques CSRF
+
+# WhiteNoise sert les fichiers + les compresse et leur donner un nom unique (hachage) 
+# pour que le cache des navigateurs fonctionne parfaitement
+# STORAGES = {
+#     "default": {
+#         "BACKEND": "django.core.files.storage.FileSystemStorage",
+#     },
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",  # ← ENLEVÉ "Manifest"
+    },
+}
