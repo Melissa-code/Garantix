@@ -10,9 +10,9 @@
   <link rel="icon" href="{% static 'images/logo_black2.png' %}" type="image/png">
   <!-- Style Shoelace -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <!-- Style custom -->
   {% block extra_css %}{% endblock %}
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <!-- title -->
   {% block title %}Garantix{% endblock %}
 </head>
@@ -24,9 +24,7 @@
 
   <!-- Main -->
   <main class="container">
-    {% block content %}
-    <!-- contenu spécifique à chaque page  -->
-    {% endblock%}
+    {% block content %}<!-- contenu spécifique à chaque page  -->{% endblock%}
   </main>
 
   <!-- Footer -->

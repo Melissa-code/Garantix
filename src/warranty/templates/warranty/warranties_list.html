@@ -1,95 +1,95 @@
-{% extends "base.html" %} {% block title %}
+{% extends "base.html" %}
+{% load static %}  
+
+{% block title %}
     <title>Liste des garanties</title>
 {% endblock %} 
 
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/list_warranties.css' %}">
+{% endblock %}
+
 
 {% block content %}
+<section class="dashboard-container">
+    <header class="page-header">
+            <div class="header-text">
+                <h1>Mes garanties</h1>
+                <p class="subtitle">{{ warranties|length }} garanties trouvées</p>
+            </div>
+
+            <div class="header-actions">
+                <form method="get" class="search-form">
+                    <sl-input 
+                        name="search" 
+                        placeholder="Rechercher une garantie " 
+                        size="medium" 
+                        clearable 
+                        value="{{ request.GET.search }}">
+                        <sl-icon name="search" slot="prefix"></sl-icon>
+                    </sl-input>
+                </form>
+
+                <sl-tooltip content="Ajouter une garantie">
+                    <sl-button variant="primary" pill href="{% url 'warranty:warranty_create' %}">
+                        <sl-icon slot="prefix" name="plus-lg"></sl-icon>
+                        Ajouter
+                    </sl-button>
+                </sl-tooltip>
+            </div>
+        </header>
+
+    <sl-divider style="--spacing: 2rem;"></sl-divider>
 
     <section class="section-message">
         {% include 'partials/_messages.html' %}
     </section>
 
-    <!-- Searchbar section -->
-    <section id="search">
-        <h2 id="search-warranty-title">Rechercher une garantie</h2>
-
-        <form method="get" class="searchbar">
-            <sl-input 
-                name="search" 
-                placeholder="Saisir le nom d'un produit ou marque" 
-                size="large" 
-                clearable 
-                value="{{ request.GET.search }}">
-            </sl-input>
-            <sl-button type="submit" variant="default" size="large">
-                <sl-icon name="search" label="Rechercher"></sl-icon>
-            </sl-button>
-        </form>
-    </section>
-
-    <sl-divider></sl-divider>
-
-    <!-- List warranties section -->
-    <section id="warranties" class="container">
-
-        <!-- total warranties found -->
-        <div>
-            <p>{{ warranties|length }} garanties trouvées</p>
-        </div>
-       
-        <div class="title">
-            <h1>Mes garanties</h1>
-
-            <!-- Add Warranty button -->
-            <sl-tooltip content="Ajouter une garantie">
-                <sl-button size="medium" circle class="icon-btn" variant="neutral" outline href={% url 'warranty:warranty_create' %}>
-                    <sl-icon name="plus-lg" label="plus-lg" class="icon-medium"></sl-icon>
-                </sl-button>
-            </sl-tooltip>
-        </div>
-            
-        <!-- List warranties -->
-        <article id="warranties_list">
+    <section id="warranties_grid" class="warranties-grid">
         {% for warranty in warranties %}
-            <!-- card produit -->
-            <sl-card class="card-header">
-                <div slot="header" class="card-header-title">
-                    <h2 class="truncate-title">{{ warranty.product_name }}</h2>
-                    <h3>{{ warranty.brand }}</h3>
+            <sl-card class="warranty-card">
+                <div slot="header" class="card-header">
+                    <strong class="product-name">{{ warranty.product_name }}</strong>
+                    <small class="brand-badge">{{ warranty.brand }}</small>
                 </div>
-                
-                <div>
-                    <ul>
-                        <li>Date d'achat : {{ warranty.purchase_date|date:"d/m/Y" }} </li>
-                        <li>Garantie : {{ warranty.warranty_duration_months }} mois</li>
-                    </ul>
 
-                    <div class="btns-action">
-                        <form action="">
-                            <!-- Detail Warranty link -->
-                            <sl-button size="medium" circle class="icon-btn"  variant="neutral" outline href={% url 'warranty:warranty_detail' warranty.pk %}>
-                                <sl-icon name="file-earmark-fill" label="garantie" class="icon-medium" style="color:black;"></sl-icon>
-                            </sl-button>
-                        </form>
-                        <!-- Action buttons -->
-                        <div class="action-btns">
-                            {% if request.user.is_authenticated %}
-                                <!-- Edit button -->
-                                <sl-button size="medium" circle class="icon-btn"  variant="warning" outline href="{% url 'warranty:warranty_update' warranty.pk %}">
-                                    <sl-icon name="pencil-square" label="modifier" class="icon-medium"></sl-icon>
-                                </sl-button>
-                                <!-- Delete button -->
-                                <sl-button size="medium" circle class="icon-btn" variant="danger" outline href="{% url 'warranty:warranty_delete' warranty.pk %}">
-                                    <sl-icon name="trash2" label="supprimer" class="icon-medium"></sl-icon>
-                                </sl-button>
-                            {% endif %}
-                        </div>
+                <div class="card-body">
+                    <div class="info-row">
+                        <sl-icon name="calendar3"></sl-icon>
+                        <span>Acheté le : <strong>{{ warranty.purchase_date|date:"d/m/Y" }}</strong></span>
+                    </div>
+                    <div class="info-row">
+                        <sl-icon name="shield-check"></sl-icon>
+                        <span>Durée : <strong>{{ warranty.warranty_duration_months }} mois</strong></span>
                     </div>
                 </div>
+
+                <div slot="footer" class="card-footer">
+                    <sl-button-group>
+                        <sl-button size="small" variant="neutral" outline href="{% url 'warranty:warranty_detail' warranty.pk %}">
+                            <sl-icon name="eye"></sl-icon>
+                        </sl-button>
+                        {% if request.user.is_authenticated %}
+                            <sl-button size="small" variant="neutral" outline href="{% url 'warranty:warranty_update' warranty.pk %}">
+                                <sl-icon name="pencil" style="color: var(--sl-color-warning-600);"></sl-icon>
+                            </sl-button>
+                            <sl-button size="small" variant="neutral" outline href="{% url 'warranty:warranty_delete' warranty.pk %}">
+                                <sl-icon name="trash" style="color: var(--sl-color-danger-600);"></sl-icon>
+                            </sl-button>
+                        {% endif %}
+                    </sl-button-group>
+                </div>
             </sl-card>
-            {% empty %}
-            Aucune garantie trouvée pour votre recherche</p>
+        {% empty %}
+            <div class="empty-state">
+                <sl-icon name="search"></sl-icon>
+                <p>Aucune garantie trouvée pour "{{ request.GET.search }}"</p>
+                <sl-button variant="default" size="small" href="?">Voir tout</sl-button>
+            </div>
         {% endfor %}
-        </article>
     </section>
+
+      
+</section>
+
 {% endblock %}
