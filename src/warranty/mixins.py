@@ -25,7 +25,6 @@ class ContextDataMixin:
 
 class WarrantySearchMixin:
     """ Mixin pour rechercher une garnatie via un paramètre GET """
-
     search_param = "search"
 
     def get_queryset(self): 
@@ -46,6 +45,5 @@ class UserWarrantyMixin:
     """ Filtre les garanties par utilisateur connecté """
     
     def get_queryset(self):
-        
         return super().get_queryset().filter(user=self.request.user)
     

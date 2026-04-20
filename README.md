@@ -29,6 +29,10 @@ source env/bin/activate
 
 - Pour récupérer les dépendances mises dans requirements.txt : `pip install -r requirements.txt`
 
+## Shoelace 
+
+Attention: input dans Shoelace n'ont pas d'image ! 
+
 ## 5. Base de données
 
 `cd "C:/Program Files/PostgreSQL/17/bin"`
