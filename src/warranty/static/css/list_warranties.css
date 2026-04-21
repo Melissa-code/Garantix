@@ -103,6 +103,10 @@
     margin-bottom: 1rem;
 }
 
+/*****************************************************************************************
+ * Pagination Styles
+ *****************************************************************************************/
+
 .pagination-container {
     display: flex;
     justify-content: center;
@@ -116,15 +120,14 @@
     color: var(--black-middle) ;
     font-weight: 600;
     cursor: default;
-    opacity: 1; /* Pour enlever l'effet grisé du 'disabled' */
+    opacity: 1; /* pour enlever l'effet grisé du 'disabled' */
     border-color: var(--black-light);
 }
 
-/* effet de survol  sur les flèches  */
 .pagination-container sl-button:not([disabled]):hover::part(base) {
-    color: var(--primary);
+    background-color: var(--primary);
     border-color: var(--primary);
-    background-color: var(--white);
+    color: white; 
 }
 
 /* icônes centrées */
@@ -133,7 +136,6 @@
     vertical-align: middle;
 }
 
-/* Responsive fixes */
 @media (max-width: 600px) {
     .page-header {
         flex-direction: column;
