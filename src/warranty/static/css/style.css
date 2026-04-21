@@ -21,7 +21,6 @@
   --container-max-width: 1200px; /* largeur max */ 
 }
 
-
 body {
   font-family: "Jost", sans-serif;
   font-size: 18px;
@@ -29,9 +28,7 @@ body {
   height: 100%;
 }
 
-
 h1 {
-  margin-top: 1rem;
   text-align: center;
   font-size: 30px;
 }

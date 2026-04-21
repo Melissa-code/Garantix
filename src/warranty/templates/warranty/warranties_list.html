@@ -11,69 +11,85 @@
 
 
 {% block content %}
-<div class="container-list">
+<div class="page-list-bg-header">
+    <div class="container-list">
   
-    <section class="title-total">
-        <h1>Mes garanties</h1>
-        <sl-badge class="primary" pill>
-            <sl-icon name="shield-check" style="margin-right: 4px;"></sl-icon>
-            {{ warranties|length }} trouvées
-        </sl-badge>
-    </section>
+        <section class="title-total">
+            <h1>Mes garanties</h1>
+            <sl-badge class="primary" pill>
+                <sl-icon name="shield-check" style="margin-right: 4px;"></sl-icon>
+                {{ warranties|length }} trouvées
+            </sl-badge>
+        </section>
 
-    <section class="search-add-warranties">
-        <!-- recherche  -->
-        <div class="search-actions">
-            <form method="get" class="search-form">
-                <sl-input 
-                    name="search" 
-                    placeholder="Rechercher une garantie" 
-                    clearable 
-                    value="{{ request.GET.search }}">
-                    
-                    <sl-icon-button 
-                        slot="suffix" 
-                        name="search" 
-                        style="font-size: 1.2rem; color: var(--primary);"
-                        onclick="this.closest('form').submit();">
-                    </sl-icon-button>
-                </sl-input>
-            </form>
-        </div>
-        <!-- bouton d'ajout -->
-        <div> 
-            <sl-tooltip content="Ajouter une garantie" placement="top">
-                <sl-button class="btn btn-primary" href="{% url 'warranty:warranty_create' %}">
-                    <sl-icon slot="prefix" name="plus-lg"></sl-icon>
-                    Ajouter
-                </sl-button>
-            </sl-tooltip>
-        </div>
-    </section>
-
-    <sl-divider style="--spacing: 2rem;"></sl-divider>
-
-    <!-- message -->
-    <section class="section-message">
-        {% include 'partials/_messages.html' %}
-    </section>
-
-    <!-- liste -->
-    <section id="warranties_grid" class="warranties-grid">
-        {% for warranty in warranties %}
-            <!-- card -->
-            {% include 'warranty/partials/_card_warranty.html' with warranty=warranty %}
-        {% empty %}
-        <!-- message si aucune garantie enregistrée/trouvée -->
-            <div class="empty-state">
-                <sl-icon name="search"></sl-icon>
-                <p>Aucune garantie trouvée pour "{{ request.GET.search }}"</p>
-                <sl-button variant="default" size="small" href="?">Voir tout</sl-button>
-            </div>
-        {% endfor %}
-    </section>
-
-    <!-- pagination -->
-    {% include 'warranty/partials/_pagination.html' %}
+        <!-- présentation -->
+        <section class="presentation">
+            <p>Retrouvez ici l'ensemble de vos justificatifs de garantie concernant vos appareils et vos biens.</p>
+        </section.presentation>
+        
+    </div>
 </div>
+
+<!-- banniere (photo tickets caisse) -->
+<div class="page-list-bg-banniere">
+    <div class="container-list">
+
+        <section class="search-add-warranties">
+            <!-- recherche  -->
+            <div class="search-actions">
+                <form method="get" class="search-form">
+                    <sl-input 
+                        name="search" 
+                        placeholder="Rechercher une garantie" 
+                        clearable 
+                        value="{{ request.GET.search }}">
+                        
+                        <sl-icon-button 
+                            slot="suffix" 
+                            name="search" 
+                            style="font-size: 1.2rem; color: var(--primary);"
+                            onclick="this.closest('form').submit();">
+                        </sl-icon-button>
+                    </sl-input>
+                </form>
+            </div>
+            <!-- bouton d'ajout -->
+            <div> 
+                <sl-tooltip content="Ajouter une garantie" placement="top">
+                    <sl-button class="btn btn-primary" href="{% url 'warranty:warranty_create' %}">
+                        <sl-icon slot="prefix" name="plus-lg"></sl-icon>
+                        Ajouter
+                    </sl-button>
+                </sl-tooltip>
+            </div>
+        </section>
+        
+    </div>
+</div>
+
+    <div class="container-list">
+
+        <!-- message -->
+        <section class="section-message">
+            {% include 'partials/_messages.html' %}
+        </section>
+
+        <!-- liste -->
+        <section id="warranties_grid" class="warranties-grid">
+            {% for warranty in warranties %}
+                <!-- card -->
+                {% include 'warranty/partials/_card_warranty.html' with warranty=warranty %}
+            {% empty %}
+            <!-- message si aucune garantie enregistrée/trouvée -->
+                <div class="empty-state">
+                    <sl-icon name="search"></sl-icon>
+                    <p>Aucune garantie trouvée pour "{{ request.GET.search }}"</p>
+                    <sl-button variant="default" size="small" href="?">Voir tout</sl-button>
+                </div>
+            {% endfor %}
+        </section>
+
+        <!-- pagination -->
+        {% include 'warranty/partials/_pagination.html' %}
+    </div>
 {% endblock %}
