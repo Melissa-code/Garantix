@@ -43,7 +43,9 @@
     margin-top: 1rem;
 }
 
-/* Card Styling */
+/*****************************************************************************************
+ Card  */
+
 .warranty-card {
     --border-radius: 12px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -53,7 +55,6 @@
     transform: translateY(-4px);
     box-shadow: var(--sl-shadow-medium);
 }
-
 
 .product-name {
     white-space: nowrap;
@@ -90,7 +91,14 @@
     justify-content: flex-end;
 }
 
-/* Empty State */
+sl-card::part(footer) {
+    border-top: none;
+    padding-top: 0; 
+}
+
+/*****************************************************************************************
+ Empty state  */
+
 .empty-state {
     grid-column: 1 / -1;
     text-align: center;
@@ -104,8 +112,7 @@
 }
 
 /*****************************************************************************************
- * Pagination Styles
- *****************************************************************************************/
+ Pagination  */
 
 .pagination-container {
     display: flex;
