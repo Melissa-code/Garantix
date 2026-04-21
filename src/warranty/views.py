@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from warranty.models import Warranty
 from warranty.mixins import ContextDataMixin, WarrantySearchMixin, UserWarrantyMixin
 from .forms import WarrantyForm
+from warranty import services
 
 
 class HomeView(TemplateView): 
@@ -21,9 +22,13 @@ class HomeView(TemplateView):
 
 class WarrantiesListView(LoginRequiredMixin, ContextDataMixin, WarrantySearchMixin, UserWarrantyMixin, ListView):
     """Liste des garanties de l'utilisateur connecté avec barre de recherche"""
-    model = Warranty
     context_object_name = "warranties" 
     template_name = "warranty/warranties_list.html"
+    paginate_by = 3
+
+    def get_queryset(self):
+        """Récupère les garanties de l'utilisateur connecté filtrées par la barre de recherche"""
+        return services.get_user_warranties(user=self.request.user)
 
 
 class WarrantyDetailView(LoginRequiredMixin, UserWarrantyMixin, DetailView):

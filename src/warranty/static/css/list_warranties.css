@@ -103,6 +103,36 @@
     margin-bottom: 1rem;
 }
 
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin: 3rem 0;
+}
+
+/* On stylise le compteur central pour qu'il ne ressemble pas à un bouton cliquable */
+.page-counter::part(base) {
+    background-color: var(--secondary-light);
+    border-color: var(--secondary-light); 
+    color: var(--black-middle) ;
+    font-weight: 600;
+    cursor: default;
+    opacity: 1; /* Pour enlever l'effet grisé du 'disabled' */
+    border-color: var(--black-light);
+}
+
+/* effet de survol  sur les flèches  */
+.pagination-container sl-button:not([disabled]):hover::part(base) {
+    color: var(--primary);
+    border-color: var(--primary);
+    background-color: var(--white);
+}
+
+/* icônes centrées */
+.pagination-container sl-icon {
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
 /* Responsive fixes */
 @media (max-width: 600px) {
     .page-header {

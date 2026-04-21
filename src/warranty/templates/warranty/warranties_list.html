@@ -58,7 +58,6 @@
         {% include 'partials/_messages.html' %}
     </section>
 
-
     <!-- liste -->
     <section id="warranties_grid" class="warranties-grid">
         {% for warranty in warranties %}
@@ -116,5 +115,7 @@
         {% endfor %}
     </section>
 
+    <!-- pagination -->
+    {% include 'warranty/partials/_pagination.html' %}
 </div>
 {% endblock %}
