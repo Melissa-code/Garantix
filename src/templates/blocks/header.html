@@ -14,14 +14,12 @@
         Mes garanties
       </sl-button>
       <sl-button variant="text" class="login-btn-navbar" href="{% url 'accounts:logout' %}">
-        <sl-icon name="power" label="déconnexion" class="icon-medium menu-icon"></sl-icon>
         Se déconnecter
       </sl-button>
     {% else %}
       <sl-button href="{% url 'accounts:login' %}" class="login-btn-navbar" size="medium" title="Se connecter">
-        <sl-icon name="person-fill" label="connexion" class="icon-medium menu-icon"></sl-icon>
           Se connecter
-        </sl-button>
+      </sl-button>
     {% endif %}
   </nav>
   
@@ -43,12 +41,10 @@
     Mes garanties
   </sl-button>
   <sl-button variant="primary" class="login-btn-navbar">
-    <sl-icon name="person-fill" label="deconnexion" class="icon-small menu-icon"></sl-icon>
     Se déconnecter
   </sl-button>
   {% else %}
-  <sl-button variant="primary" class="login-btn-navbar" href="/admin/"  title="Se déconnecter">
-    <sl-icon name="person-fill" label="connexion" class="icon-small menu-icon"></sl-icon>
+  <sl-button variant="primary" class="login-btn-navbar" href="/admin/">
     Se connecter
   </sl-button>
   {% endif %}
