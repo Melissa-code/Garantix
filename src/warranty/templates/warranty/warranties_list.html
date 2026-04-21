@@ -2,7 +2,7 @@
 {% load static %}  
 
 {% block title %}
-    <title>Liste des garanties</title>
+    <title>Liste de mes garanties</title>
 {% endblock %} 
 
 {% block extra_css %}
@@ -11,72 +11,99 @@
 
 
 {% block content %}
-<section class="dashboard-container">
-    <header class="page-header">
-            <div class="header-text">
-                <h1>Mes garanties</h1>
-                <p class="subtitle">{{ warranties|length }} garanties trouvées</p>
-            </div>
+<div class="container-list">
+  
+    <section class="title-total">
+        <h1>Mes garanties</h1>
+        <sl-badge class="primary" pill>
+            <sl-icon name="shield-check" style="margin-right: 4px;"></sl-icon>
+            {{ warranties|length }} trouvées
+        </sl-badge>
+    </section>
 
-            <div class="header-actions">
-                <form method="get" class="search-form">
-                    <sl-input 
+    <section class="search-add-warranties">
+        <!-- recherche  -->
+        <div class="search-actions">
+            <form method="get" class="search-form">
+                <sl-input 
+                    name="search" 
+                    placeholder="Rechercher une garantie" 
+                    clearable 
+                    value="{{ request.GET.search }}">
+                    
+                    <sl-icon-button 
+                        slot="suffix" 
                         name="search" 
-                        placeholder="Rechercher une garantie " 
-                        size="medium" 
-                        clearable 
-                        value="{{ request.GET.search }}">
-                        <sl-icon name="search" slot="prefix"></sl-icon>
-                    </sl-input>
-                </form>
-
-                <sl-tooltip content="Ajouter une garantie">
-                    <sl-button variant="primary" pill href="{% url 'warranty:warranty_create' %}">
-                        <sl-icon slot="prefix" name="plus-lg"></sl-icon>
-                        Ajouter
-                    </sl-button>
-                </sl-tooltip>
-            </div>
-        </header>
+                        style="font-size: 1.2rem; color: var(--primary);"
+                        onclick="this.closest('form').submit();">
+                    </sl-icon-button>
+                </sl-input>
+            </form>
+        </div>
+        <!-- bouton d'ajout -->
+        <div> 
+            <sl-tooltip content="Ajouter une garantie" placement="top">
+                <sl-button class="btn btn-primary" href="{% url 'warranty:warranty_create' %}">
+                    <sl-icon slot="prefix" name="plus-lg"></sl-icon>
+                    Ajouter
+                </sl-button>
+            </sl-tooltip>
+        </div>
+    </section>
 
     <sl-divider style="--spacing: 2rem;"></sl-divider>
 
+    <!-- message -->
     <section class="section-message">
         {% include 'partials/_messages.html' %}
     </section>
 
+
+    <!-- liste -->
     <section id="warranties_grid" class="warranties-grid">
         {% for warranty in warranties %}
+            <!-- card -->
             <sl-card class="warranty-card">
+                <!-- nom et marque -->
                 <div slot="header" class="card-header">
-                    <strong class="product-name">{{ warranty.product_name }}</strong>
-                    <small class="brand-badge">{{ warranty.brand }}</small>
+                    <strong class="product-name">{{ warranty.product_name|truncatechars:30|capfirst }}</strong>
+                    <small class="brand">{{ warranty.brand }}</small>
                 </div>
 
                 <div class="card-body">
                     <div class="info-row">
+                        <!-- date d'achat -->
                         <sl-icon name="calendar3"></sl-icon>
                         <span>Acheté le : <strong>{{ warranty.purchase_date|date:"d/m/Y" }}</strong></span>
                     </div>
+                    <!-- durée de la garantie -->
                     <div class="info-row">
                         <sl-icon name="shield-check"></sl-icon>
                         <span>Durée : <strong>{{ warranty.warranty_duration_months }} mois</strong></span>
                     </div>
                 </div>
 
-                <div slot="footer" class="card-footer">
+                <!-- action btn  -->
+                <div slot="footer"  class="card-footer">
                     <sl-button-group>
-                        <sl-button size="small" variant="neutral" outline href="{% url 'warranty:warranty_detail' warranty.pk %}">
-                            <sl-icon name="eye"></sl-icon>
-                        </sl-button>
-                        {% if request.user.is_authenticated %}
+                        <!-- Voir garantie -->
+                        <sl-tooltip content="Voir la garantie" placement="top">
+                            <sl-button size="small" variant="neutral" outline href="{% url 'warranty:warranty_detail' warranty.pk %}">
+                                <sl-icon name="file-earmark-fill"></sl-icon>
+                            </sl-button>
+                        </sl-tooltip>
+                        <!-- Modifier garantie -->
+                        <sl-tooltip content="Modifier la garantie" placement="top">
                             <sl-button size="small" variant="neutral" outline href="{% url 'warranty:warranty_update' warranty.pk %}">
-                                <sl-icon name="pencil" style="color: var(--sl-color-warning-600);"></sl-icon>
+                                <sl-icon name="pencil-square" style="color: var(--sl-color-warning-600);"></sl-icon>
                             </sl-button>
+                        </sl-tooltip>
+                        <!-- supprimer garantie -->
+                        <sl-tooltip content="Supprimer la garantie" placement="top">
                             <sl-button size="small" variant="neutral" outline href="{% url 'warranty:warranty_delete' warranty.pk %}">
-                                <sl-icon name="trash" style="color: var(--sl-color-danger-600);"></sl-icon>
+                                <sl-icon name="trash3-fill" style="color: var(--sl-color-danger-600);"></sl-icon>
                             </sl-button>
-                        {% endif %}
+                        </sl-tooltip>
                     </sl-button-group>
                 </div>
             </sl-card>
@@ -89,7 +116,5 @@
         {% endfor %}
     </section>
 
-      
-</section>
-
+</div>
 {% endblock %}

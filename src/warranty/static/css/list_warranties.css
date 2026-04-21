@@ -1,50 +1,45 @@
-.dashboard-container {
-    max-width: var(--container-max-width);
-    margin: 2rem auto;
-    padding: 0 1.5rem;
-    font-family: var(--sl-font-sans);
+.container-list {
+  max-width: var(--container-max-width);
+  margin: 1rem auto;
 }
 
-/* Header & Search Layout */
-.page-header {
+.title-total {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 2rem;
+}
+     
+.total-warranties {
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 1rem 0.7rem;
+    border-radius: 999px;
+    width: fit-content;
+}
+
+.search-add-warranties {
+    margin-top: 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 1.5rem;
 }
 
-.header-text h1 {
-    margin: 0;
-    text-align: left;
-}
-
-.subtitle {
-    display: inline-block;
-    background-color: #F1F5F9;
-    color: #64748B;
-    font-size: 0.8rem;
-    font-weight: 500;
-    padding: 0.4rem 0.7rem;
-    border-radius: 999px;
-    margin-top: 1rem;
-}
-
-.header-actions {
+.search-actions {
     display: flex;
     gap: 1rem;
     align-items: center;
 }
 
 .search-form {
-    min-width: 300px;
+    min-width: 600px;
 }
 
 /* Grid System */
 .warranties-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
+    gap: 2rem;
     margin-top: 1rem;
 }
 
@@ -60,20 +55,20 @@
 }
 
 
-
 .product-name {
-    font-size: 1.1rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.brand-badge {
-    color: var(--sl-color-primary-600);
+.brand {
+    display: block;
+    color: #2563EB;
     text-transform: uppercase;
     font-size: 0.75rem;
     letter-spacing: 0.5px;
     font-weight: 600;
+    margin-top: 0.5rem;
 }
 
 .card-body {

@@ -29,6 +29,7 @@ body {
   height: 100%;
 }
 
+
 h1 {
   margin-top: 1rem;
   text-align: center;
@@ -61,12 +62,12 @@ hr {
 
 .btn::part(base) {
   border: none;
-  padding: 0.3rem; 
+  padding: 0.1rem; 
   border-radius: 5px;
   font-weight: 600;
   cursor: pointer;
   text-align: center;
-  font-size: 17px;
+  font-size: 16px;
   min-width: 160px;
 }
 
@@ -241,77 +242,7 @@ a {
     font-size: var(--sl-font-size-medium);
   }
 
-  /**************************
-  warranties list 
-  ***************************/
-  #warranties_list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-  }
 
-  #search-warranty-title {
-    text-align: center;
-    font-size: 25px;
-  }
-
-  .searchbar  {
-    display: flex;
-    gap: .2rem;
-  }
-
-  #search {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding: 1rem 0;
-}
-
-.card-header {
-  margin: 0 1rem;
-}
-
-.btns-action {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  gap: 10px;
-}
-
-.icon-large {
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
-
-sl-card::part(header) {
-  background-color: #e6e8e6; 
-  height: 6.5rem;
-}
-
-.card-header-title {
-  display: flex;
-  flex-direction: column;
-}
-
-.truncate-title {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;        /* nombre max de lignes */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.title {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 4rem;
-}
 
 /**************************
 warranties detail
