@@ -38,7 +38,7 @@
     </div>
 </div>
 
-
+<!-- details -->
 <div class="container-details body-content">
     <div class="centered-content-wrapper">
         <div class="warranty-main-layout {% if not warranty.imageReceipt %}no-image-layout{% endif %}">
@@ -83,7 +83,9 @@
                             <sl-icon name="sticky"></sl-icon>
                             <label>Notes</label>
                         </div>
-                        <div class="value-cell">{{ warranty.notes|safe|linebreaks|default:"Aucune note" }}</div>
+                        <div class="value-cell notes-truncate">
+                            {{ warranty.notes|safe|linebreaks|default:"Aucune note" }}
+                        </div>
                     </div>
 
                     <!-- boutons Actions-->
@@ -91,12 +93,12 @@
                         <sl-button-group>
                             <sl-tooltip content="Modifier la garantie" placement="top">
                                 <sl-button size="small" variant="neutral" outline href="{% url 'warranty:warranty_update' warranty.pk %}">
-                                    <sl-icon name="pencil-square" style="color: var(--sl-color-warning-600);"></sl-icon> Modifier
+                                    <sl-icon slot="prefix" name="pencil-square" style="color: var(--sl-color-warning-600);"></sl-icon> Modifier
                                 </sl-button>
                             </sl-tooltip>
                             <sl-tooltip content="Supprimer la garantie" placement="top">
                                 <sl-button size="small" variant="neutral" outline href="{% url 'warranty:warranty_delete' warranty.pk %}">
-                                    <sl-icon name="trash3-fill" style="color: var(--sl-color-danger-600);"></sl-icon> Supprimer
+                                    <sl-icon slot="prefix" name="trash3-fill" style="color: var(--sl-color-danger-600);"></sl-icon> Supprimer
                                 </sl-button>
                             </sl-tooltip>
                         </sl-button-group>
@@ -104,14 +106,13 @@
                 </div>
             </div>
 
-            {% if warranty.imageReceipt %}
+            <!-- img receipt (il null img by default) -->
             <div class="receipt-column">
                 <div class="photo-frame">
-                    <img src="{{ warranty.imageReceipt.url }}" alt="Ticket de caisse" onclick="window.open(this.src)">
+                    <img src="{% if warranty.imageReceipt %}{{ warranty.imageReceipt.url }}{% else %}/static/images/img-ticket-default.jpg{% endif %}" 
+                        alt="{% if warranty.imageReceipt %} image du ticket de caisse pour {{ warranty.product_name }}{% else %} image du ticket de caisse par défaut{% endif %}" class="equal-height-img">
                 </div>
             </div>
-            {% endif %}
-
         </div>
     </div>
 </div>

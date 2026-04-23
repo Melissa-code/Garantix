@@ -88,6 +88,16 @@ hr {
   color: var(--black-light);
 }
 
+sl-button[size="small"]::part(label) {
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+sl-breadcrumb::part(base) {
+  color: var(--primary);
+  font-size: 0.9rem;
+}
+
 .imageReceipt {
   font-size: 16px;
   color: grey;
@@ -213,66 +223,7 @@ sl-breadcrumb::part(base) {
   color: var(--primary);
 }
 
-/**************************
-warranties detail
-***************************/
 
-/* #warranty-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100%; 
-}
-
-.breadcrumb {
-  margin: 1rem 3rem;
-}
-
-.warranty-detail {
-  border: 1px solid #ddd;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  max-width: auto;
-  margin: auto;
-  overflow: hidden;
-}
-
-.warranty-header {
-  background-color: #f0f0f0;
-  padding: 1.5rem 2rem;
-  border-bottom: 1px solid #ccc;
-}
-
-.warranty-header h2 {
-  margin: 0;
-  font-size: 1.7rem;
-}
-
-.warranty-header h3 {
-  margin: 0;
-  font-weight: normal;
-  color: #555;
-}
-
-.warranty-body {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 2rem;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.warranty-text {
-  flex: 1;
-  min-width: 250px;
-}
-
-.warranty-image img {
-  max-width: 250px;
-  border-radius: 12px;
-  object-fit: cover;
-} */
 
 /**************************
 warranties forms
