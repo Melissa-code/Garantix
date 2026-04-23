@@ -28,7 +28,9 @@ class WarrantiesListView(LoginRequiredMixin, ContextDataMixin, WarrantySearchMix
 
     def get_queryset(self):
         """Récupère les garanties de l'utilisateur connecté filtrées par la barre de recherche"""
-        return services.get_user_warranties(user=self.request.user)
+        queryset = services.get_user_warranties(user=self.request.user)
+        self.queryset = queryset 
+        return super().get_queryset()
 
 
 class WarrantyDetailView(LoginRequiredMixin, UserWarrantyMixin, DetailView):
