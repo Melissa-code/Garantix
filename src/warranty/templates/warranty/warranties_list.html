@@ -33,7 +33,6 @@
 <!-- banniere (photo tickets caisse) -->
 <div class="page-list-bg-banniere">
     <div class="container-list">
-
         <section class="search-add-warranties">
             <!-- recherche  -->
             <div class="search-actions">
@@ -49,33 +48,32 @@
                 </sl-tooltip>
             </div>
         </section>
-
     </div>
 </div>
 
-    <div class="container-list">
+<div class="container-list">
 
-        <!-- message -->
-        <section class="section-message">
-            {% include 'partials/_messages.html' %}
-        </section>
+    <!-- message -->
+    <section class="section-message">
+        {% include 'partials/_messages.html' %}
+    </section>
 
-        <!-- liste -->
-        <section id="warranties_grid" class="warranties-grid">
-            {% for warranty in warranties %}
-                <!-- card -->
-                {% include 'warranty/partials/_card_warranty.html' with warranty=warranty %}
-            {% empty %}
-            <!-- message si aucune garantie enregistrée/trouvée -->
-                <div class="empty-state">
-                    <sl-icon name="search"></sl-icon>
-                    <p>Aucune garantie trouvée pour "{{ request.GET.search }}"</p>
-                    <sl-button variant="default" size="small" href="?">Voir tout</sl-button>
-                </div>
-            {% endfor %}
-        </section>
+    <!-- liste -->
+    <section id="warranties_grid" class="warranties-grid">
+        {% for warranty in warranties %}
+            <!-- card -->
+            {% include 'warranty/partials/_card_warranty.html' with warranty=warranty %}
+        {% empty %}
+        <!-- message si aucune garantie enregistrée/trouvée -->
+            <div class="empty-state">
+                <sl-icon name="search"></sl-icon>
+                <p>Aucune garantie trouvée pour "{{ request.GET.search }}"</p>
+                <sl-button variant="default" size="small" href="?">Voir tout</sl-button>
+            </div>
+        {% endfor %}
+    </section>
 
-        <!-- pagination -->
-        {% include 'warranty/partials/_pagination.html' %}
-    </div>
+    <!-- pagination -->
+    {% include 'warranty/partials/_pagination.html' %}
+</div>
 {% endblock %}

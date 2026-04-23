@@ -209,11 +209,15 @@ footer .footer-link::part(base):hover {
 }
 
 
+sl-breadcrumb::part(base) {
+  color: var(--primary);
+}
 
 /**************************
 warranties detail
 ***************************/
-#warranty-section {
+
+/* #warranty-section {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -268,7 +272,7 @@ warranties detail
   max-width: 250px;
   border-radius: 12px;
   object-fit: cover;
-}
+} */
 
 /**************************
 warranties forms
