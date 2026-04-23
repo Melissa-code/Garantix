@@ -13,12 +13,13 @@
 {% block content %}
 <div class="page-list-bg-header">
     <div class="container-list">
-  
-        <section class="title-total">
+        <!-- titre et badge -->
+        <section class="title-badge">
             <h1>Mes garanties</h1>
-            <sl-badge class="primary" pill>
+            <sl-badge class="badge-total" pill>
                 <sl-icon name="shield-check" style="margin-right: 4px;"></sl-icon>
-                {{ warranties|length }} trouvées
+                {{ paginator.count }} 
+                {{ paginator.count|pluralize:"trouvée, trouvées" }}
             </sl-badge>
         </section>
 
@@ -26,7 +27,6 @@
         <section class="presentation">
             <p>Retrouvez ici l'ensemble de vos justificatifs de garantie concernant vos appareils et vos biens.</p>
         </section.presentation>
-        
     </div>
 </div>
 
@@ -63,7 +63,7 @@
                 </sl-tooltip>
             </div>
         </section>
-        
+
     </div>
 </div>
 

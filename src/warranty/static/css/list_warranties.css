@@ -8,7 +8,7 @@
   margin: 0 auto;
 }
 
-.title-total {
+.title-badge {
     display: flex;
     justify-content: center;
     align-items: baseline;
@@ -16,12 +16,16 @@
 }
 
 /* badge avec total */
-.total-warranties {
-    font-size: 0.8rem;
-    font-weight: 500;
-    padding: 1rem 0.7rem;
-    border-radius: 999px;
-    width: fit-content;
+.badge-total::part(base) {
+    background-color: var(--black-light);
+    color: white;
+    font-weight: 400;
+    font-size: 0.85rem; /* Un peu plus petit pour le look "badge" */
+    padding: 8px 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
 }
 
 /* présentation text de la page */
@@ -93,8 +97,10 @@
 
 /* Card */
 .warranty-card {
-    --border-radius: 12px;
+    border-radius: 12px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    -webkit-box-shadow: 1px 1px 5px 1px var(--secondary);
+    box-shadow: 3px 3px 3px 1px var(--secondary);
 }
 
 .warranty-card:hover {
