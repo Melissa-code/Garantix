@@ -98,14 +98,32 @@
 /* Card */
 .warranty-card {
     border-radius: 12px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    -webkit-box-shadow: 1px 1px 5px 1px var(--secondary);
-    box-shadow: 3px 3px 3px 1px var(--secondary);
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /*ombre en deux couches : une très diffuse et une plus proche */
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .warranty-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--sl-shadow-medium);
+    transform: translateY(-6px);
+    /*ombre  plus large quand la carte bouge */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+                0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.warranty-card::part(header) {
+    background-color: var(--secondary);
+    padding: 0;
+    /* Optionnel : ajouter une petite ligne de séparation */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05); 
+}
+
+.card-header {
+    padding: var(--sl-spacing-medium); 
+    display: flex;
+    flex-direction: column;
 }
 
 .product-name {

@@ -37,21 +37,7 @@
         <section class="search-add-warranties">
             <!-- recherche  -->
             <div class="search-actions">
-                <form method="get" class="search-form">
-                    <sl-input 
-                        name="search" 
-                        placeholder="Rechercher une garantie" 
-                        clearable 
-                        value="{{ request.GET.search }}">
-                        
-                        <sl-icon-button 
-                            slot="suffix" 
-                            name="search" 
-                            style="font-size: 1.2rem; color: var(--primary);"
-                            onclick="this.closest('form').submit();">
-                        </sl-icon-button>
-                    </sl-input>
-                </form>
+                {% include 'warranty/partials/_searchbar.html' %}
             </div>
             <!-- bouton d'ajout -->
             <div> 
