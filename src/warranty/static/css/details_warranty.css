@@ -8,12 +8,6 @@
   margin: 0 auto;
 }
 
-.presentation {
-    text-align: center;
-    margin-top: 1rem;
-    font-size: 1.4rem;
-}
-
 .title-badge {
     display: flex;
     justify-content: center;

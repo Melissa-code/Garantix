@@ -1,14 +1,30 @@
-{% extends 'base.html' %} 
-
+{% extends "base.html" %} 
+{% load static %}
 
 {% block title %}
-    <title>Ajouter une garantie</title>
-{% endblock %} 
+  <title>Ajouter une garantie</title>
+{% endblock title %} 
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/form_warranty.css' %}">
+{% endblock %}
+
 
 {% block content %}
-<section class="title">
-    <h1>Ajouter une garantie</h1>
-</section>
+
+<div class="page-bg-header">
+    <div class="container-page">
+        <!-- titre  -->
+        <section class="title-badge">
+          <h1>Ajouter une garantie</h1>
+        </section>
+
+        <!-- présentation -->
+        <section class="presentation">
+            <p>Enregistrez une nouvelle garantie pour ne plus jamais perdre votre preuve d'achat.</p>
+        </section>
+    </div>
+</div>
 
 <!-- form section create -->
 <section class="form-container">
@@ -17,34 +33,34 @@
     <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
-    <div class="form-grid">
-      <!-- Colonne de gauche -->
-      <div class="form-column">
-        <sl-input name="product_name" placeholder="Nom du produit" clearable value="{{ form.product_name.value|default:'' }}" required></sl-input>
-        <sl-input name="purchase_date" type="date" placeholder="Date d'achat" value="{{ form.purchase_date.value|default:'' }}" required></sl-input>
-        <sl-input name="vendor" placeholder="Revendeur" clearable value="{{ form.vendor.value|default:'' }}"></sl-input>
+      <div class="form-grid">
+        <!-- Colonne de gauche -->
+        <div class="form-column">
+          <sl-input name="product_name" placeholder="Nom du produit" clearable value="{{ form.product_name.value|default:'' }}" required></sl-input>
+          <sl-input name="purchase_date" type="date" placeholder="Date d'achat" value="{{ form.purchase_date.value|default:'' }}" required></sl-input>
+          <sl-input name="vendor" placeholder="Revendeur" clearable value="{{ form.vendor.value|default:'' }}"></sl-input>
+        </div>
+
+        <!-- Colonne de droite -->
+        <div class="form-column">
+          <sl-input name="brand" placeholder="Marque" clearable value="{{ form.brand.value|default:'' }}" required></sl-input>
+          <sl-input name="warranty_duration_months" type="number" placeholder="Durée de garantie (en mois)" value="{{ form.warranty_duration_months.value|default:'' }}" required></sl-input>
+          <!-- Input pour l'image du reçu -->
+          <input type="file" name="imageReceipt" class="imageReceipt" accept="image/png, image/jpeg">
+        </div>
       </div>
 
-      <!-- Colonne de droite -->
-      <div class="form-column">
-        <sl-input name="brand" placeholder="Marque" clearable value="{{ form.brand.value|default:'' }}" required></sl-input>
-        <sl-input name="warranty_duration_months" type="number" placeholder="Durée de garantie (mois)" value="{{ form.warranty_duration_months.value|default:'' }}" required></sl-input>
-        <!-- Input pour l'image du reçu -->
-        <input type="file" name="imageReceipt" class="imageReceipt" accept="image/png, image/jpeg">
-      </div>
-    </div>
-
-    <!-- Notes (pleine largeur) -->
-      <sl-textarea name="notes" placeholder="Notes sur le produit" rows="4" help-text="Ajoutez une note sur la garantie">
-        {{ form.notes.value|default:'' }}
-      </sl-textarea>
-    
-    <!-- Bouton -->
-    <div class="submit-container" >
-      <sl-button variant="secondary"><a href="{% url 'warranty:warranties_list' %}">Retour à la liste</a></sl-button>
-      <sl-button type="submit" variant="primary">Ajouter la garantie</sl-button>
-    </div>
+      <!-- Notes (pleine largeur) -->
+      <sl-textarea name="notes" placeholder="Notes sur le produit..." rows="2">{{ form.notes.value|default:'' }}</sl-textarea>
       
+      <!-- Boutons -->
+      <div class="submit-container" >
+        <!-- bouton revenir à la liste -->
+        <sl-button href="{% url 'warranty:warranties_list' %}" class="btn btn-white"> Revenir</sl-button>
+        <!-- bouton submit -->
+        <sl-button type="submit" class="btn btn-primary">Ajouter </sl-button>
+      </div>
+
     </form>
   </sl-card>
 </section>
