@@ -64,6 +64,12 @@ class Warranty(models.Model):
         """calcule la date d'expiration approximative de la garantie en ajoutant la durée de garantie à la date d'achat
         -> Python transforme cette fonction en attribut "virtuel"""
         return self.purchase_date + timedelta(days=self.warranty_duration_months * 30)
+    
+    
+    @property
+    def is_active(self):
+        """Vérifie si la garantie est toujours valide à la date d'aujourd'hui"""
+        return self.warranty_expiry_date >= timezone.now().date()
 
 
     def __str__(self):

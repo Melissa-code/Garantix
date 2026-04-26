@@ -21,16 +21,27 @@
     gap: 2rem;
 }
 
-/* badge avec total */
+/* badge */
 .badge-expiration::part(base) {
+    padding: 8px 12px;
     color: white;
     font-weight: 400;
     font-size: 0.85rem;
-    padding: 8px 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     letter-spacing: 0.5px;
     display: flex;
     align-items: center;
+}
+
+.is-active::part(base) {
+    background-color: var(--black-light); 
+    color: white; 
+}
+
+.is-expired::part(base) {
+    background-color: var(--secondary-light);
+    color: var(--sl-color-neutral-700); 
+    border: 1px solid var(--secondary);
 }
 
 
