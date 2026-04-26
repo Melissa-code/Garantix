@@ -13,11 +13,6 @@
   --info: #5498F7;
   --info-light: #BBD9FB; 
 
-  /* Overriding Shoelace Variables to match your palette */
-  /* --sl-color-primary-600: var(--primary);
-  --sl-input-border-color-focus: var(--primary);
-  --sl-font-sans: 'Jost', sans-serif; */
-
   --container-max-width: 1200px; /* largeur max */ 
 }
 
@@ -89,14 +84,10 @@ hr {
 }
 
 sl-button[size="small"]::part(label) {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 500;
 }
 
-sl-breadcrumb::part(base) {
-  color: var(--primary);
-  font-size: 0.9rem;
-}
 
 .imageReceipt {
   font-size: 16px;
@@ -107,7 +98,6 @@ sl-breadcrumb::part(base) {
   border: 1px solid lightgray;
   border-radius: 3px;
 }
-
 
 
 /* media queries */ 

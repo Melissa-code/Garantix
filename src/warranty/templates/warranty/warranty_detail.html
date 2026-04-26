@@ -14,13 +14,6 @@
 
 <div class="page-details-bg-header">
     <div class="container-details">
-        <!-- fil d'Ariane  -->
-        <sl-breadcrumb>
-            <sl-breadcrumb-item href="/">Accueil</sl-breadcrumb-item>
-            <sl-breadcrumb-item href="{% url 'warranty:warranties_list' %}">Liste</sl-breadcrumb-item>
-            <sl-breadcrumb-item>{{ warranty.product_name|capfirst }}</sl-breadcrumb-item>
-        </sl-breadcrumb>
-
         <!-- titre  -->
         <section class="title-badge">
             <h1>Ma Garantie {{ warranty.product_name|capfirst }}</h1>
