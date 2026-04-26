@@ -82,20 +82,27 @@
 }
 
 .label-cell sl-icon {
-    color: var(--info);
-    font-size: 1.2rem;
+    font-size: 1.2rem; 
+    color: var(--sl-color-neutral-500);    
 }
 
 .label-cell label {
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 0.75rem;
-    color: var(--info);
-    letter-spacing: 0.5px;
+    font-size: 0.95rem;
 }
 
 .value-cell {
     text-align: right;
+    font-weight: 700;
+    color: var(--sl-color-neutral-800);
+    font-size: 0.95rem;
+}
+
+#value-brand {
+    color: var(--info);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    font-weight: 600;
 }
 
 .notes-row {
@@ -108,6 +115,9 @@
     text-align: left;
     width: 100%;
     font-size: 0.95rem;
+    margin-top: 0.5rem;
+    font-weight: 400; 
+    color: var(--sl-color-neutral-500);
 }
 
 .notes-truncate {
@@ -151,8 +161,7 @@
 }
 
 .photo-frame:hover {
-    transform: rotate(1deg) scale(1.02);
-    cursor: zoom-in;
+    transform: scale(1.03);
 }
 
 .photo-frame img {
@@ -164,6 +173,14 @@
     border-radius: 8px;
 }
 
+#zoom-modal img {
+    width: 100%; 
+    height: auto; 
+    display: block;
+    border-radius: 8px;
+    object-fit: contain; /* Garde tout le ticket visible sans le couper */
+}
+
 .actions-group {
     margin-top: 1rem;
     display: flex;
@@ -171,6 +188,7 @@
     gap: 1rem;
     width: 100%;
     flex-shrink: 0;
+    font-weight: 500;
 }
 
 
@@ -202,5 +220,9 @@
 
     .photo-frame img {
         max-height: 350px;
+    }
+
+    #zoom-modal {
+        --width: 90vw;
     }
 }

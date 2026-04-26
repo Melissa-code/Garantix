@@ -134,7 +134,7 @@
 
 .brand {
     display: block;
-    color: #2563EB;
+    color: var(--info);
     text-transform: uppercase;
     font-size: 0.75rem;
     letter-spacing: 0.5px;

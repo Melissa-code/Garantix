@@ -49,25 +49,17 @@
                     <div class="table-row">
                         <div class="label-cell">
                             <sl-icon name="tag"></sl-icon>
-                            <label>Marque</label>
+                            <label class="">Marque</label>
                         </div>
-                        <div class="value-cell">{{ warranty.brand }}</div>
+                        <div class="value-cell" id="value-brand">{{ warranty.brand }}</div>
                     </div>
                     <!-- date d'achat -->
                     <div class="table-row">
                         <div class="label-cell">
-                            <sl-icon name="calendar-check"></sl-icon>
-                            <label>Date d'achat</label>
+                            <sl-icon name="calendar3"></sl-icon>
+                            <label>Acheté le</label>
                         </div>
                         <div class="value-cell">{{ warranty.purchase_date|date:'j F Y' }}</div>
-                    </div>
-                    <!-- revendeur -->
-                    <div class="table-row">
-                        <div class="label-cell">
-                            <sl-icon name="shop"></sl-icon>
-                            <label>Revendeur</label>
-                        </div>
-                        <div class="value-cell">{{ warranty.vendor }}</div>
                     </div>
                     <!-- durée -->
                     <div class="table-row">
@@ -77,6 +69,14 @@
                         </div>
                         <div class="value-cell">{{ warranty.warranty_duration_months }} mois</div>
                     </div>
+                    <!-- revendeur -->
+                    <div class="table-row">
+                        <div class="label-cell">
+                            <sl-icon name="shop"></sl-icon>
+                            <label>Revendeur</label>
+                        </div>
+                        <div class="value-cell">{{ warranty.vendor|default_if_none:"-"|upper }}</div>
+                    </div>
                     <!-- notes -->
                     <div class="table-row notes-row">
                         <div class="label-cell">
@@ -84,7 +84,7 @@
                             <label>Notes</label>
                         </div>
                         <div class="value-cell notes-truncate">
-                            {{ warranty.notes|safe|linebreaks|default:"Aucune note" }}
+                            {{ warranty.notes|default:"-" }}
                         </div>
                     </div>
 
@@ -106,16 +106,23 @@
                 </div>
             </div>
 
-            <!-- img receipt (il null img by default) -->
+            <!-- img receipt (if null img by default) -->
             <div class="receipt-column">
-                <div class="photo-frame">
+                <!-- photo-->
+                <div class="photo-frame" onclick="document.getElementById('zoom-modal').show()">
                     <img src="{% if warranty.imageReceipt %}{{ warranty.imageReceipt.url }}{% else %}/static/images/img-ticket-default.jpg{% endif %}" 
                         alt="{% if warranty.imageReceipt %} image du ticket de caisse pour {{ warranty.product_name }}{% else %} image du ticket de caisse par défaut{% endif %}" class="equal-height-img">
                 </div>
+
+                <!-- zoom sur photo-->
+                <sl-dialog id="zoom-modal" label="Détail du justificatif" style="--width: 40vw;">
+                    <img src="{% if warranty.imageReceipt %}{{ warranty.imageReceipt.url }}{% else %}/static/images/img-ticket-default.jpg{% endif %}" 
+                        alt="Zoom ticket">
+                    <sl-button slot="footer" variant="secondary" onclick="document.getElementById('zoom-modal').hide()">Fermer</sl-button>
+                </sl-dialog>
             </div>
         </div>
     </div>
 </div>
-
 
 {% endblock %}
