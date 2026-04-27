@@ -10,11 +10,12 @@ from django.utils import timezone
 
 class Warranty(models.Model): 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='warranties', verbose_name="Utilisateur")
-    product_name = models.CharField(max_length=150, verbose_name="Nom du produit")
+    
+    product_name = models.CharField(max_length=150, validators=[MinLengthValidator(2)], verbose_name="Nom du produit")
     brand = models.CharField(max_length=150, validators=[MinLengthValidator(2)], verbose_name="Nom de la marque")
     purchase_date = models.DateField(verbose_name="Date d'achat")
     warranty_duration_months = models.PositiveIntegerField(verbose_name="Durée de garantie (en mois)")
-    vendor = models.CharField(max_length=100, blank=True, null=True, verbose_name="Fournisseur")
+    vendor = models.CharField(max_length=100, blank=True, null=True, verbose_name="Revendeur")
     imageReceipt = models.ImageField(upload_to='receipts/', blank=True, null=True, verbose_name="Image du reçu")
     notes = models.TextField(blank=True, null=True, verbose_name="Notes")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Crée le")

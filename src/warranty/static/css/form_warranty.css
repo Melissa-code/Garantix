@@ -33,7 +33,7 @@ fieldset {
 }
 
 .form-card:hover {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .form-grid {
@@ -57,6 +57,25 @@ fieldset {
   border-radius: var(--sl-border-radius-medium);
   padding: 9px;
   background: var(--white);
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.error-text {
+    color: #e11d48; 
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-left: 4px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .submit-container {
