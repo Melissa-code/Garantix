@@ -90,7 +90,7 @@ sl-button[size="small"]::part(label) {
 }
 
 
-.imageReceipt {
+/* .imageReceipt {
   font-size: 16px;
   color: grey;
   display: inline-block;
@@ -98,8 +98,8 @@ sl-button[size="small"]::part(label) {
   cursor: pointer;
   border: 1px solid lightgray;
   border-radius: 3px;
-}
-
+} */
+ 
 
 .page-bg-header {
   background: var(--secondary-light); 
@@ -112,9 +112,9 @@ sl-button[size="small"]::part(label) {
 }
 
 .presentation {
-    text-align: center;
-    margin-top: 1rem;
-    font-size: 1.4rem;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.4rem;
 }
 
 

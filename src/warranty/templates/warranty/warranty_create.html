@@ -20,7 +20,7 @@
         </section>
 
         <!-- présentation -->
-        <section class="presentation">
+        <section class="presentation presentation-create">
             <p>Enregistrez une nouvelle garantie pour ne plus jamais perdre votre preuve d'achat.</p>
         </section>
     </div>
@@ -33,26 +33,29 @@
     <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
-      <div class="form-grid">
-        <!-- Colonne de gauche -->
-        <div class="form-column">
-          <sl-input name="product_name" placeholder="Nom du produit" clearable value="{{ form.product_name.value|default:'' }}" required></sl-input>
-          <sl-input name="purchase_date" type="date" placeholder="Date d'achat" value="{{ form.purchase_date.value|default:'' }}" required></sl-input>
-          <sl-input name="vendor" placeholder="Revendeur" clearable value="{{ form.vendor.value|default:'' }}"></sl-input>
-        </div>
+      <fieldset class="form-fieldset">
+      <legend class="sr-only">Informations sur le produit</legend>
+        <div class="form-grid">
+          <!-- Colonne de gauche -->
+          <div class="form-column">
+            <sl-input name="product_name" placeholder="Nom du produit" clearable value="{{ form.product_name.value|default:'' }}" required></sl-input>
+            <sl-input name="purchase_date" type="date" placeholder="Date d'achat" value="{{ form.purchase_date.value|default:'' }}" required></sl-input>
+            <sl-input name="vendor" placeholder="Revendeur" clearable value="{{ form.vendor.value|default:'' }}"></sl-input>
+          </div>
 
-        <!-- Colonne de droite -->
-        <div class="form-column">
-          <sl-input name="brand" placeholder="Marque" clearable value="{{ form.brand.value|default:'' }}" required></sl-input>
-          <sl-input name="warranty_duration_months" type="number" placeholder="Durée de garantie (en mois)" value="{{ form.warranty_duration_months.value|default:'' }}" required></sl-input>
-          <!-- Input pour l'image du reçu -->
-          <input type="file" name="imageReceipt" class="imageReceipt" accept="image/png, image/jpeg">
+          <!-- Colonne de droite -->
+          <div class="form-column">
+            <sl-input name="brand" placeholder="Marque" clearable value="{{ form.brand.value|default:'' }}" required></sl-input>
+            <sl-input name="warranty_duration_months" type="number" placeholder="Durée de garantie (en mois)" value="{{ form.warranty_duration_months.value|default:'' }}" required></sl-input>
+            <!-- Input pour l'image du reçu -->
+            <input type="file" name="imageReceipt" class="image-receipt" accept="image/png, image/jpeg">
+          </div>
         </div>
-      </div>
+     
+        <!-- Notes (pleine largeur) -->
+        <sl-textarea name="notes" placeholder="Notes sur le produit..." rows="2">{{ form.notes.value|default:'' }}</sl-textarea>
+      </fieldset>
 
-      <!-- Notes (pleine largeur) -->
-      <sl-textarea name="notes" placeholder="Notes sur le produit..." rows="2">{{ form.notes.value|default:'' }}</sl-textarea>
-      
       <!-- Boutons -->
       <div class="submit-container" >
         <!-- bouton revenir à la liste -->
