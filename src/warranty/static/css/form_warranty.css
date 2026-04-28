@@ -33,7 +33,7 @@ fieldset {
 }
 
 .form-card:hover {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .form-grid {
@@ -51,7 +51,7 @@ fieldset {
 }
 
 .image-receipt {
-  font-family: inherit;
+  width: 95%;
   font-size: 0.9rem;
   border: 1px solid var(--sl-color-neutral-300);
   border-radius: var(--sl-border-radius-medium);
@@ -59,24 +59,28 @@ fieldset {
   background: var(--white);
 }
 
-.field-group {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
 .error-text {
-    color: #e11d48; 
-    font-size: 0.75rem;
+    color: var(--error);
+    font-size: 0.8rem; 
     font-weight: 500;
-    margin-left: 4px;
-    animation: fadeIn 0.3s ease-in-out;
+    margin-top: 4px;   
+    margin-left: 8px;  
+    display: flex;
+    align-items: center;
+    gap: 4px;   
+    animation: fadeIn 0.3s ease-out;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+    from { 
+        opacity: 0; 
+        transform: translateY(-3px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+} 
 
 .submit-container {
   display: flex;

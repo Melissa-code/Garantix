@@ -12,6 +12,8 @@
   --secondary-light: #F3F4F6;
   --info: #5498F7;
   --info-light: #BBD9FB; 
+  --error: #f43f5e;
+  --success: #22c55e;
 
   --container-max-width: 1200px; /* largeur max */ 
 }

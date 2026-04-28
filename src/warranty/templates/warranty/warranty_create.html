@@ -30,7 +30,7 @@
 <section class="form-container">
   <!-- card -->
   <sl-card class="form-card">
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="" method="POST" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
       <!-- fieldset => regrouper les champs du formulaire -->
       <fieldset class="form-fieldset">
@@ -41,7 +41,8 @@
           <div class="form-column">
             <!-- product_name -->
             <div class="field-group">
-              <sl-input type="text"
+              <sl-input class="{% if form.product_name.errors %}input-error{% endif %}"
+                  type="text"
                   name="product_name" 
                   placeholder="Nom du produit" 
                   value="{{ form.product_name.value|default:'' }}" 
@@ -56,7 +57,8 @@
 
             <!-- purchase_date (achat) -->
             <div class="field-group">
-              <sl-input type="date"
+              <sl-input class="{% if form.purchase_date.errors %}input-error{% endif %}"
+                  type="date"
                   id="purchase_date_input"
                   name="purchase_date" 
                   placeholder="Date d'achat" 
@@ -70,7 +72,8 @@
 
             <!-- vendor (revendeur) -->
             <div class="field-group">
-              <sl-input type="text"
+              <sl-input class="{% if form.vendor.errors %}input-error{% endif %}"
+                  type="text"
                   name="vendor" 
                   placeholder="Revendeur" 
                   clearable 
@@ -88,7 +91,8 @@
           <div class="form-column">
             <!-- brand (marque) -->
             <div class="field-group">
-              <sl-input type="text"
+              <sl-input class="{% if form.brand.errors %}input-error{% endif %}"
+                  type="text"
                   name="brand" 
                   placeholder="Marque" 
                   clearable 
@@ -104,7 +108,8 @@
             
             <!-- duration (durée) -->
             <div class="field-group">
-              <sl-input  type="number" 
+              <sl-input class="{% if form.warranty_duration_months.errors %}input-error{% endif %}"
+                  type="number" 
                   name="warranty_duration_months" 
                   min="0"
                   max="240"
@@ -120,9 +125,9 @@
             <!-- Input pour l'image du reçu -->
             <div class="field-group">
               <input type="file" 
-                  name="imageReceipt" 
-                  class="image-receipt" 
-                  accept="image/png, image/jpeg">
+                    name="imageReceipt" 
+                    accept="image/png, image/jpeg"
+                    class="image-receipt {% if form.imageReceipt.errors %}input-error{% endif %}">
               {% if form.imageReceipt.errors %}
                 <div class="error-text">{{ form.imageReceipt.errors|first }}</div>
               {% endif %}
@@ -132,7 +137,7 @@
      
         <!-- Notes (pleine largeur) -->
         <div class="field-group">  
-          <sl-textarea 
+          <sl-textarea class="{% if form.notes.errors %}input-error{% endif %}"
               name="notes" 
               placeholder="Notes sur le produit..." 
               rows="2">
@@ -147,7 +152,7 @@
           <!-- bouton revenir à la liste -->
           <sl-button href="{% url 'warranty:warranties_list' %}" class="btn btn-white"> Revenir</sl-button>
           <!-- bouton submit -->
-          <sl-button type="submit" class="btn btn-primary">Ajouter </sl-button>
+          <sl-button type="submit" class="btn btn-primary">Ajouter</sl-button>
         </div>
       </fieldset>
     </form>
@@ -158,7 +163,7 @@
 <script>
   const today = new Date().toISOString().split('T')[0];
   const dateInput = document.getElementById('purchase_date_input');
-  
+
   if (dateInput) {
     dateInput.max = today;
   }
