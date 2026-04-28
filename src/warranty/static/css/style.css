@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Poetsen+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Outfit:wght@700&display=swap');
 @import "reset.css"; 
 
 :root {
@@ -19,7 +19,7 @@
 }
 
 body {
-  font-family: "Jost", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 18px;
   color: var(--black);
   height: 100%;
@@ -38,6 +38,11 @@ h2 {
 h3 {
   font-weight: 600;
   font-size: 1.4rem;
+}
+
+h1, h2, h3, .card-header .card-title  {
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
 }
 
 legend {
@@ -91,18 +96,6 @@ sl-button[size="small"]::part(label) {
   font-weight: 500;
 }
 
-
-/* .imageReceipt {
-  font-size: 16px;
-  color: grey;
-  display: inline-block;
-  padding: 7px 12px;
-  cursor: pointer;
-  border: 1px solid lightgray;
-  border-radius: 3px;
-} */
- 
-
 .page-bg-header {
   background: var(--secondary-light); 
   padding: 1.5rem 0;
@@ -116,7 +109,7 @@ sl-button[size="small"]::part(label) {
 .presentation {
   text-align: center;
   margin-top: 1rem;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 }
 
 
@@ -156,9 +149,14 @@ header .login-btn-navbar::part(base) {
 }
 
 .nav-brand {
-  font-family: "Poetsen One", sans-serif;
-  font-size: 2.5rem;
-  font-weight: bold; 
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: -0.04em; 
+}
+
+.nav-brand span {
+  color: var(--primary); /*  bleu */
 }
 
 .nav-desktop {
