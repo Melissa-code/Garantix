@@ -57,6 +57,7 @@ class Warranty(models.Model):
                 name='unique_user_warranty'
             )
         ]
+       
     
     def clean(self):
         """Validations personnalisées pour les champs de la garantie"""
@@ -77,8 +78,6 @@ class Warranty(models.Model):
             raise ValidationError({
                 'warranty_duration_months': "La durée de garantie est trop élevée. Veuillez entrer une durée réaliste."
             })
-        
-        
 
     def save(self, *args, **kwargs):
         """execution de clean() avant de sauvegarder"""

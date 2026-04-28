@@ -31,13 +31,18 @@
             </sl-tooltip>
             <!-- Modifier garantie -->
             <sl-tooltip content="Modifier la garantie" placement="top">
-                <sl-button size="small" variant="neutral" outline href="{% url 'warranty:warranty_update' warranty.pk %}">
+                <sl-button size="small" 
+                        variant="neutral" outline 
+                        data-url="{% url 'warranty:warranty_update' warranty.pk %}">
                     <sl-icon name="pencil-square" style="color: var(--sl-color-warning-600);"></sl-icon>
                 </sl-button>
             </sl-tooltip>
             <!-- supprimer garantie -->
             <sl-tooltip content="Supprimer la garantie" placement="top">
-                <sl-button size="small" variant="neutral" outline href="{% url 'warranty:warranty_delete' warranty.pk %}">
+                <sl-button size="small" 
+                        variant="neutral" outline 
+                        class="delete-btn"
+                        data-url="{% url 'warranty:warranty_delete' warranty.pk %}">
                     <sl-icon name="trash3-fill" style="color: var(--sl-color-danger-600);"></sl-icon>
                 </sl-button>
             </sl-tooltip>

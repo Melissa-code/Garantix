@@ -11,6 +11,7 @@
 
 
 {% block content %}
+{% csrf_token %}
 <div class="page-list-bg-header">
     <div class="container-list">
         <!-- titre et badge -->
@@ -76,4 +77,60 @@
     <!-- pagination -->
     {% include 'warranty/partials/_pagination.html' %}
 </div>
+
+<script>
+// suppresssion de garantie en AJAX 
+    document.addEventListener('click', async (e) => {
+        const btn = e.target.closest('.delete-btn');
+        if (!btn) return;
+        e.preventDefault();
+
+        const url = btn.getAttribute('data-url');
+        console.log("Tentative de suppression sur :", url); 
+        if (!url) return;
+        if (!confirm("Supprimer cette garantie ?")) return;
+
+        const tokenInput = document.querySelector('[name=csrfmiddlewaretoken]');
+        if (!tokenInput) {
+            console.error("Token CSRF manquant dans le HTML !");
+            return;
+        }
+        const csrftoken = tokenInput.value;
+
+        try {
+            btn.loading = true; //spinner sur le bouton
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrftoken,
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.status === 'success') {
+                    // remove la card
+                    const card = btn.closest('.warranty-card'); 
+                    if (card) {
+                        card.style.opacity = '0';
+                        setTimeout(() => card.remove(), 300);
+                    } else {
+                        window.location.reload();
+                    }
+                }
+    
+            } else {
+                console.error("Erreur serveur:", response.status);
+                btn.loading = false;
+            }
+        } catch (err) {
+            console.error("Erreur réseau:", err);
+            btn.loading = false;
+        }
+    });
+
+</script>
+
 {% endblock %}

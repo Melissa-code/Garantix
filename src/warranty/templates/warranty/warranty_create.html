@@ -26,6 +26,15 @@
     </div>
 </div>
 
+{% if messages %}
+    {% for message in messages %}
+        <sl-alert variant="{{ message.tags }}" open closable duration="5000">
+            <sl-icon slot="icon" name="info-circle"></sl-icon>
+            {{ message }}
+        </sl-alert>
+    {% endfor %}
+{% endif %}
+
 <!-- form section create -->
 <section class="form-container">
   <!-- card -->
@@ -33,6 +42,7 @@
     <!-- form novalidate pour désactiver la validation HTML par défaut -->
     <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
+
       <!-- fieldset => regrouper les champs du formulaire -->
       <fieldset class="form-fieldset">
       <legend class="sr-only">Informations sur le produit</legend>
