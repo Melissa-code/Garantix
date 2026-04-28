@@ -4,20 +4,14 @@
   
   <!-- Desktop menu -->
   <nav class="nav-desktop">
-    <sl-button variant="text" href="{% url 'warranty:home' %}">
-       {# <sl-icon name="house-door-fill" label="accueil" class="icon-medium menu-icon"></sl-icon> #}
-       Accueil
-    </sl-button>
+    <sl-button variant="text" href="{% url 'warranty:home' %}" class=" navbar-link">Accueil</sl-button>
     {% if user.is_authenticated %}
-      <sl-button variant="text" href="{% url 'warranty:warranties_list' %}">
-        {# <sl-icon name="file-earmark-fill" label="garanties" class="icon-medium menu-icon"></sl-icon> #}
-        Mes garanties
-      </sl-button>
-      <sl-button variant="text" class="login-btn-navbar" href="{% url 'accounts:logout' %}">
+      <sl-button variant="text" href="{% url 'warranty:warranties_list' %}" class=" navbar-link">Mes garanties</sl-button>
+      <sl-button variant="text" class="btn btn-white navbar-link" href="{% url 'accounts:logout' %}"  size="small">
         Se déconnecter
       </sl-button>
     {% else %}
-      <sl-button href="{% url 'accounts:login' %}" class="login-btn-navbar" size="medium" title="Se connecter">
+      <sl-button href="{% url 'accounts:login' %}" class="btn btn-white navbar-link" size="small">
           Se connecter
       </sl-button>
     {% endif %}
@@ -31,22 +25,12 @@
 
 <!-- Mobile menu (caché par défaut) -->
 <nav class="nav-mobile" id="mobile-menu">
-  <sl-button variant="text" href="{% url 'warranty:home' %}" title="Accueil">
-    <sl-icon name="house-door-fill" label="accueil" class="icon-small menu-icon" style="color:black;"></sl-icon>
-    Accueil
-  </sl-button>
+  <sl-button variant="text" href="{% url 'warranty:home' %}" title="Accueil" class="mobile-link">Accueil</sl-button>
   {% if request.user.is_authenticated %}
-  <sl-button variant="text" href="{% url 'warranty:warranties_list' %}" title="Mes garanties">
-    <sl-icon name="file-earmark-fill" label="garanties" class="icon-small menu-icon" style="color:black;"></sl-icon>
-    Mes garanties
-  </sl-button>
-  <sl-button variant="primary" class="login-btn-navbar">
-    Se déconnecter
-  </sl-button>
+  <sl-button variant="text" href="{% url 'warranty:warranties_list' %}" title="Mes garanties" class="mobile-link">Mes garanties</sl-button>
+  <sl-button class="btn btn-white mobile-link" size="small" href="{% url 'accounts:logout' %}">Se déconnecter</sl-button>
   {% else %}
-  <sl-button variant="primary" class="login-btn-navbar" href="/admin/">
-    Se connecter
-  </sl-button>
+  <sl-button class="btn btn-white mobile-link" size="small" href="/admin/">Se connecter</sl-button>
   {% endif %}
 </nav>
 

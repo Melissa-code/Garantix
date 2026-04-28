@@ -43,6 +43,7 @@ h3 {
 h1, h2, h3, .card-header .card-title  {
   font-family: "Outfit", sans-serif;
   font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 legend {
@@ -157,6 +158,16 @@ header .login-btn-navbar::part(base) {
 
 .nav-brand span {
   color: var(--primary); /*  bleu */
+}
+
+
+.navbar-link:hover, .mobile-link:hover {
+  --sl-color-neutral-600: var(--primary); 
+  --sl-color-neutral-700: var(--primary);
+}
+
+.navbar-link::part(base):hover {
+  color: var(--primary);
 }
 
 .nav-desktop {

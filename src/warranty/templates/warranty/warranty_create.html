@@ -26,14 +26,10 @@
     </div>
 </div>
 
-{% if messages %}
-    {% for message in messages %}
-        <sl-alert variant="{{ message.tags }}" open closable duration="5000">
-            <sl-icon slot="icon" name="info-circle"></sl-icon>
-            {{ message }}
-        </sl-alert>
-    {% endfor %}
-{% endif %}
+  <!-- message -->
+  <section class="section-message">
+      {% include 'partials/_messages.html' %}
+  </section>
 
 <!-- form section create -->
 <section class="form-container">
