@@ -32,7 +32,7 @@
   <sl-card class="form-card">
     <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-
+      <!-- fieldset => regrouper les champs du formulaire -->
       <fieldset class="form-fieldset">
       <legend class="sr-only">Informations sur le produit</legend>
         <div class="form-grid">
@@ -41,19 +41,43 @@
           <div class="form-column">
             <!-- product_name -->
             <div class="field-group">
-              <sl-input name="product_name" placeholder="Nom du produit" value="{{ form.product_name.value|default:'' }}" required></sl-input>
-              {% if form.product_name.errors %}<div class="error-text">{{ form.product_name.errors|first }}</div>{% endif %}
+              <sl-input type="text"
+                  name="product_name" 
+                  placeholder="Nom du produit" 
+                  value="{{ form.product_name.value|default:'' }}" 
+                  minlength="2"
+                  maxlength="150"
+                  required>
+              </sl-input>
+              {% if form.product_name.errors %}
+                <div class="error-text">{{ form.product_name.errors|first }}</div>
+              {% endif %}
             </div>
-            <!-- purchase_date -->
+
+            <!-- purchase_date (achat) -->
             <div class="field-group">
-              <sl-input name="purchase_date" type="date" placeholder="Date d'achat" value="{{ form.purchase_date.value|default:'' }}" required></sl-input>
+              <sl-input type="date"
+                  id="purchase_date_input"
+                  name="purchase_date" 
+                  placeholder="Date d'achat" 
+                  value="{{ form.purchase_date.value|default:'' }}" 
+                  required>
+              </sl-input>
               {% if form.purchase_date.errors %}
                 <div class="error-text">{{ form.purchase_date.errors|first }}</div>
               {% endif %}
             </div>
-            <!-- vendor -->
+
+            <!-- vendor (revendeur) -->
             <div class="field-group">
-              <sl-input name="vendor" placeholder="Revendeur" clearable value="{{ form.vendor.value|default:'' }}"></sl-input>
+              <sl-input type="text"
+                  name="vendor" 
+                  placeholder="Revendeur" 
+                  clearable 
+                  minlength="2"
+                  maxlength="100"
+                  value="{{ form.vendor.value|default:'' }}">
+              </sl-input>
               {% if form.vendor.errors %}
                 <div class="error-text">{{ form.vendor.errors|first }}</div>
               {% endif %}
@@ -62,23 +86,43 @@
 
           <!-- Colonne de droite -->
           <div class="form-column">
-            <!-- brand -->
+            <!-- brand (marque) -->
             <div class="field-group">
-              <sl-input name="brand" placeholder="Marque" clearable value="{{ form.brand.value|default:'' }}" required></sl-input>
+              <sl-input type="text"
+                  name="brand" 
+                  placeholder="Marque" 
+                  clearable 
+                  minlength="2"
+                  maxlength="150"
+                  value="{{ form.brand.value|default:'' }}" 
+                  required>
+              </sl-input>
               {% if form.brand.errors %}
                 <div class="error-text">{{ form.brand.errors|first }}</div>
               {% endif %}
             </div>
-              <!-- duration -->
+            
+            <!-- duration (durée) -->
             <div class="field-group">
-              <sl-input name="warranty_duration_months" type="number" placeholder="Durée de garantie (en mois)" value="{{ form.warranty_duration_months.value|default:'' }}" required></sl-input>
+              <sl-input  type="number" 
+                  name="warranty_duration_months" 
+                  min="0"
+                  max="240"
+                  placeholder="Durée de garantie (en mois)" 
+                  value="{{ form.warranty_duration_months.value|default:'' }}"
+                  required>
+              </sl-input>
               {% if form.warranty_duration_months.errors %}
                 <div class="error-text">{{ form.warranty_duration_months.errors|first }}</div>
               {% endif %}
             </div>
+
             <!-- Input pour l'image du reçu -->
             <div class="field-group">
-              <input type="file" name="imageReceipt" class="image-receipt" accept="image/png, image/jpeg">
+              <input type="file" 
+                  name="imageReceipt" 
+                  class="image-receipt" 
+                  accept="image/png, image/jpeg">
               {% if form.imageReceipt.errors %}
                 <div class="error-text">{{ form.imageReceipt.errors|first }}</div>
               {% endif %}
@@ -88,7 +132,11 @@
      
         <!-- Notes (pleine largeur) -->
         <div class="field-group">  
-          <sl-textarea name="notes" placeholder="Notes sur le produit..." rows="2">{{ form.notes.value|default:'' }}</sl-textarea>
+          <sl-textarea 
+              name="notes" 
+              placeholder="Notes sur le produit..." 
+              rows="2">
+              {{ form.notes.value|default:'' }}</sl-textarea>
           {% if form.notes.errors %}
             <div class="error-text">{{ form.notes.errors|first }}</div>
           {% endif %}
@@ -105,5 +153,15 @@
     </form>
   </sl-card>
 </section>
+
+<!-- Script pour limiter la date sélectionnable (futur =>aujourd'hui max)-->
+<script>
+  const today = new Date().toISOString().split('T')[0];
+  const dateInput = document.getElementById('purchase_date_input');
+  
+  if (dateInput) {
+    dateInput.max = today;
+  }
+</script>
 
 {% endblock %}
