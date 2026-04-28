@@ -46,7 +46,10 @@
                   type="text"
                   name="product_name" 
                   placeholder="Nom du produit" 
+                  pattern="^[a-zA-Z0-9À-ÿ\s\(\)\-\.]+$"
+                  title="Lettres, chiffres, parenthèses et tirets uniquement."
                   value="{{ form.product_name.value|default:'' }}" 
+                  clearable
                   minlength="2"
                   maxlength="150"
                   required>
@@ -80,6 +83,8 @@
                   clearable 
                   minlength="2"
                   maxlength="100"
+                  pattern="^[a-zA-Z0-9À-ÿ\s\(\)\-\.]+$"
+                  title="Lettres, chiffres, parenthèses et tirets uniquement."
                   value="{{ form.vendor.value|default:'' }}">
               </sl-input>
               {% if form.vendor.errors %}
@@ -96,6 +101,8 @@
                   type="text"
                   name="brand" 
                   placeholder="Marque" 
+                  pattern="^[a-zA-Z0-9À-ÿ\s\(\)\-\.]+$"
+                  title="Lettres, chiffres, parenthèses et tirets uniquement."
                   clearable 
                   minlength="2"
                   maxlength="150"
@@ -140,6 +147,7 @@
         <div class="field-group">  
           <sl-textarea class="{% if form.notes.errors %}input-error{% endif %}"
               name="notes" 
+              title="Lettres, chiffres, parenthèses et tirets uniquement."
               placeholder="Notes sur le produit..." 
               rows="2">
               {{ form.notes.value|default:'' }}</sl-textarea>

@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.core.exceptions import ValidationError
-from django.core.validators import FileExtensionValidator, MinLengthValidator
+from django.core.validators import FileExtensionValidator, MinLengthValidator, RegexValidator
 from django.contrib.auth.models import User
 from django.urls import reverse
 from datetime import timedelta
@@ -9,6 +9,17 @@ from django.utils import timezone
 import os
 import uuid
 
+# accentd, lettres, chiffres, espaces, tirets, parenthèses, points (Sécurité XSS < >)
+text_regex = RegexValidator(
+    regex=r'^[a-zA-Z0-9À-ÿ\s\(\)\-\.]+$',
+    message="Le nom contient des caractères non autorisés (ex: < > $ # { })."
+)
+
+# \r?\n pour les sauts de ligne 
+notes_regex = RegexValidator(
+    regex=r'^[a-zA-Z0-9À-ÿ\s\(\)\-\.\,\!\?\:\' \r?\n]+$',
+    message="Les notes contiennent des caractères spéciaux non autorisés."
+)
 
 # Pour renommer l'image => sécurité contre l'écrasement de fichiers 
 def get_file_path(instance, filename):
@@ -16,15 +27,14 @@ def get_file_path(instance, filename):
     filename = f"{uuid.uuid4()}.{ext}"
     return os.path.join('receipts/', filename)
 
-
 class Warranty(models.Model): 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='warranties', verbose_name="Utilisateur")
     
-    product_name = models.CharField(max_length=150, validators=[MinLengthValidator(2)], verbose_name="Nom du produit")
-    brand = models.CharField(max_length=150, validators=[MinLengthValidator(2)], verbose_name="Nom de la marque")
+    product_name = models.CharField(max_length=150, validators=[MinLengthValidator(2), text_regex], verbose_name="Nom du produit")
+    brand = models.CharField(max_length=150, validators=[MinLengthValidator(2), text_regex], verbose_name="Nom de la marque")
     purchase_date = models.DateField(verbose_name="Date d'achat")
     warranty_duration_months = models.PositiveIntegerField(verbose_name="Durée de garantie (en mois)")
-    vendor = models.CharField(max_length=100, blank=True, null=True, verbose_name="Revendeur")
+    vendor = models.CharField(max_length=100, blank=True, null=True, validators=[text_regex], verbose_name="Revendeur")
     imageReceipt = models.ImageField(upload_to='receipts/', blank=True, null=True, verbose_name="Image du reçu")
     # pour limiter les formats => sécurité contre les fichiers malveillants
     imageReceipt = models.ImageField(
@@ -32,7 +42,7 @@ class Warranty(models.Model):
         validators=[FileExtensionValidator(['jpg', 'jpeg', 'png'])],
         blank=True, null=True
     )
-    notes = models.TextField(blank=True, null=True, verbose_name="Notes")
+    notes = models.TextField(blank=True, null=True, validators=[notes_regex], verbose_name="Notes")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Crée le")
 
     class Meta:
@@ -51,6 +61,11 @@ class Warranty(models.Model):
     def clean(self):
         """Validations personnalisées pour les champs de la garantie"""
         super().clean()
+
+        # brand en MAJ et sans espaces avant/après 
+        if self.brand:
+            self.brand = self.brand.strip().upper()
+
         # date d'achat ne peut pas etre dans le futur
         if self.purchase_date and self.purchase_date > timezone.now().date():
             raise ValidationError({
@@ -62,6 +77,7 @@ class Warranty(models.Model):
             raise ValidationError({
                 'warranty_duration_months': "La durée de garantie est trop élevée. Veuillez entrer une durée réaliste."
             })
+        
         
 
     def save(self, *args, **kwargs):
