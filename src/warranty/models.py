@@ -1,11 +1,20 @@
 from django.db import models
 from django.urls import reverse
 from django.core.exceptions import ValidationError
-from django.core.validators import MinLengthValidator
+from django.core.validators import FileExtensionValidator, MinLengthValidator
 from django.contrib.auth.models import User
 from django.urls import reverse
-from datetime import timedelta, timezone
+from datetime import timedelta
 from django.utils import timezone
+import os
+import uuid
+
+
+# Pour renommer l'image => sécurité contre l'écrasement de fichiers 
+def get_file_path(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = f"{uuid.uuid4()}.{ext}"
+    return os.path.join('receipts/', filename)
 
 
 class Warranty(models.Model): 
@@ -17,6 +26,12 @@ class Warranty(models.Model):
     warranty_duration_months = models.PositiveIntegerField(verbose_name="Durée de garantie (en mois)")
     vendor = models.CharField(max_length=100, blank=True, null=True, verbose_name="Revendeur")
     imageReceipt = models.ImageField(upload_to='receipts/', blank=True, null=True, verbose_name="Image du reçu")
+    # pour limiter les formats => sécurité contre les fichiers malveillants
+    imageReceipt = models.ImageField(
+        upload_to=get_file_path, 
+        validators=[FileExtensionValidator(['jpg', 'jpeg', 'png'])],
+        blank=True, null=True
+    )
     notes = models.TextField(blank=True, null=True, verbose_name="Notes")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Crée le")
 
