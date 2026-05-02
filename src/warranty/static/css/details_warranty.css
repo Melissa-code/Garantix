@@ -119,7 +119,7 @@
 .notes-row .value-cell {
     text-align: left;
     width: 100%;
-    font-size: 0.95rem;
+    font-size: 0.80rem;
     margin-top: 0.5rem;
     font-weight: 400; 
     color: var(--sl-color-neutral-500);

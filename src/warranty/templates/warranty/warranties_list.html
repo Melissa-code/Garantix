@@ -122,11 +122,11 @@
                 }
     
             } else {
-                console.error("Erreur serveur:", response.status);
+                console.error("Erreur serveur: ", response.status);
                 btn.loading = false;
             }
         } catch (err) {
-            console.error("Erreur réseau:", err);
+            console.error("Erreur réseau: ", err);
             btn.loading = false;
         }
     });

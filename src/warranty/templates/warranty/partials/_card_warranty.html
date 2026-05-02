@@ -33,7 +33,7 @@
             <sl-tooltip content="Modifier la garantie" placement="top">
                 <sl-button size="small" 
                         variant="neutral" outline 
-                        data-url="{% url 'warranty:warranty_update' warranty.pk %}">
+                        href="{% url 'warranty:warranty_update' warranty.pk %}">
                     <sl-icon name="pencil-square" style="color: var(--sl-color-warning-600);"></sl-icon>
                 </sl-button>
             </sl-tooltip>

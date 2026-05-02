@@ -26,10 +26,10 @@
     </div>
 </div>
 
-  <!-- message -->
-  <section class="section-message">
-      {% include 'partials/_messages.html' %}
-  </section>
+<!-- message -->
+<section class="section-message">
+    {% include 'partials/_messages.html' %}
+</section>
 
 <!-- form section create -->
 <section class="form-container">
@@ -42,7 +42,7 @@
       <!-- fieldset => regrouper les champs du formulaire -->
       <fieldset class="form-fieldset">
       <legend class="sr-only">Informations sur le produit</legend>
-        <div class="form-grid">
+      <div class="form-grid">
           
           <!-- Colonne de gauche -->
           <div class="form-column">
@@ -180,9 +180,7 @@
   const today = new Date().toISOString().split('T')[0];
   const dateInput = document.getElementById('purchase_date_input');
 
-  if (dateInput) {
-    dateInput.max = today;
-  }
+  if (dateInput) dateInput.max = today;
 </script>
 
-{% endblock %}
+{% endblock content %}
