@@ -69,6 +69,25 @@ class WarrantyUpdateView(LoginRequiredMixin, UserWarrantyMixin, UpdateView):
     model = Warranty
     form_class = WarrantyForm
     template_name = "warranty/warranty_update.html"
+
+    def form_valid(self, form):
+        product = form.cleaned_data.get('product_name')
+        brand = form.cleaned_data.get('brand')
+        user = self.request.user
+        duplicate = Warranty.objects.filter(
+            user=user, 
+            product_name__iexact=product, 
+            brand__iexact=brand
+        ).exclude(pk=self.object.pk).exists()
+
+        if duplicate:
+            messages.error(self.request, "Une garantie existe déjà avec ce nom et cette marque.")
+            form.add_error('product_name', "Ce nom est déjà utilisé pour cette marque.")
+            return self.form_invalid(form)
+
+        messages.success(self.request, "Garantie modifiée avec succès.")
+        return super().form_valid(form)
+
         
         
 class WarrantyDeleteView(LoginRequiredMixin, UserWarrantyMixin, DeleteView):

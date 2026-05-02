@@ -69,7 +69,8 @@
                                 id="update_purchase_date_input"
                                 name="purchase_date" 
                                 placeholder="Date d'achat" 
-                                value="{{ form.purchase_date.value|default:warranty.purchase_date|date:'Y-m-d'|default:'' }}" 
+                                {# value="{{ form.purchase_date.value|default:warranty.purchase_date|date:'Y-m-d'|default:'' }}"  #}
+                                value="{{ form.purchase_date.value|date:'Y-m-d'|default:form.purchase_date.value|default:'' }}"
                                 required>
                             </sl-input>
                             {% if form.purchase_date.errors %}
