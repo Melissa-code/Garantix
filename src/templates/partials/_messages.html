@@ -3,32 +3,19 @@
     <div class="messages-container">
         {% for message in messages %}
         <sl-alert 
-            variant="{% if message.tags == 'success' %}success{% elif message.tags == 'error' %}danger{% elif message.tags == 'warning' %}warning{% else %}primary{% endif %}" 
             open 
             closable 
-            class="alert-message">
-            <sl-icon slot="icon" name="{% if message.tags == 'success' %}check-circle-fill{% elif message.tags == 'error' %}exclamation-octagon-fill{% elif message.tags == 'warning' %}exclamation-triangle-fill{% else %}info-circle-fill{% endif %}"></sl-icon>
-            <strong>{{ message }}</strong>
+            class="custom-black-alert alert-{{ message.tags }}"
+            closable
+            duration="4000">
+            <!-- icon -->
+            <sl-icon slot="icon" 
+                name="{% if message.tags == 'success' %}check2-circle{% elif message.tags == 'error' %}exclamation-circle{% else %}info-circle{% endif %}"
+                class="icon-{{ message.tags }}">
+            </sl-icon>
+            <!-- message -->
+            <span class="message-text">{{ message }}</span>
         </sl-alert>
         {% endfor %}
     </div>
 {% endif %}
-
-<script>
-    // Ferme automatiquement les alertes après 5 secondes
-    document.addEventListener('DOMContentLoaded', () => {
-        const container = document.querySelector('.messages-container');
-        const alerts = document.querySelectorAll('.alert-message[closable]');
-
-        if (container) {
-            container.style.marginTop = '1.5rem';
-        }
-
-        alerts.forEach(alert => {
-            setTimeout(() => {
-            alert.toast();
-            setTimeout(() => alert.hide(), 300);
-            }, 5000);
-        });
-    });
-</script>

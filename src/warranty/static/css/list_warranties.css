@@ -20,7 +20,7 @@
     background-color: var(--black-light);
     color: white;
     font-weight: 400;
-    font-size: 0.85rem; /* Un peu plus petit pour le look "badge" */
+    font-size: 0.85rem; 
     padding: 8px 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     letter-spacing: 0.5px;
