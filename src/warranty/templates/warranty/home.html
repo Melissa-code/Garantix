@@ -12,19 +12,24 @@
 
 {% block content %}
 
-  <!-- section hero (slogan) -->
-  <section id="hero">
-    <article>
+  <!-- section titre -->
+  <section class="page-bg-header">
+    <div class="container-page">
+      <!-- message Welcome/logout -->
       {% include 'partials/_messages.html' %}
 
-      <h1>Bienvenue sur Garantix</h1>
-      
-      <p>Centralisez vos garanties. Ne perdez plus un seul reçu.</p>
-      {% if user.is_authenticated %}
-        <sl-button href="{% url 'accounts:logout' %}" class="btn btn-primary" size="medium">
-          Se déconnecter
-        </sl-button>
-      {% else %}
+      <!-- titre -->
+      <section class="title-badge">
+          <h1>Bienvenue sur Garantix</h1>
+      </section>
+
+      <!-- présentation -->
+      <section class="presentation">
+          <p>Centralisez vos garanties. Ne perdez plus un seul reçu.</p>
+      </section.presentation>
+
+      <!-- boutons login/signup -->
+      {% if not user.is_authenticated %}
         <sl-button href="{% url 'accounts:login' %}" class="btn btn-primary" size="medium">
           Se connecter
         </sl-button>
@@ -32,35 +37,50 @@
           Créer un compte
         </sl-button>
       {% endif %}
-    </article>
+    </div>
   </section>
 
   <!-- section features -->
   <section id="features" class="contain">
     <article>
       <div class="card-group">
-        <sl-card class="custom-card">
-          <sl-icon name="archive" class="custom-card-icon"></sl-icon>
-          <h3>Stockez vos garanties</h3>
-          <p>Centralisez tous vos documents et reçus en un seul endroit, accessible partout.</p>
+        <!-- Carte 1 -->
+        <sl-card class="home-card custom-card">
+          <div slot="header" class="card-header card-title">
+            <sl-icon name="archive" class="custom-card-icon"></sl-icon>
+            <strong class="product-name card-home-title">Stockez vos garanties</strong>
+          </div>
+          <div class="card-body">
+            <div class="info-row">
+              <span>Tous vos documents en un seul endroit sécurisé.</span>
+            </div>
+          </div>
         </sl-card>
 
-        <sl-card class="custom-card">
-          <sl-icon name="search" class="custom-card-icon"></sl-icon>
-          <h3>Retrouvez facilement</h3>
-          <p>Recherchez vos produits et garanties rapidement grâce à notre interface intuitive.</p>
+        <!-- Carte 2 -->
+        <sl-card class="home-card custom-card card-title">
+          <div slot="header" class="card-header">
+            <sl-icon name="search" class="custom-card-icon"></sl-icon>
+            <strong class="product-name card-home-title">Retrouvez facilement</strong>
+          </div>
+          <div class="card-body">
+            <div class="info-row">
+              <span>Recherchez vos produits rapidement et simplement.</span>
+            </div>
+          </div>
         </sl-card>
 
-        <sl-card class="custom-card">
-          <sl-icon name="cloud" class="custom-card-icon"></sl-icon>
-          <h3>Accès sécurisé</h3>
-          <p>Vos données sont sauvegardées en toute sécurité.</p>
-        </sl-card>
-
-         <sl-card class="custom-card">
-          <sl-icon name="alarm" class="custom-card-icon"></sl-icon>
-          <h3>Alertes avant expiration</h3>
-          <p>Recevez des notifications pour ne jamais oublier une garantie importante.</p>
+        <!-- Carte 3 -->
+        <sl-card class="home-card custom-card card-title">
+          <div slot="header" class="card-header">
+             <sl-icon name="cloud" class="custom-card-icon"></sl-icon>
+            <strong class="product-name card-home-title">Accès sécurisé</strong>
+          </div>
+          <div class="card-body">
+            <div class="info-row">
+              <span>Vos données sont sauvegardées en toute sécurité.</span>
+            </div>
+          </div>
         </sl-card>
       </div>
     </article>

@@ -40,12 +40,11 @@
 
 .page-list-bg-banniere {
     background-color: var(--black-middle);
-    /* On ajoute un radial-gradient par-dessus le reste */
     background-image: 
         radial-gradient(circle, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 70%),
         linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), 
         url('/static/images/banniere2.png');
-    background-size: cover, contain, contain; /* 'cover' pour le halo noir */
+    background-size: cover, contain, contain; /* cover: halo noir */
     background-repeat: no-repeat, no-repeat, repeat-x; 
     background-position: center;
     width: 100%;
@@ -117,7 +116,6 @@
 .warranty-card::part(header) {
     background-color: var(--secondary);
     padding: 0;
-    /* Optionnel : ajouter une petite ligne de séparation */
     border-bottom: 1px solid rgba(0, 0, 0, 0.05); 
 }
 

@@ -1,42 +1,73 @@
-/* section hero */
 
-#hero {               
-    display: flex;                  
-    justify-content: center;      
-    background: var(--secondary-light);         
-    text-align: center;  
-    padding: 2rem 0;      
-}
-
-#hero p {
-  margin-top: 2rem;
-  font-size: 1.4rem;
-}
-
+/* ********************************** */
 /* section features */
 
-#features .card-group {
-    display: flex;     
-    flex-wrap: wrap; 
-    gap: 1.3rem;        
-    justify-content: center; 
-    padding: 1rem 0;
+.card-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 2rem;
+    width: 100%;
+    margin-top: 2rem;
 }
 
-#features .custom-card {
-  flex: 0 0 25rem;  /* largeur fixe: <flex-grow> <flex-shrink> <flex-basis> */
-  display: flex;
-  flex-direction: column;   
-  align-items: center;      
-  justify-content: space-around; 
-  box-sizing: border-box;   
+.home-card {
+    background-color: var(--white);
+    height: 100%; 
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0.4, 0.2, 1);
+    box-shadow: 
+        0 0 10px rgba(0, 0, 0, 0.05),    
+        0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: none;
 }
 
-#features .custom-card-icon {
-    font-size: 40px;
-    color: var(--primary);
+.home-card::part(base) {
+    border: none;
 }
 
+.home-card:hover {
+    transform: translateY(-6px);
+    box-shadow:
+        0 0 15px rgba(0, 0, 0, 0.08),   
+        0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.home-card::part(header) {
+    padding: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05); 
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: var(--sl-spacing-medium); 
+    font-family: "Outfit", sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.custom-card-icon {
+    font-size: 1.5rem;
+    color: var(--info); 
+    flex-shrink: 0;
+}
+
+.info-row {
+    font-size: 0.9rem;
+    color: var(--sl-color-neutral-700);
+}
+
+@media (max-width: 1200px) {
+    .card-group {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* *********************************** */
 /* section mockup */
 
 #mockup {
