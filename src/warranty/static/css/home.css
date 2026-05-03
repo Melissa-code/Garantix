@@ -1,13 +1,48 @@
+.title-home, .subtitle-home {
+    text-align: center;
+    
+}
+
+/* ********************************** */
+/* section banniere */
+
+.bg-banniere {
+    background-color: var(--black-middle);
+    background-image: 
+        radial-gradient(circle, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 70%),
+        linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), 
+        url('/static/images/banniere2.png');
+    background-size: cover, contain, contain; /* cover: halo noir */
+    background-repeat: no-repeat, no-repeat, repeat-x; 
+    background-position: center;
+    width: 100%;
+    padding: 2.2rem 0; 
+    display: flex;
+    justify-content: center;
+    min-height: auto; 
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
 
 /* ********************************** */
 /* section features */
+
+.section-features-header {
+    margin: 3rem 0;
+}
 
 .card-group {
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
     gap: 2rem;
     width: 100%;
-    margin-top: 2rem;
+
 }
 
 .home-card {
@@ -38,6 +73,7 @@
 .home-card::part(header) {
     padding: 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05); 
+    background-color: var(--secondary);
 }
 
 .card-header {

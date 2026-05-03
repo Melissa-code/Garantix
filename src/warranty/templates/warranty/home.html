@@ -28,14 +28,23 @@
           <p>Centralisez vos garanties. Ne perdez plus un seul reçu.</p>
       </section.presentation>
 
-      <!-- boutons login/signup -->
+      
+    </div>
+  </section>
+
+  <section class="bg-banniere">
+    <div class="container-page">
       {% if not user.is_authenticated %}
-        <sl-button href="{% url 'accounts:login' %}" class="btn btn-primary" size="medium">
-          Se connecter
-        </sl-button>
-        <sl-button href="{% url 'accounts:signup' %}" class="btn btn-white" size="medium">
-          Créer un compte
-        </sl-button>
+        <div class="cta-buttons">
+          <sl-button href="{% url 'accounts:login' %}" class="btn btn-primary" size="medium">
+            Se connecter
+          </sl-button>
+          <sl-button href="{% url 'accounts:signup' %}" class="btn btn-white" size="medium">
+            Créer un compte
+          </sl-button>
+        </div>
+      {% else %}
+        <p style="color: white; font-weight: 500;">Prêt à gérer vos documents ?</p>
       {% endif %}
     </div>
   </section>
@@ -43,8 +52,15 @@
   <!-- section features -->
   <section id="features" class="contain">
     <article>
+      <!-- titre et sous-titre -->
+      <div class="section-features-header">
+        <h2 class="title-home">Pourquoi choisir Garantix ?</h2>
+        <p class="subtitle-home">
+          Découvrez les fonctionnalités qui font de Garantix votre meilleur allié pour gérer vos garanties.
+        </p>
+      </div>
+      <!-- 3 cards features -->
       <div class="card-group">
-        <!-- Carte -->
         {% for feature in features %}
           {% include 'warranty/partials/_card_features_home.html' with feature=feature %}
         {% endfor %}
@@ -54,6 +70,10 @@
 
   <!-- section mockup  -->
   <section id="mockup" class="contain">
+    <div class="section-header">
+        <h2 class="title-home">Mockups</h2>
+        <p class="subtitle-home">Voici quelques aperçus de l'interface de Garantix.</p>
+      </div>
     <div class="image-grid">
       <div class="grid-item">
         <img src="{% static 'images/logo_blue1.png' %}" 

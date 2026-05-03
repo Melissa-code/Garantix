@@ -69,11 +69,13 @@ hr {
   text-align: center;
   font-size: 16px;
   min-width: 160px;
+  text-decoration: none;
 }
 
 .btn-primary::part(base) {
   background-color: var(--primary);
   color: var(--white);
+  border: 1px solid var(--primary);  
 }
 
 .btn-primary::part(base):hover {
@@ -84,7 +86,6 @@ hr {
   background-color: var(--white);
   color: var(--black);
   border: 1px solid var(--secondary);  
-  text-decoration: none;
 }
 
 .btn-white::part(base):hover {
