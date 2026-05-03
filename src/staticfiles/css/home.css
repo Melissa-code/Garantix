@@ -1,42 +1,116 @@
-/* section hero */
-
-#hero {               
-    display: flex;                  
-    justify-content: center;      
-    background: var(--secondary-light);         
-    text-align: center;  
-    padding: 2rem 0;      
+.title-home, .subtitle-home {
+    text-align: center;
+    
 }
 
-#hero p {
-  margin-top: 2rem;
-  font-size: 1.4rem;
+/* ********************************** */
+/* section banniere */
+
+.bg-banniere {
+    background-color: var(--black-middle);
+    background-image: 
+        radial-gradient(circle, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 70%),
+        linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), 
+        url('/static/images/banniere2.png');
+    background-size: cover, contain, contain; /* cover: halo noir */
+    background-repeat: no-repeat, no-repeat, repeat-x; 
+    background-position: center;
+    width: 100%;
+    padding: 2.2rem 0; 
+    display: flex;
+    justify-content: center;
+    min-height: auto; 
 }
 
+.cta-buttons {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* ********************************** */
 /* section features */
 
-#features .card-group {
-    display: flex;     
-    flex-wrap: wrap; 
-    gap: 1.3rem;        
-    justify-content: center; 
-    padding: 1rem 0;
+.section-features-header {
+    margin: 3rem 0;
 }
 
-#features .custom-card {
-  flex: 0 0 25rem;  /* largeur fixe: <flex-grow> <flex-shrink> <flex-basis> */
-  display: flex;
-  flex-direction: column;   
-  align-items: center;      
-  justify-content: space-around; 
-  box-sizing: border-box;   
+.card-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 2rem;
+    width: 100%;
+
 }
 
-#features .custom-card-icon {
-    font-size: 40px;
-    color: var(--primary);
+.home-card {
+    background-color: var(--white);
+    height: 100%; 
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0.4, 0.2, 1);
+    box-shadow: 
+        0 0 10px rgba(0, 0, 0, 0.05),    
+        0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: none;
 }
 
+.home-card::part(base) {
+    border: none;
+}
+
+.home-card:hover {
+    transform: translateY(-6px);
+    box-shadow:
+        0 0 15px rgba(0, 0, 0, 0.08),   
+        0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.home-card::part(header) {
+    padding: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05); 
+    background-color: var(--secondary);
+}
+
+.card-header {
+    display: block;
+    padding: var(--sl-spacing-medium); 
+    font-family: "Outfit", sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.card-home-subtitle {
+    display: block;
+    color: var(--info);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.custom-card-icon {
+    margin-right: 0.5rem;
+}
+
+.info-row {
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--sl-color-neutral-700);
+}
+
+@media (max-width: 1200px) {
+    .card-group {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* *********************************** */
 /* section mockup */
 
 #mockup {

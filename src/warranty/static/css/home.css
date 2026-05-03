@@ -20,6 +20,7 @@
     display: flex;
     justify-content: center;
     min-height: auto; 
+    margin: 0 0 3rem 0;
 }
 
 .cta-buttons {
@@ -29,20 +30,19 @@
     align-items: center;
 }
 
+.section-home-header {
+    margin: 0 0 3rem 0;
+}
 
 /* ********************************** */
 /* section features */
-
-.section-features-header {
-    margin: 3rem 0;
-}
 
 .card-group {
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
     gap: 2rem;
     width: 100%;
-
+    margin-bottom: 3rem;
 }
 
 .home-card {
@@ -77,22 +77,29 @@
 }
 
 .card-header {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
+    display: block;
     padding: var(--sl-spacing-medium); 
     font-family: "Outfit", sans-serif;
     font-weight: 700;
     letter-spacing: -0.02em;
 }
 
+.card-home-subtitle {
+    display: block;
+    color: var(--info);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
 .custom-card-icon {
-    font-size: 1.5rem;
-    color: var(--info); 
-    flex-shrink: 0;
+    margin-right: 0.5rem;
 }
 
 .info-row {
+    gap: 0.75rem;
     font-size: 0.9rem;
     color: var(--sl-color-neutral-700);
 }
@@ -114,7 +121,7 @@
 .image-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 1.3rem; 
+    gap: 2rem; 
     max-width: 2000px; 
     margin: 0 auto; 
 }
@@ -123,8 +130,16 @@
     width: 100%;
     height: 220px; 
     object-fit: cover;
-    border-radius: 5px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Ombre légère pour le relief */
+    border: 1px solid #eee; /* Pour bien définir les bords sur fond blanc */
+    transition: transform 0.3s ease;
+    cursor: pointer;
 } 
+
+.grid-img:hover {
+    transform: translateY(-5px);
+}
 
 /* section cta */
 

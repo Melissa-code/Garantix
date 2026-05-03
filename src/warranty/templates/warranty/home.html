@@ -53,7 +53,7 @@
   <section id="features" class="contain">
     <article>
       <!-- titre et sous-titre -->
-      <div class="section-features-header">
+      <div class="section-home-header">
         <h2 class="title-home">Pourquoi choisir Garantix ?</h2>
         <p class="subtitle-home">
           Découvrez les fonctionnalités qui font de Garantix votre meilleur allié pour gérer vos garanties.
@@ -68,27 +68,25 @@
     </article>
   </section>
 
-  <!-- section mockup  -->
-  <section id="mockup" class="contain">
-    <div class="section-header">
-        <h2 class="title-home">Mockups</h2>
-        <p class="subtitle-home">Voici quelques aperçus de l'interface de Garantix.</p>
+  <!-- section mockups  -->
+
+  <section class="page-bg-header">
+    <div class="container-page">
+      <!-- titre et sous-titre -->
+      <div class="section-home-header">
+        <h2 class="title-home">Une interface pensée pour vous</h2>
+        <p class="subtitle-home">
+          Gérez vos dossiers, consultez vos garanties et ajoutez de nouveaux produits en quelques clics. 
+        </p>
       </div>
-    <div class="image-grid">
-      <div class="grid-item">
-        <img src="{% static 'images/logo_blue1.png' %}" 
-            alt="Dashboard example" class="grid-img"> 
-      </div>
-      <div class="grid-item">
-        <img src="{% static 'images/logo_black1.png' %}" 
-            alt="Dashboard example" class="grid-img">
-      </div>
-      <div class="grid-item">
-        <img src="{% static 'images/logo_black2.png' %}" 
-            alt="Dashboard example" class="grid-img">
+      <!-- grid images -->
+      <div class="image-grid">
+        {% for mockup in mockups %}
+          {% include 'warranty/partials/_img_mockup_home.html' with mockup=mockup counter=forloop.counter %}
+        {% endfor %}
       </div>
     </div>
-  </section> 
+  </section>
 
   <!-- section Call to action -->
   <section id="cta" class="contain">
@@ -121,7 +119,7 @@
         </sl-card>
 
         <sl-card class="testimonial-card">
-          <blockquote>« Enfin une solution simple pour centraliser l'ensemble de mes garanties ! »</blockquote>
+          <blockquote>« Enfin une solution simple pour centraliser mes garanties ! »</blockquote>
           <div slot="footer">
             <sl-rating value="4.5" readonly></sl-rating>
             <span>— Sarah, cliente</span>
