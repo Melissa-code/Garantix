@@ -44,44 +44,10 @@
   <section id="features" class="contain">
     <article>
       <div class="card-group">
-        <!-- Carte 1 -->
-        <sl-card class="home-card custom-card">
-          <div slot="header" class="card-header card-title">
-            <sl-icon name="archive" class="custom-card-icon"></sl-icon>
-            <strong class="product-name card-home-title">Stockez vos garanties</strong>
-          </div>
-          <div class="card-body">
-            <div class="info-row">
-              <span>Tous vos documents en un seul endroit sécurisé.</span>
-            </div>
-          </div>
-        </sl-card>
-
-        <!-- Carte 2 -->
-        <sl-card class="home-card custom-card card-title">
-          <div slot="header" class="card-header">
-            <sl-icon name="search" class="custom-card-icon"></sl-icon>
-            <strong class="product-name card-home-title">Retrouvez facilement</strong>
-          </div>
-          <div class="card-body">
-            <div class="info-row">
-              <span>Recherchez vos produits rapidement et simplement.</span>
-            </div>
-          </div>
-        </sl-card>
-
-        <!-- Carte 3 -->
-        <sl-card class="home-card custom-card card-title">
-          <div slot="header" class="card-header">
-             <sl-icon name="cloud" class="custom-card-icon"></sl-icon>
-            <strong class="product-name card-home-title">Accès sécurisé</strong>
-          </div>
-          <div class="card-body">
-            <div class="info-row">
-              <span>Vos données sont sauvegardées en toute sécurité.</span>
-            </div>
-          </div>
-        </sl-card>
+        <!-- Carte -->
+        {% for feature in features %}
+          {% include 'warranty/partials/_card_features_home.html' with feature=feature %}
+        {% endfor %}
       </div>
     </article>
   </section>
