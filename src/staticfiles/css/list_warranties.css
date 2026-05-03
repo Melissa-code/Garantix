@@ -39,51 +39,51 @@
  Bannière img */
 
 .page-list-bg-banniere {
-    background-color: var(--black-middle);
-    /* On ajoute un radial-gradient par-dessus le reste */
-    background-image: 
-        radial-gradient(circle, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 70%),
-        linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), 
-        url('/static/images/banniere2.png');
-    background-size: cover, contain, contain; /* 'cover' pour le halo noir */
-    background-repeat: no-repeat, no-repeat, repeat-x; 
-    background-position: center;
     width: 100%;
-    padding: 2.2rem 0; 
-    display: flex;
-    justify-content: center;
+    height: 100px; 
+    /* background-image: linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('/static/images/tickets2.jpg'); */
+    background-image: url('/static/images/banniere_garantix.png');
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
+/* Barre de recherche et bouton d'ajout */
 .search-add-warranties {
-    padding-top: 0; 
+    padding-top: 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 2rem;
 }
 
 .search-actions {
     display: flex;
+    gap: 1rem;
     align-items: center;
 }
 
+/* barre de recherche */
 .search-form {
-    min-width: 400px;
+    min-width: 600px;
 }
 
+/* Ombre sur la barre de recherche sur l'input */
 .search-form sl-input::part(base) {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     border: none; 
 }
 
+/* Ombre sur bouton d'ajout */
 .search-add-warranties sl-button::part(base) {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.search-form sl-input::part(base),
-.search-add-warranties sl-button::part(base) {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    border: none; 
+/* effet au survol */
+.search-form sl-input::part(base):hover,
+.search-add-warranties sl-button:hover::part(base) {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
 }
 
 /*****************************************************************************************

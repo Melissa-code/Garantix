@@ -50,6 +50,8 @@ docker-compose exec web python manage.py makemigrations
 docker-compose exec web python manage.py migrate
 
 docker-compose exec web python manage.py test
+
+docker-compose build --no-cache
 ```
 
 - `factory-boy` : Génération de données de test: `docker exec -it garantix_web pip install whitenoise`
