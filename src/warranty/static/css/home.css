@@ -118,6 +118,10 @@
     padding: 1rem 0;
 }
 
+#mockup-section-home {
+    padding-bottom: 1rem;
+}
+
 .image-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
@@ -134,28 +138,37 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Ombre légère pour le relief */
     border: 1px solid #eee; /* Pour bien définir les bords sur fond blanc */
     transition: transform 0.3s ease;
-    cursor: pointer;
+    cursor: zoom-in;
 } 
 
 .grid-img:hover {
-    transform: translateY(-5px);
+   transform: scale(1.08);
+}
+
+.zoom-img {
+    width: 100%; 
+    height: auto; 
+    display: block; 
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* section cta */
 
 #cta {
     background: var(--black-light);  
-    margin: 30px auto;  
-    display: flex;                  
+    margin: 0 auto ;   
+    padding: 1rem 0 0 0;
+    display: flex;                
     justify-content: center;      
     text-align: center;     
     color: var(--white);  
 }
 
-#cta article {
-    max-width: 600px; 
-    padding: 1rem 0 2rem 0;
+#btn-signup-cta {
+    margin-top: 1.5rem;
 }
+
 
 /* section testimonials */
 

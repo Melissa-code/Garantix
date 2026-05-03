@@ -69,9 +69,8 @@
   </section>
 
   <!-- section mockups  -->
-
   <section class="page-bg-header">
-    <div class="container-page">
+    <div class="container-page" id="mockup-section-home">
       <!-- titre et sous-titre -->
       <div class="section-home-header">
         <h2 class="title-home">Une interface pensée pour vous</h2>
@@ -79,7 +78,7 @@
           Gérez vos dossiers, consultez vos garanties et ajoutez de nouveaux produits en quelques clics. 
         </p>
       </div>
-      <!-- grid images -->
+      <!-- grid images interfaces -->
       <div class="image-grid">
         {% for mockup in mockups %}
           {% include 'warranty/partials/_img_mockup_home.html' with mockup=mockup counter=forloop.counter %}
@@ -88,13 +87,17 @@
     </div>
   </section>
 
-  <!-- section Call to action -->
+  <!-- section Call to action Sign up -->
   <section id="cta" class="contain">
-    <article>
-      <h2>Rejoignez Garantix dès aujourd'hui</h2>
-      <p>Ne perdez plus vos garanties et facilitez votre suivi.</p>
-      <sl-button class="btn btn-white" size="medium">S'inscrire gratuitement</sl-button>
-    </article>
+      <!-- titre et sous-titre -->
+      <div class="section-home-header">
+        <h2 class="title-home">Rejoignez Garantix dès aujourd'hui</h2>
+        <p class="subtitle-home">
+          Ne perdez plus vos garanties et facilitez votre suivi.
+        </p>
+        <!-- sign up button -->
+        <sl-button class="btn btn-primary" id="btn-signup-cta" size="medium">S'inscrire gratuitement</sl-button>
+        </div>
   </section>
 
   <!-- section testimonials -->

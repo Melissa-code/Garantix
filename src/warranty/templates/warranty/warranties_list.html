@@ -63,7 +63,7 @@
     <section id="warranties_grid" class="warranties-grid">
         {% for warranty in warranties %}
             <!-- card -->
-            {% include 'warranty/partials/_card_warranty.html' with warranty=warranty %}
+            {% include 'warranty/partials/_card_warranty_list.html' with warranty=warranty %}
         {% empty %}
         <!-- message si aucune garantie enregistrée/trouvée -->
             <div class="empty-state">
