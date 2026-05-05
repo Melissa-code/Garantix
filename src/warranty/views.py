@@ -11,7 +11,7 @@ from warranty.forms import WarrantyForm
 from warranty import services
 from django.http import JsonResponse
 from django.contrib import messages
-from warranty.constants import FEATURES_HOME, MOCKUPS_HOME
+from warranty.constants import FEATURES_HOME, MOCKUPS_HOME, TESTIMONIALS_HOME
 
 
 class HomeView(TemplateView): 
@@ -23,6 +23,7 @@ class HomeView(TemplateView):
         context['media_url'] = settings.MEDIA_URL
         context['features'] = FEATURES_HOME
         context['mockups'] = MOCKUPS_HOME
+        context['testimonials'] = TESTIMONIALS_HOME
         return context
 
 

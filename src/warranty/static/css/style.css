@@ -223,7 +223,7 @@ header .login-btn-navbar::part(base) {
 /***************************************************/
 
 footer {
-  padding: 2rem 1rem;
+  padding: 3rem 1rem;
   border-top: 1px solid var(--black-light);
   text-align: center;
 }
@@ -236,12 +236,16 @@ footer .footer-link::part(base):hover {
   color: var(--info);
 }
 
-
 sl-breadcrumb::part(base) {
   color: var(--primary);
+  text-decoration: none;
 }
 
-
+.footer-copy {
+    font-size: 0.95rem;
+    color: var(--secondary);
+    margin-bottom: 1rem;
+}
 
 /******************************/ 
 /* Messages */

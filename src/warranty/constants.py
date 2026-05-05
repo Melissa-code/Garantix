@@ -35,3 +35,9 @@ MOCKUPS_HOME = [
     "description": "Formulaire pour ajouter une nouvelle garantie.",
     "image": "garantix_ajouter.png"}
 ]
+
+TESTIMONIALS_HOME = [
+  {"name": "Alice Dupont, cliente", "opinion": "Grâce à Garantix, j’ai pu retrouver ma garantie en quelques secondes."},
+  {"name": "Julien Martin, client", "opinion": "Garantix m’a sauvé la vie quand j’ai perdu mes papiers de garantie !"},
+  {"name": "Claire Durand, cliente", "opinion": "Je recommande Garantix à tous ceux qui veulent garder leurs garanties en sécurité."}
+]

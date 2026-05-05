@@ -39,11 +39,12 @@
 
 .card-group {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(3, 1fr);  /* 3 col égales */
     gap: 2rem;
     width: 100%;
-    margin-bottom: 3rem;
+    margin: 0 0 3rem 0;
 }
+
 
 .home-card {
     background-color: var(--white);
@@ -135,8 +136,8 @@
     height: 220px; 
     object-fit: cover;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Ombre légère pour le relief */
-    border: 1px solid #eee; /* Pour bien définir les bords sur fond blanc */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); 
+    border: 1px solid #eee; 
     transition: transform 0.3s ease;
     cursor: zoom-in;
 } 
@@ -169,48 +170,48 @@
     margin-top: 1.5rem;
 }
 
-
+/* *********************************** */
 /* section testimonials */
 
-#testimonials {
-  margin: 2rem 0 1rem 0;
-  text-align: center;
+.section-white {
+    background-color: var(--white);
 }
 
-#testimonials .testimonials-card-group {
-  display: flex;     
-  flex-wrap: wrap; 
-  gap: 1.3rem;        
-  justify-content: center; 
-  padding: 1rem 0;
-}
-
-#testimonials .testimonial-card {
-  flex: 0 0 25rem;  
-  min-height: 12rem; 
-  display: flex;
-  flex-direction: column;   
-  justify-content: space-between; 
-  box-sizing: border-box;  
-  text-align: left; 
-}
-
-#testimonials .testimonial-card blockquote {
-  font-style: italic;
-  margin: 0;
-  padding: 1rem;
-}
-
-#testimonials .testimonial-card [slot='footer'] {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.testimonial-card {
+    --border-radius: 12px; 
+    border-radius: 12px;
+    border: none;/*bordure par défaut Shoelace */
+    background-color: var(--white);
+    height: 100%; 
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 -4px 10px rgba(0, 0, 0, 0.02), /* haut */
+        0 10px 20px rgba(0, 0, 0, 0.08),
+        0 2px 6px rgba(0, 0, 0, 0.04); /* globale */
+    color: var(--sl-color-neutral-700);
   font-size: 0.9rem;
-  color: var(--black-light);
-  padding: 0 1rem;
 }
 
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
 
+.testimonial-opinion {
+    font-style: italic;
+    font-size: 0.9rem;
+    padding: 0;
+    margin: 0;
+}
+
+[slot="footer"] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* *********************************** */
 /* media queries */ 
 
 @media only screen and (max-width: 500px) {
@@ -245,7 +246,7 @@
         margin: 0 2rem;
     }
 
-    #testimonials .testimonial-card {
-        flex: 0 0 20rem;
+    .card-group {
+        grid-template-columns: 1fr;
     }
 }
