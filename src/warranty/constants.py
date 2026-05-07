@@ -14,7 +14,7 @@ FEATURES_HOME = [
   {
     "title": "Accès sécurisé",
     "subtitle": "CONFIDENTIALITÉ",
-    "description": "Vos données sont sauvegardées en toute sécurité.",
+    "description": "Vos données sont chiffrées et sauvegardées.",
     "icon": "shield-lock"
   }
 ]

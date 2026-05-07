@@ -153,15 +153,9 @@
 
 /* *********************************** */
 /* section mockup */
-
-#mockup {
-    background-color: var(--white);
-    padding: 1rem 0;
+#mockup-section-home {
+    padding: 1rem 0 2rem 0 ;
 }
-
-/* #mockup-section-home {
-    padding-bottom: 1rem;
-} */
 
 .image-grid {
     display: grid;
