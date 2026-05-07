@@ -1,7 +1,10 @@
 {% load static %}
 <header class="navbar">
-  <div class="nav-brand">Garantix</div>
-  
+  <div class="nav-brand">
+    {# <img src="{% static 'images/logo.svg' %}" alt="Logo Garantix" id="logo-header"> #}
+    Garantix
+  </div>
+
   <!-- Desktop menu -->
   <nav class="nav-desktop">
     <sl-button variant="text" href="{% url 'warranty:home' %}" class=" navbar-link">Accueil</sl-button>

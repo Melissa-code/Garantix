@@ -27,11 +27,10 @@
       <section class="presentation">
           <p>Centralisez vos garanties. Ne perdez plus un seul reçu.</p>
       </section.presentation>
-
-      
     </div>
   </section>
 
+  <!-- bannière + boutons connexion/inscription -->
   <section class="bg-banniere">
     <div class="container-page">
       {% if not user.is_authenticated %}
@@ -49,7 +48,7 @@
     </div>
   </section>
 
-  <!-- section features -->
+  <!-- section features (3 cards) -->
   <section id="features" class="contain">
     <article>
       <!-- titre et sous-titre -->
@@ -59,7 +58,6 @@
           Découvrez les fonctionnalités qui font de Garantix votre meilleur allié pour gérer vos garanties.
         </p>
       </div>
-
       <!-- 3 cards features -->
       <div class="card-group">
         {% for feature in features %}
@@ -69,7 +67,38 @@
     </article>
   </section>
 
-  <!-- section mockups  -->
+  <section id="section-mission" class="page-bg-header">
+    <div class="container-page">
+      <!-- titre et sous-titre -->
+      <div class="section-home-header">
+        <h2 class="title-home">Notre mission</h2>
+        <p class="subtitle-home">Ne laissez plus une garantie égarée vous coûter de l'argent.</p>
+      </div>
+
+      <div class="mission-grid">
+        <!-- illustration de la mission -->
+        <div class="mission-illustration">
+          <img src="{% static 'images/angry.svg' %}" alt="Illustration frustration de la perte de la garantie">
+        </div>
+        <!-- texte de la mission -->
+        <div class="mission-text-content">
+          <p>
+            Nous avons créé <strong>Garantix</strong> car nous avons tous déjà vécu cette frustration : 
+            un appareil qui tombe en panne et l'impossibilité de retrouver le ticket de caisse !
+          </p>
+          <p>
+            Notre mission est de simplifier la protection de vos achats pour que vous puissiez 
+            consommer l'esprit tranquille.
+          </p>
+        </div>
+      </div>
+
+
+      </div>
+    </div>
+  </section>
+
+  <!-- section mockups (3interfaces) -->
   <section class="page-bg-header">
     <div class="container-page" id="mockup-section-home">
       <!-- titre et sous-titre -->
