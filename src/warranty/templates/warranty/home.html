@@ -26,7 +26,7 @@
   </section>
 
   <!-- Section Bannière/img + boutons connexion/inscription -->
-  <section class="container-fluid container-fluid-bg-banniere">
+  <section id="section-banniere-home" class="container-fluid container-fluid-bg-banniere">
     <div class="container-page">
       <!-- CTA Buttons login/sign-up-->
       {% if not user.is_authenticated %}
@@ -38,7 +38,7 @@
         <p class="cta-authenticated">
           <img src="{% static 'images/logo.svg' %}" alt="Logo Garantix" class="icon-banniere">
           <span>Votre <strong>coffre fort</strong> est prêt ! Accéder à 
-            <a href="{% url 'warranty:warranties_list' %}" class="link-warranties">mes garanties</a>
+            <a href="{% url 'warranty:warranties_list' %}" class="link-warranties">vos garanties</a>
           </span>
         </p>
       {% endif %}
