@@ -12,50 +12,47 @@
 
 {% block content %}
 
-  <!-- section titre -->
-  <section class="page-bg-header">
+  <!-- Section Hero Garantix (messages) -->
+  <section id="hero-welcome" class="container-fluid container-fluid-bg-secondary-light">
     <div class="container-page">
       <!-- message Welcome/logout -->
       {% include 'partials/_messages.html' %}
-
       <!-- titre -->
-      <section class="title-badge">
-          <h1>Bienvenue sur Garantix</h1>
-      </section>
-
-      <!-- présentation -->
-      <section class="presentation">
-          <p>Centralisez vos garanties. Ne perdez plus un seul reçu.</p>
-      </section.presentation>
+      <div class="hero-content">
+        <h1>Bienvenue sur Garantix</h1>
+        <p class="hero-presentation">Centralisez vos garanties. Ne perdez plus un seul reçu.</p>
+      </div>
     </div>
   </section>
 
-  <!-- bannière + boutons connexion/inscription -->
-  <section class="bg-banniere">
+  <!-- Section Bannière/img + boutons connexion/inscription -->
+  <section class="container-fluid container-fluid-bg-banniere">
     <div class="container-page">
+      <!-- CTA Buttons login/sign-up-->
       {% if not user.is_authenticated %}
         <div class="cta-buttons">
-          <sl-button href="{% url 'accounts:login' %}" class="btn btn-primary" size="medium">
-            Se connecter
-          </sl-button>
-          <sl-button href="{% url 'accounts:signup' %}" class="btn btn-white" size="medium">
-            Créer un compte
-          </sl-button>
+          <sl-button href="{% url 'accounts:login' %}" class="btn btn-primary" size="medium">Se connecter</sl-button>
+          <sl-button href="{% url 'accounts:signup' %}" class="btn btn-white" size="medium">Créer un compte</sl-button>
         </div>
       {% else %}
-        <p style="color: white; font-weight: 500;">Prêt à gérer vos documents ?</p>
+        <p class="cta-authenticated">
+          <img src="{% static 'images/logo.svg' %}" alt="Logo Garantix" class="icon-banniere">
+          <span>Votre <strong>coffre fort</strong> est prêt ! Accéder à 
+            <a href="{% url 'warranty:warranties_list' %}" class="link-warranties">mes garanties</a>
+          </span>
+        </p>
       {% endif %}
     </div>
   </section>
 
-  <!-- section features (3 cards) -->
-  <section id="features" class="contain">
-    <article>
-      <!-- titre et sous-titre -->
-      <div class="section-home-header">
-        <h2 class="title-home">Gérez vos garanties sans effort</h2>
-        <p class="subtitle-home">
-          Une solution simple et sécurisée pour centraliser, retrouver et activer vos garanties en un clic.
+  <!-- Section Features (3 cards) -->
+  <section id="features" class="container-fluid">
+    <div class="container-page">
+      <!-- titre section et presentation -->
+      <div class="section-title-h2">
+        <h2 class="title-h2">Gérez vos garanties sans effort</h2>
+        <p class="presentation-section-title-h2">
+          Une solution simple et sécurisée pour centraliser, retrouver et activer vos garanties en un clic
         </p>
       </div>
       <!-- 3 cards features -->
@@ -64,17 +61,18 @@
           {% include 'warranty/partials/_card_features_home.html' with feature=feature %}
         {% endfor %}
       </div>
-    </article>
+    </div>
   </section>
 
-  <section id="section-mission" class="page-bg-header">
+  <!-- Section Mission -->
+  <section id="section-mission" class="container-fluid container-fluid-bg-white">
     <div class="container-page">
-      <!-- titre et sous-titre -->
-      <div class="section-home-header">
-        <h2 class="title-home">Notre mission : simplifier votre quotidien</h2>
-        <p class="subtitle-home">Ne laissez plus une garantie égarée vous coûter de l'argent.</p>
+      <!-- titre section et presentation -->
+      <div class="section-title-h2">
+        <h2 class="title-h2">Notre mission : simplifier votre quotidien</h2>
+        <p class="presentation-section-title-h2">Ne laissez plus une garantie égarée vous coûter de l'argent</p>
       </div>
-
+      <!-- illustration/img et texte de la mission -->
       <div class="mission-grid">
         <!-- illustration de la mission -->
         <div class="mission-illustration">
@@ -91,23 +89,21 @@
             consommer l'esprit tranquille.
           </p>
         </div>
-      </div>
-      
-      </div>
+      </div>  
     </div>
   </section>
 
-  <!-- section mockups (3interfaces) -->
-  <section class="page-bg-header">
-    <div class="container-page" id="mockup-section-home">
-      <!-- titre et sous-titre -->
-      <div class="section-home-header">
-        <h2 class="title-home">Une interface pensée pour vous</h2>
-        <p class="subtitle-home">
-          Gérez vos dossiers, consultez vos garanties et ajoutez de nouveaux produits en quelques clics. 
+  <!-- Section Mockups (ex 3 interfaces) -->
+  <section id="section-mockup" class="container-fluid container-fluid-bg-secondary-light">
+    <div class="container-page">
+      <!-- titre section et presentation -->
+      <div class="section-title-h2">
+        <h2 class="title-h2">Une interface pensée pour vous</h2>
+        <p class="presentation-section-title-h2">
+          Gérez vos dossiers, consultez vos garanties et ajoutez facilement de nouveaux produits 
         </p>
       </div>
-      <!-- grid images interfaces -->
+      <!-- 3 images interfaces -->
       <div class="image-grid">
         {% for mockup in mockups %}
           {% include 'warranty/partials/_img_mockup_home.html' with mockup=mockup counter=forloop.counter %}
@@ -116,13 +112,62 @@
     </div>
   </section>
 
-  <section class="page-bg-header section-white">
+   <!-- Section Expertise (2col texte) -->
+  <section id="section-expertise" class="container-fluid container-fluid-bg-white">
     <div class="container-page">
-      <!-- titre et sous-titre -->
-      <div class="section-home-header">
-        <h2 class="title-home">Ils nous font confiance</h2>
-        <p class="subtitle-home">
-          Ils ont simplifié leur quotidien avec Garantix. Voici ce qu'ils en disent. 
+      <!-- titre section et presentation -->
+      <div class="section-title-h2">
+        <h2 class="title-h2">Bien plus qu'un simple stockage</h2>
+        <p class="presentation-section-title-h2"> 
+          Anticipez la fin de vos garanties et valorisez vos biens à la revente
+        </p>
+      </div>
+      <!-- 2 colonnes expertise texte -->
+      <div class="expertise-grid">
+        <!--col 1 -->
+        <div class="expertise-col">
+          <div class="expertise-col-title">
+            <sl-icon name="file-earmark-check" class="icon-expertise"></sl-icon>
+            <h3 class="title-expertise">Garantie légale</h3>
+          </div>
+          <p>
+            La loi encadre strictement la <strong>garantie légale de conformité</strong>. Pourtant, 
+            sans preuve d'achat, faire valoir vos droits devient vite un parcours du combattant.
+          </p>
+          <p>
+            Garantix <strong>centralise vos documents</strong> pour vous éviter de fouiller dans vos tiroirs. Un ticket de 
+            caisse thermique s'efface avec le temps; une copie numérique sur notre plateforme, 
+            elle, reste <strong>lisible à vie</strong>.
+          </p>
+        </div>
+        <!-- col 2 -->
+        <div class="expertise-col">
+           <div class="expertise-col-title">
+            <sl-icon name="alarm" class="icon-expertise"></sl-icon>
+            <h3 class="title-expertise">Valorisation de vos biens</h3>
+          </div>
+          <p>
+            Bien gérer ses garanties, c'est aussi <strong>valoriser son patrimoine</strong>. En cas de revente d'occasion, 
+            fournir une <strong>facture originale</strong> et un suivi rigoureux rassure l'acheteur et augmente la valeur 
+            de votre produit.
+          </p>
+          <p>
+            Grâce à nos <strong>rappels automatiques</strong> avant expiration, vous décidez sereinement s'il est temps de faire réviser votre appareil 
+            ou de souscrire à une extension.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Temoignages (3 cards) -->
+  <section id="section-testimonials" class="container-fluid container-fluid-bg-secondary-light">
+    <div class="container-page">
+      <!-- titre section et presentation -->
+      <div class="section-title-h2">
+        <h2 class="title-h2">Ils nous font confiance</h2>
+        <p class="presentation-section-title-h2">
+          Ils ont simplifié leur quotidien avec Garantix; voici ce qu'ils en disent
         </p>
       </div>
       <!-- cards -->
@@ -133,21 +178,24 @@
     </div>  
   </section>
 
-  <!-- section Call to action Sign up -->
-  <section id="cta" class="contain">
-      <!-- titre et sous-titre -->
-      <div class="section-home-header">
-        <h2 class="title-home">Rejoignez Garantix dès aujourd'hui</h2>
-        <p class="subtitle-home">
-          Ne perdez plus vos garanties et facilitez votre suivi.
-        </p>
+  <!-- Section Call to action -> Sign up -->
+  <section id="cta" class="container-fluid container-fluid-bg-white">
+    <div class="container-page">
+      <!-- logo -->
+      <div class="cta-logo">
+        <img src="/static/images/logo.svg" alt="Logo Garantix" class="icon-cta">
+     </div>
+      <!-- titre section et presentation -->
+      <div class="section-title-h2">
+        <h2 class="title-h2">
+          Rejoignez Garantix dès aujourd'hui
+        </h2>
+        <p class="presentation-section-title-h2"> Ne perdez plus vos garanties et facilitez votre suivi</p>
         <!-- sign up button -->
-        <sl-button class="btn btn-primary" 
-            ="btn-signup-cta" 
-            size="medium"
-            href="{% url 'accounts:signup' %}">
-                S'inscrire gratuitement
-            </sl-button>
-        </div>
+        <sl-button id="btn-signup-cta" class="btn btn-primary" size="medium" href="{% url 'accounts:signup' %}">
+          S'inscrire gratuitement
+        </sl-button>
+      </div>
+    </div>
   </section>
 {% endblock content %}

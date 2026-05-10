@@ -97,21 +97,41 @@ sl-button[size="small"]::part(label) {
   font-size: 0.9rem;
   font-weight: 500;
 }
+/**************************************************/
+/* containers et sections */
 
-.page-bg-header {
-  background: var(--secondary-light); 
-  padding: 1.5rem 0;
+.container-fluid {
+  padding: 2rem 0 3rem 0;
 }
+
+.container-fluid-bg-secondary-light {
+  background: var(--secondary-light);
+}
+
+.container-fluid-bg-white {
+  background: var(--white); 
+}
+
+.container-fluid-bg-banniere {
+    background-color: var(--black-middle);
+    background-image: 
+        radial-gradient(circle, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 70%),
+        linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), 
+        url('/static/images/banniere2.png');
+    background-size: cover, contain, contain; /* cover: halo noir */
+    background-repeat: no-repeat, no-repeat, repeat-x; 
+    background-position: center;
+    width: 100%;
+    padding: 2rem 0; 
+    display: flex;
+    justify-content: center;
+    min-height: auto; 
+}
+
 
 .container-page {
   max-width: var(--container-max-width);
   margin: 0 auto;
-}
-
-.presentation {
-  text-align: center;
-  margin-top: 1rem;
-  font-size: 1.2rem;
 }
 
 
@@ -160,14 +180,9 @@ header .login-btn-navbar::part(base) {
   letter-spacing: -0.04em; 
 }
 
-/* #logo-header {
-  height: 2rem;
-} */
-
 .nav-brand span {
   color: var(--primary); /*  bleu */
 }
-
 
 .navbar-link:hover, .mobile-link:hover {
   --sl-color-neutral-600: var(--primary); 
@@ -227,20 +242,22 @@ header .login-btn-navbar::part(base) {
 
 /***************************************************/
 /* Footer */
-/***************************************************/
 
 footer {
   padding: 3rem 1rem;
   border-top: 1px solid var(--black-light);
   text-align: center;
+  font-size: 0.95rem;
 }
 
 footer .footer-link::part(base) {
-  color: var(--primary);
-}
+  color: var(--sl-color-neutral-500);
+  font-size: 0.9rem;
+} 
 
 footer .footer-link::part(base):hover {
-  color: var(--info);
+  color: var(--primary);
+  font-weight: 500;
 }
 
 sl-breadcrumb::part(base) {
@@ -249,9 +266,9 @@ sl-breadcrumb::part(base) {
 }
 
 .footer-copy {
-    font-size: 0.95rem;
-    color: var(--secondary);
-    margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: var(--secondary);
+  margin-bottom: 1rem;
 }
 
 /******************************/ 
