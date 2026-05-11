@@ -46,18 +46,44 @@ h1, h2, h3, .card-header .card-title  {
   letter-spacing: -0.02em;
 }
 
-legend {
-  display: none;
-}
-
 hr {     
   border: none;        
   border-top: 1px solid var(--secondary);
   width: 100%;            
 }
 
+.page-bg-header {
+  background: var(--secondary-light); 
+  padding: 1.5rem 0;
+}
+
+/* présentation text de la page */
+.presentation {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+}
+
 .contain {
   margin: 1rem 8rem;
+}
+
+fieldset {
+  border: none;      
+  margin: 0;         
+  padding: 0;        
+  min-width: 0;  /* pour ne pas casser grid  sur mobile */
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
 .btn::part(base) {

@@ -62,7 +62,7 @@ class CustomLoginView(LoginView):
         return super().form_valid(form)
    
     def remember_me(self): 
-        """ 
+        """
         Cookie de session Django à la connexion, utilisé dans la navigation (ex Cookie: sessionid=h3k5j2n4m6p8q1r9) 
         - Session destroyed by closing browser 
         - or Session 2 weeks (par défaut Django: 14j en secondes)
