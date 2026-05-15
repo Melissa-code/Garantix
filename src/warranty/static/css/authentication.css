@@ -1,7 +1,6 @@
 /* **************************************************
 /* Login & Sign-up */
 
-
 .form-container {
   display: flex;
   align-items: center;
@@ -9,18 +8,30 @@
 }
 
 .form-card {
-  max-width: 900px;
+  width: 90%; 
+  max-width: 800px;
   width: 100%;
   --padding: 0;
-  margin: 2rem auto;
+  margin: 4rem auto;
   overflow: hidden;
   border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border: none;
 }
 
-/* grille 50/50 */
+.form-card::part(base) {
+  border: none;
+}
+
+.form-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* grille 30/70 */
 .form-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 0.7fr 1.3fr;
   min-height: 300px;
 }
 
@@ -30,7 +41,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
 }
 
 .form-image-side img {
@@ -41,7 +51,7 @@
 .form-content-side {
   display: flex;
   flex-direction: column;
-  padding: 3rem 2rem;
+  padding: 2rem 3rem;
 }
 
 .form-fields-wrapper {
@@ -56,26 +66,81 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
-/* footer  */
-.form-footer {
-  margin-top: 2rem;
+/* forgot password */
+.forgot-password {
+  text-decoration: none;
+  margin-top: 0.5rem;
+  color: var(--sl-color-neutral-700);
+}
+
+.forgot-password:hover {
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.btn-login {
+  margin-top: 0.5rem;
+  background-color: var(--primary);
+  color: var(--white);
+  font-weight: 500;
   text-align: center;
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.form-footer hr {
-  border: 0;
-  border-top: 1px solid var(--secondary);
-  margin-bottom: 1.5rem;
+/* footer card */
+.form-footer {
+  margin-top: 1.5rem;
+  text-align: start;
 }
+
+.link-to-signup {
+  font-size: 0.95rem;
+}
+
+.link-to-signup a { 
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.link-to-signup a:hover {
+  color: var(--info);
+  font-weight: 500;
+}
+
 
 @media (max-width: 768px) {
   .form-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* 1col */
+    min-height: auto;
   }
+
+  .form-card {
+    margin: 2rem 1rem;
+    width: calc(100% - 2rem);
+  }
+
   .form-image-side {
-    padding: 3rem;
+    padding: 1.5rem;
+  }
+
+  .form-image-side img {
+    max-width: 5rem; 
+  }
+
+  .form-content-side {
+    padding: 1.5rem 1rem; 
+  }
+
+  .form-options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
   }
 }

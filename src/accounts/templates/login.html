@@ -32,78 +32,84 @@
 
   <!-- Login form -->
   <section class="form-container">
-  <!-- card -->
-  <sl-card class="form-card">
-    <!-- form novalidate pour désactiver la validation HTML par défaut -->
-    <form id="login-form" action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
+    <!-- card -->
+    <sl-card class="form-card">
+      <!-- form novalidate pour désactiver la validation HTML par défaut -->
+      <form id="login-form" action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
 
-      <fieldset class="form-fieldset">
-        <legend class="sr-only">Formulaire de connexion</legend>
+        <fieldset class="form-fieldset">
+          <legend class="sr-only">Formulaire de connexion</legend>
 
-        <div class="form-grid">
-          <!-- Colonne de gauche : logo -->
-          <div class="form-image-side">
-            <img src="{% static 'images/logo.svg' %}" alt="Logo Garantix">
-          </div>
+          <div class="form-grid">
+            <!-- Colonne de gauche : logo -->
+            <div class="form-image-side">
+              <img src="{% static 'images/logo.svg' %}" alt="Logo Garantix">
+            </div>
 
-          <div class="form-content-side">
-            <div class="form-fields-wrapper">
-          
-              <!-- input username -->
-              <sl-input 
-                name="username"
-                type="email" 
-                placeholder="Entrez votre Email" 
-                size="medium"
-                value="{{ form.username.value|default:'' }}"
-                {% if form.username.errors %}class="invalid"{% endif %}>
-                <sl-icon name="envelope-fill" slot="prefix"></sl-icon>
-              </sl-input>
-              {% if form.username.errors %}
-                <div class="error-msg-field">
-                  {% for error in form.username.errors %}
-                    {{ error }}
-                  {% endfor %}
-                </div>
-              {% endif %}
+            <div class="form-content-side">
+              <div class="form-fields-wrapper">
+            
+                <!-- input username -->
+                <sl-input 
+                  name="username"
+                  type="email" 
+                  placeholder="Entrez votre e-mail" 
+                  size="medium"
+                  value="{{ form.username.value|default:'' }}"
+                  {% if form.username.errors %}class="invalid"{% endif %}>
+                  <sl-icon name="envelope-fill" slot="prefix"></sl-icon>
+                </sl-input>
+                {% if form.username.errors %}
+                  <div class="error-msg-field">
+                    {% for error in form.username.errors %}
+                      {{ error }}
+                    {% endfor %}
+                  </div>
+                {% endif %}
   
-              <!-- input password -->  
-              <sl-input 
-                name="password"
-                type="password" 
-                placeholder="Entrez votre mot de passe" 
-                password-toggle 
-                size="medium"
-                {% if form.password.errors %}class="invalid"{% endif %}>
-                <sl-icon name="lock-fill" slot="prefix"></sl-icon>
-              </sl-input>
-              {% if form.password.errors %}
-                <div class="error-msg-field">
-                  {% for error in form.password.errors %}
-                    {{ error }}
-                  {% endfor %}
-                </div>
-              {% endif %}
+                <!-- input password -->  
+                <sl-input 
+                  name="password"
+                  type="password" 
+                  placeholder="Entrez votre mot de passe" 
+                  password-toggle 
+                  size="medium"
+                  {% if form.password.errors %}class="invalid"{% endif %}>
+                  <sl-icon name="shield-lock-fill" slot="prefix"></sl-icon>
+                </sl-input>
+                {% if form.password.errors %}
+                  <div class="error-msg-field">
+                    {% for error in form.password.errors %}
+                      {{ error }}
+                    {% endfor %}
+                  </div>
+                {% endif %}
           
-              <!-- remember me -->
-              <div class="form-options">
-                <sl-checkbox name="remember_me">Se souvenir de moi</sl-checkbox>
-                <a href="#" class="forgot-password">Mot de passe oublié</a>
-              </div>  
+                <!-- remember me -->
+                <div class="form-options">
+                  <sl-checkbox name="remember_me">
+                    Se souvenir de moi
+                  </sl-checkbox>
+                  <!-- forgot-password -->
+                  {# <a href="#" class="forgot-password">Mot de passe oublié</a> #}
+                </div>  
 
-              <!-- submit -->
-              <div class="authentication-btn-submit">
-                <sl-button type="submit" class="btn btn-primary" size="medium">Se connecter</sl-button>
+                <!-- submit -->
+                <div class="authentication-btn-submit">
+                  <sl-button type="submit" class="btn btn-primary btn-login" size="medium">Se connecter</sl-button>
+                </div>
               </div>
-            </div>
 
-            <!-- link signup --> 
-            <div class="form-footer">
-               <hr>
-               <p>Pas encore de compte, <a href="{% url 'accounts:signup' %}">s'inscrire</a></p>
-            </div>
-          </div>
+              <!-- link signup --> 
+              <div class="form-footer">
+                <p class="link-to-signup">
+                  Pas encore de compte, 
+                  <a href="{% url 'accounts:signup' %}">
+                    s'inscrire !
+                  </a></p>
+              </div>
+           </div>
 
         </div><!-- end form-grid -->
       </fieldset> 

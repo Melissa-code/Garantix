@@ -124,6 +124,11 @@ sl-button[size="small"]::part(label) {
   font-weight: 500;
 }
 
+sl-checkbox::part(control--checked) {
+  background-color: var(--primary);
+  font-size: 0.95rem;
+}
+
 /**************************************************/
 /* containers et sections */
 
