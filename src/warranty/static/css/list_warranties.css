@@ -171,13 +171,18 @@ sl-card::part(footer) {
 .empty-state {
     grid-column: 1 / -1;
     text-align: center;
-    padding: 4rem;
-    color: var(--sl-color-neutral-400);
+}
+
+.empty-card {
+    border-radius: 12px;
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .empty-state sl-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    color: var(--primary);
 }
 
 /*****************************************************************************************

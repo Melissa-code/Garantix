@@ -2,7 +2,7 @@
 {% load static %}  
 
 {% block title %}
-    <title>Liste de mes garanties</title>
+    <title>Garantix - Liste des garanties</title>
 {% endblock %} 
 
 {% block extra_css %}
@@ -67,9 +67,19 @@
         {% empty %}
         <!-- message si aucune garantie enregistrée/trouvée -->
             <div class="empty-state">
-                <sl-icon name="search"></sl-icon>
-                <p>Aucune garantie trouvée pour "{{ request.GET.search }}"</p>
-                <sl-button variant="default" size="small" href="?">Voir tout</sl-button>
+                <sl-card class="empty-card">
+                    <sl-icon name="search"></sl-icon>
+                    {% if request.GET.search %}
+                        <p>Aucune garantie trouvée pour "{{ request.GET.search }}"</p>
+                        <sl-tooltip content="Voir toutes mes garanties" placement="top">
+                            <sl-button class="btn btn-white" size="medium" href="{% url 'warranty:warranties_list' %}">
+                                Voir tout
+                            </sl-button>
+                        </sl-tooltip>
+                    {% else %}
+                        <p>Aucune garantie enregistrée.</p>
+                    {% endif %}
+                </sl-card>
             </div>
         {% endfor %}
     </section>
