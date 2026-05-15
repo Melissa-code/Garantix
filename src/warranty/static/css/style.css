@@ -64,6 +64,12 @@ hr {
     font-size: 1.2rem;
 }
 
+.title-badge {
+  font-size: 1.2rem;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
 .contain {
   margin: 1rem 8rem;
 }
@@ -129,6 +135,12 @@ sl-checkbox::part(control--checked) {
   font-size: 0.95rem;
 }
 
+@media (max-width: 768px) {
+    .presentation {
+        font-size: 1rem;
+    }
+}
+
 /**************************************************/
 /* containers et sections */
 
@@ -180,7 +192,7 @@ sl-checkbox::part(control--checked) {
     font-size: 1.5rem;
   }
   .presentation {
-    font-size: 1rem;
+    font-size: 1.1rem;
     padding: 0 1rem; 
   }
 }

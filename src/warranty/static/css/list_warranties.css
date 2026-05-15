@@ -28,6 +28,13 @@
     font-size: 1.2rem;
 }
 
+@media (max-width: 768px) {    
+ .presentation {
+    font-size: 1.1rem;
+    padding: 0 1rem; 
+  }
+}
+
 /*****************************************************************************************
  Bannière img */
 
@@ -80,7 +87,7 @@
 
 @media (max-width: 768px) {
     .page-list-bg-banniere {
-        padding: 2rem 0rem;
+        padding: 1.5rem 0rem;
         overflow: hidden;
         background-size: cover;
         background-position: center;

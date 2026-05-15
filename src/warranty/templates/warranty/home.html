@@ -37,8 +37,9 @@
       {% else %}
         <p class="cta-authenticated">
           <img src="{% static 'images/logo.svg' %}" alt="Logo Garantix" class="icon-banniere">
-          <span>Votre <strong>coffre fort</strong> est prêt ! Accéder à 
-            <a href="{% url 'warranty:warranties_list' %}" class="link-warranties">vos garanties</a>
+          <span class="text-container">Votre <strong>coffre fort</strong> est prêt ! 
+            <span class="break-mobile">Accédez à
+            <a href="{% url 'warranty:warranties_list' %}" class="link-warranties">vos garanties</a></span>
           </span>
         </p>
       {% endif %}
