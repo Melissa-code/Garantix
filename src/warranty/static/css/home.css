@@ -70,7 +70,7 @@
 
 @media (max-width: 768px) {
   #section-banniere-home {
-    padding: 0 1rem; 
+    padding: 1rem 0; 
     background-color: var(--black-middle);
     background-image: none, linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7));
     line-height: 1.4;
@@ -85,6 +85,8 @@
     grid-template-columns: repeat(3, 1fr);  /* 3 col égales */
     gap: 2rem;
     width: 90%;
+    max-width: 1200px; /* Sécurité*/
+    margin: 0rem auto;
 }
 
 .home-feature-card {
@@ -155,7 +157,8 @@
 @media (max-width: 768px) {
     .card-group {
         grid-template-columns: 1fr;
-        margin: 0 1rem; 
+        margin: 0 1rem;
+        width: 90%;
     }
 }
 

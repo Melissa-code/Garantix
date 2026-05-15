@@ -1,8 +1,11 @@
 {% load static %}
+
 <header class="navbar">
+  <!-- Brand (link to home ) -->
   <div class="nav-brand">
-    {# <img src="{% static 'images/logo.svg' %}" alt="Logo Garantix" id="logo-header"> #}
-    Garantix
+    <sl-tooltip content="Retour à l'accueil" placement="bottom">
+      <a href="{% url 'warranty:home' %}">Garantix</a>
+    </sl-tooltip>
   </div>
 
   <!-- Desktop menu -->

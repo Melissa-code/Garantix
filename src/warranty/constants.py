@@ -37,7 +37,19 @@ MOCKUPS_HOME = [
 ]
 
 TESTIMONIALS_HOME = [
-  {"name": "Alice Dupont, cliente", "opinion": "Grâce à Garantix, j’ai pu retrouver ma garantie en quelques secondes."},
-  {"name": "Julien Martin, client", "opinion": "Garantix m’a sauvé la vie quand j’ai perdu mes papiers de garantie !"},
-  {"name": "Claire Durand, cliente", "opinion": "Je recommande Garantix à tous ceux qui veulent garder leurs garanties en sécurité."}
+  {
+    "name": "Alice Dupont, cliente", 
+    "rating": 5,
+    "opinion": "Grâce à Garantix, j’ai pu retrouver ma garantie en quelques secondes."
+  },
+  {
+    "name": "Julien Martin, client", 
+    "rating": 5,
+    "opinion": "Garantix m’a sauvé la vie quand j’ai perdu mes papiers de garantie !"
+  },
+  {
+    "name": "Claire Durand, cliente", 
+    "rating": 4,
+    "opinion": "Je recommande Garantix à tous ceux qui veulent garder leurs garanties en sécurité."
+  }
 ]
