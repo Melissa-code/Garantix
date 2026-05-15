@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-  <title>Créer un compte</title>
+  <title>Garantix - Créer un compte</title>
 {% endblock title %} 
 
 {% block extra_css %}
@@ -12,26 +12,24 @@
 
 {% block content %}
 
-  <section class="section-message">
-      {% include 'partials/_messages.html' %}
+  <section class="page-bg-header">
+    <div class="container-page">
+        <!-- titre  -->
+        <div class="title">
+          <h1>Créer un compte</h1>
+        </div>
+        <!-- présentation -->
+        <div class="presentation">
+            <p>Créez votre compte pour pouvoir gérer vos garanties.</p>
+        </div>
+    </div>
   </section>
 
-  <!-- section sign up -->
-  <section class="authentication" id="sigup">
-    <fieldset class="contain"><legend></legend>
+  <!-- Messages d'alerte -->
+  <section class="section-message">
+    {% include 'partials/_messages.html' %}
 
-      <!-- icon user (col left) -->
-      <div class="icon-user">
-        <sl-icon name="person-fill"></sl-icon>
-      </div>
-
-      <!-- form (col right) -->
-      <form action="" method="POST" class="authentication-form" id="signup-form">
-      {% csrf_token %}
-        <!-- title h1 -->
-        <h1 class="title-authentication">Créer un compte</h1> 
-
-        <!-- Errors messages sl-alert -->
+            <!-- Errors messages sl-alert -->
         {% if form.non_field_errors %}
           <sl-alert variant="danger" open class="alert-msg-danger">
             <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
@@ -40,93 +38,115 @@
             {% endfor %}
           </sl-alert>
         {% endif %}
-
-        <div class="form-group">
-          <!-- Email field -->
-          <div class="form-field">
-            <sl-input
-              id="username"
-              type="email"
-              placeholder="Entrez votre Email"
-              name="username"
-              size="medium"
-              value="{{ form.username.value|default:'' }}"
-              {% if form.username.errors %}class="invalid"{% endif %}>
-              <sl-icon name="envelope-fill" slot="prefix"></sl-icon>
-            </sl-input>
-            {% if form.username.errors %}
-              <div class="error-msg-field">
-                {% for error in form.username.errors %}
-                  {{ error }}
-                {% endfor %}
-              </div>
-            {% endif %}
-          </div>
-          
-          <!-- Password field -->  
-          <div class="form-field">
-            <sl-input
-              id="password1"
-              type="password"
-              placeholder="Entrez votre mot de passe"
-              name="password1"
-              password-toggle
-              size="medium"
-              {% if form.password1.errors %}class="invalid"{% endif %}>
-              <sl-icon name="lock-fill" slot="prefix"></sl-icon>
-            </sl-input>
-            {% if form.password1.errors %}
-              <div class="error-msg-field">
-                {% for error in form.password1.errors %}
-                  {{ error }}
-                {% endfor %}
-              </div>
-            {% endif %}
-          </div>
-          
-          <!-- Confirm password field -->  
-          <div class="form-field">
-            <sl-input
-              id="password2"
-              type="password"
-              placeholder="Confirmez votre mot de passe"
-              name="password2"
-              password-toggle
-              size="medium"
-              {% if form.password2.errors %}class="invalid"{% endif %}>
-              <sl-icon name="lock-fill" slot="prefix"></sl-icon>
-            </sl-input>
-            {% if form.password2.errors %}
-              <div class="error-msg-field">
-                {% for error in form.password2.errors %}
-                  {{ error }}
-                {% endfor %}
-              </div>
-            {% endif %}
-          </div>
-        </div>
-
-        <!-- submit button -->
-        <div class="authentication-btn-submit">
-          <sl-button type="submit" class="btn btn-primary" size="medium">
-            Créer un compte
-          </sl-button>
-        </div>
-
-        <hr>
-
-        <!--lien se connecter -->
-        <div class="infos-login">
-            <p>Déjà client chez nous, 
-              <a href="{% url 'accounts:login' %}">
-                <strong class="link-account">se connecter !</strong>
-              </a>
-            </p>
-        </div>
-
-      </form>
-    </fieldset>
   </section>
+
+
+  <!-- section sign up -->
+
+ <section class="form-container">
+    <!-- card -->
+    <sl-card class="form-card">
+      <!-- form novalidate pour désactiver la validation HTML par défaut -->
+      <form id="login-form" action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <fieldset class="form-fieldset">
+          <legend class="sr-only">Formulaire de connexion</legend>
+
+          <div class="form-grid">
+            <!-- Colonne de gauche : logo -->
+            <div class="form-image-side">
+              <img src="{% static 'images/logo.svg' %}" alt="Logo Garantix">
+            </div>
+
+            <!-- Colonne de droite : contenu du formulaire -->
+            <div class="form-content-side">
+              <div class="form-fields-wrapper">
+          
+                <!-- input username (email) -->
+                <div class="form-field">
+                  <sl-input
+                    id="username"
+                    type="email"
+                    placeholder="Entrez votre Email"
+                    name="username"
+                    size="medium"
+                    value="{{ form.username.value|default:'' }}"
+                    {% if form.username.errors %}class="invalid"{% endif %}>
+                    <sl-icon name="envelope-fill" slot="prefix"></sl-icon>
+                  </sl-input>
+                  {% if form.username.errors %}
+                    <div class="error-msg-field">
+                      {% for error in form.username.errors %}
+                        {{ error }}
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+          
+                <!-- input password  -->  
+                <div class="form-field">
+                  <sl-input
+                    id="password1"
+                    type="password"
+                    placeholder="Entrez votre mot de passe"
+                    name="password1"
+                    password-toggle
+                    size="medium"
+                    {% if form.password1.errors %}class="invalid"{% endif %}>
+                    <sl-icon name="shield-lock-fill" slot="prefix"></sl-icon>
+                  </sl-input>
+                  {% if form.password1.errors %}
+                    <div class="error-msg-field">
+                      {% for error in form.password1.errors %}
+                        {{ error }}
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+          
+                <!-- Confirm password input -->  
+                <div class="form-field">
+                  <sl-input
+                    id="password2"
+                    type="password"
+                    placeholder="Confirmez votre mot de passe"
+                    name="password2"
+                    password-toggle
+                    size="medium"
+                    {% if form.password2.errors %}class="invalid"{% endif %}>
+                    <sl-icon name="shield-lock-fill" slot="prefix"></sl-icon>
+                  </sl-input>
+                  {% if form.password2.errors %}
+                    <div class="error-msg-field">
+                      {% for error in form.password2.errors %}
+                        {{ error }}
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+
+              <!-- submit button -->
+              <div class="authentication-btn-submit">
+                <sl-button type="submit" class="btn btn-primary btn-signup" size="medium">Créer un compte</sl-button>
+              </div>
+
+              <!-- link login --> 
+              <div class="form-footer">
+                <p class="link-to-login">
+                  Déjà client chez nous, 
+                  <a href="{% url 'accounts:login' %}">
+                    se connecter !
+                  </a></p>
+              </div>
+            </div>
+
+        </div><!-- end form-grid -->
+      </fieldset> 
+    </form>
+  </sl-card>
+</section>
 
 
 {% endblock content %}

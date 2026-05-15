@@ -61,6 +61,14 @@
   gap: 1.5rem;
 }
 
+.error-msg-field {
+  border-color: var(--sl-color-danger-600);
+  color: var(--sl-color-danger-600);
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  font-weight: 500;
+}
+
 /* Checkbox + forgotten password */
 .form-options {
   display: flex;
@@ -81,7 +89,7 @@
   font-weight: 500;
 }
 
-.btn-login {
+.btn-login, .btn-signup {
   margin-top: 0.5rem;
   background-color: var(--primary);
   color: var(--white);
@@ -93,23 +101,27 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+.btn-signup {
+  margin-top: 2rem;
+}
+
 /* footer card */
 .form-footer {
   margin-top: 1.5rem;
   text-align: start;
 }
 
-.link-to-signup {
+.link-to-signup, .link-to-login {
   font-size: 0.95rem;
 }
 
-.link-to-signup a { 
+.link-to-signup a, .link-to-login a { 
   color: var(--primary);
   text-decoration: none;
   font-weight: 600;
 }
 
-.link-to-signup a:hover {
+.link-to-signup a:hover, .link-to-login a:hover {
   color: var(--info);
   font-weight: 500;
 }

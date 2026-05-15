@@ -28,6 +28,16 @@
   <!-- Messages d'alerte -->
   <section class="section-message">
     {% include 'partials/_messages.html' %}
+  
+    <!-- Errors messages sl-alert -->
+    {% if form.non_field_errors %}
+      <sl-alert variant="danger" open class="alert-msg-danger">
+        <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
+        {% for error in form.non_field_errors %}
+          <div>{{ error }}</div>
+        {% endfor %}
+      </sl-alert>
+    {% endif %}
   </section>
 
   <!-- Login form -->

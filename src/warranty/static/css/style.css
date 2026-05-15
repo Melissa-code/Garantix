@@ -284,7 +284,7 @@ footer {
 }
 
 footer .footer-link::part(base) {
-  color: var(--sl-color-neutral-500);
+  color: var(--black);
   font-size: 0.9rem;
 } 
 
