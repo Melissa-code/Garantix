@@ -168,7 +168,7 @@
       <div class="section-title-h2">
         <h2 class="title-h2">Ils nous font confiance</h2>
         <p class="presentation-section-title-h2">
-          Ils ont simplifié leur quotidien avec Garantix; voici ce qu'ils en disent
+          Ils ont simplifié leur quotidien avec Garantix. Voici ce qu'ils en disent
         </p>
       </div>
       <!-- cards -->
@@ -191,11 +191,20 @@
         <h2 class="title-h2">
           Rejoignez Garantix dès aujourd'hui
         </h2>
-        <p class="presentation-section-title-h2"> Ne perdez plus vos garanties et facilitez votre suivi</p>
-        <!-- sign up button -->
-        <sl-button id="btn-signup-cta" class="btn btn-primary" size="medium" href="{% url 'accounts:signup' %}">
-          S'inscrire gratuitement
-        </sl-button>
+
+        {% if user.is_authenticated %}
+          <p class="presentation-section-title-h2"> Accédez à votre coffre fort et commencez à ajouter vos garanties.</p>
+          <!-- Warranties list button -->
+          <sl-button id="btn-signup-cta" class="btn btn-primary" size="medium" href="{% url 'warranty:warranties_list' %}">
+            Mon coffre fort
+          </sl-button>
+        {% else %}
+          <p class="presentation-section-title-h2"> Ne perdez plus vos garanties et facilitez votre suivi.</p>
+          <!-- sign up button -->
+          <sl-button id="btn-signup-cta" class="btn btn-primary" size="medium" href="{% url 'accounts:signup' %}">
+            S'inscrire gratuitement
+          </sl-button>
+        {% endif %}
       </div>
     </div>
   </section>

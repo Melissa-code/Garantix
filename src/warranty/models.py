@@ -9,7 +9,7 @@ from django.utils import timezone
 import os
 import uuid
 
-# accentd, lettres, chiffres, espaces, tirets, parenthèses, points (Sécurité XSS < >)
+# accents, lettres, chiffres, espaces, tirets, parenthèses, points (Sécurité XSS < >)
 text_regex = RegexValidator(
     regex=r'^[a-zA-Z0-9À-ÿ\s\(\)\-\.]+$',
     message="Le nom contient des caractères non autorisés (ex: < > $ # { })."

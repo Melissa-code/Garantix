@@ -70,7 +70,7 @@
 
 @media (max-width: 768px) {
     #section-banniere-home {
-        padding: 2rem 0; 
+        padding: 2.5rem 0; 
         background-color: var(--black-middle);
         line-height: 1.4;
         overflow: hidden;
@@ -94,7 +94,7 @@
     .break-mobile {
         display: block;      
         margin-top: 0.5rem; 
-    
+
     }
 }
 
