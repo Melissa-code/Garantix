@@ -145,7 +145,7 @@ sl-checkbox::part(control--checked) {
 /* containers et sections */
 
 .container-fluid {
-  padding: 2rem 0 3rem 0;
+  padding: 2rem 0 2rem 0;
 }
 
 .container-fluid-bg-secondary-light {

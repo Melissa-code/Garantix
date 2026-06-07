@@ -12,11 +12,12 @@
 
 {% block content %}
 {% csrf_token %}
+
 <div class="container-fluid container-fluid-bg-secondary-light">
     <div class="container-page">
         <!-- titre et badge -->
         <section class="title-badge">
-            <h1>Mes garanties</h1>
+            <h1 id="warranties-list-title">Mes garanties</h1>
             <sl-badge class="badge-total" pill>
                 <sl-icon name="shield-check" style="margin-right: 4px;"></sl-icon>
                 {{ paginator.count }} 
@@ -25,7 +26,7 @@
         </section>
 
         <!-- présentation -->
-        <section class="presentation">
+        <section id="presentation-list" class="presentation">
             <p>Retrouvez ici l'ensemble de vos justificatifs de garantie concernant vos appareils et vos biens.</p>
         </section.presentation>
     </div>

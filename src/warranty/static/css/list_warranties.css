@@ -21,19 +21,10 @@
     align-items: center;
 }
 
-/* présentation text de la page */
-.presentation {
-    text-align: center;
-    margin-top: 1rem;
-    font-size: 1.2rem;
+#warranties-list-title {
+    margin-bottom: 0;
 }
 
-@media (max-width: 768px) {    
- .presentation {
-    font-size: 1.1rem;
-    padding: 0 1rem; 
-  }
-}
 
 /*****************************************************************************************
  Bannière img */
