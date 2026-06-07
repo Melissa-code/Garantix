@@ -2,8 +2,15 @@
 warranties forms (create/update) */
 
 .form-container {
+  margin: 2rem;
   display: flex;
   justify-content: center;
+}
+
+@media (min-width: 1440px) {
+  .form-container {
+    margin: 4rem auto;
+  }
 }
 
 fieldset {
@@ -27,7 +34,6 @@ fieldset {
 .form-card {
   max-width: 900px;
   width: 100%;
-  margin: 2rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }

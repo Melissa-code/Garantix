@@ -2,12 +2,13 @@
 {% load static %}
 
 {% block title %}
-  <title>Ajouter une garantie</title>
+  <title>Garantix - Ajouter une garantie</title>
 {% endblock title %} 
 
 {% block extra_css %}
   <link rel="stylesheet" href="{% static 'css/form_warranty.css' %}">
 {% endblock %}
+
 
 
 {% block content %}
@@ -28,7 +29,7 @@
 
 <!-- message -->
 <section class="section-message">
-    {% include 'partials/_messages.html' %}
+  {% include 'partials/_messages.html' %}
 </section>
 
 <!-- form section create -->
@@ -41,7 +42,7 @@
 
       <!-- fieldset => regrouper les champs du formulaire -->
       <fieldset class="form-fieldset">
-      <legend class="sr-only">Informations sur le produit</legend>
+      <legend class="sr-only">Informations sur le produit : </legend>
         <div class="form-grid">
           
           <!-- Colonne de gauche -->

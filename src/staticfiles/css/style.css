@@ -46,18 +46,50 @@ h1, h2, h3, .card-header .card-title  {
   letter-spacing: -0.02em;
 }
 
-legend {
-  display: none;
-}
-
 hr {     
   border: none;        
   border-top: 1px solid var(--secondary);
   width: 100%;            
 }
 
+.page-bg-header {
+  background: var(--secondary-light); 
+  padding: 1.5rem 0;
+}
+
+/* présentation text de la page */
+.presentation {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+}
+
+.title-badge {
+  font-size: 1.2rem;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
 .contain {
   margin: 1rem 8rem;
+}
+
+fieldset {
+  border: none;      
+  margin: 0;         
+  padding: 0;        
+  min-width: 0;  /* pour ne pas casser grid  sur mobile */
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
 .btn::part(base) {
@@ -98,9 +130,46 @@ sl-button[size="small"]::part(label) {
   font-weight: 500;
 }
 
-.page-bg-header {
-  background: var(--secondary-light); 
-  padding: 1.5rem 0;
+sl-checkbox::part(control--checked) {
+  background-color: var(--primary);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .presentation {
+        font-size: 1rem;
+    }
+}
+
+/**************************************************/
+/* containers et sections */
+
+.container-fluid {
+  padding: 2rem 0 2rem 0;
+}
+
+.container-fluid-bg-secondary-light {
+  background: var(--secondary-light);
+}
+
+.container-fluid-bg-white {
+  background: var(--white);
+}
+
+.container-fluid-bg-banniere {
+    background-color: var(--black-middle);
+    background-image: 
+        radial-gradient(circle, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 70%),
+        linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), 
+        url('/static/images/banniere2.png');
+    background-size: cover, contain, contain; /* cover: halo noir */
+    background-repeat: no-repeat, no-repeat, repeat-x; 
+    background-position: center;
+    width: 100%;
+    padding: 2rem 0; 
+    display: flex;
+    justify-content: center;
+    min-height: auto; 
 }
 
 .container-page {
@@ -108,19 +177,23 @@ sl-button[size="small"]::part(label) {
   margin: 0 auto;
 }
 
-.presentation {
-  text-align: center;
-  margin-top: 1rem;
-  font-size: 1.2rem;
-}
-
-
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 768px) {
   h1 {
-    font-size: 28px;
+    font-size: 1.7rem;
   }
-  .contain {
-    margin: 1rem 2rem;
+  h2 {
+    font-size: 1.2rem;
+  }
+  .container-fluid {
+    padding: 1rem 0;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+  .presentation {
+    font-size: 1.1rem;
+    padding: 0 1rem; 
   }
 }
 
@@ -151,16 +224,31 @@ header .login-btn-navbar::part(base) {
 }
 
 .nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: "Outfit", sans-serif;
   font-weight: 700;
   font-size: 2rem;
   letter-spacing: -0.04em; 
 }
 
+.nav-brand-tooltip {
+  letter-spacing: 0;
+}
+
+.nav-brand a {
+  text-decoration: none;
+  color: var(--black);
+}
+
+.nav-brand a:hover {
+  color: var(--primary);
+}
+
 .nav-brand span {
   color: var(--primary); /*  bleu */
 }
-
 
 .navbar-link:hover, .mobile-link:hover {
   --sl-color-neutral-600: var(--primary); 
@@ -188,7 +276,7 @@ header .login-btn-navbar::part(base) {
   display: none;
   flex-direction: column;
   padding: 1rem 2rem;
-  background: white;
+  background: var(--white);
   border-bottom: 1px solid var(--black-light);   
   gap: 0.5rem;
 }
@@ -220,28 +308,33 @@ header .login-btn-navbar::part(base) {
 
 /***************************************************/
 /* Footer */
-/***************************************************/
 
 footer {
-  padding: 2rem 1rem;
+  padding: 3rem 1rem;
   border-top: 1px solid var(--black-light);
   text-align: center;
+  font-size: 0.95rem;
 }
 
 footer .footer-link::part(base) {
-  color: var(--primary);
-}
+  color: var(--black);
+  font-size: 0.9rem;
+} 
 
 footer .footer-link::part(base):hover {
-  color: var(--info);
+  color: var(--primary);
 }
-
 
 sl-breadcrumb::part(base) {
   color: var(--primary);
+  text-decoration: none;
 }
 
-
+.footer-copy {
+  font-size: 0.95rem;
+  color: var(--secondary);
+  margin-bottom: 1rem;
+}
 
 /******************************/ 
 /* Messages */
