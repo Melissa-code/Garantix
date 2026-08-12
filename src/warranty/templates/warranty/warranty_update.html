@@ -1,12 +1,12 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 {% load static %}
 
 {% block title %}
-  <title>Modifier une garantie</title>
-{% endblock title %} 
+<title>Modifier une garantie</title>
+{% endblock title %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="{% static 'css/form_warranty.css' %}">
+<link rel="stylesheet" href="{% static 'css/form_warranty.css' %}">
 {% endblock %}
 
 
@@ -16,7 +16,7 @@
     <div class="container-page">
         <!-- titre  -->
         <section class="title-badge">
-          <h1>Modifier la garantie {{ warranty.product_name|capfirst }}</h1>
+            <h1>Modifier la garantie {{ warranty.product_name|capfirst }}</h1>
         </section>
 
         <!-- présentation -->
@@ -35,7 +35,7 @@
 <section class="form-container">
     <sl-card class="form-card">
         <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
+            {% csrf_token %}
 
             <!-- fieldset => regrouper les champs du formulaire -->
             <fieldset class="form-fieldset">
@@ -45,54 +45,41 @@
                     <div class="form-column">
                         <!-- product_name -->
                         <div class="field-group">
-                            <sl-input class="{% if form.product_name.errors %}input-error{% endif %}"
-                                type="text"
-                                name="product_name" 
-                                placeholder="Nom du produit" 
-                                pattern="^[a-zA-Z0-9À-ÿ\s\(\)\-\.]+$"
+                            <sl-input class="{% if form.product_name.errors %}input-error{% endif %}" type="text"
+                                name="product_name" placeholder="Nom du produit" pattern="^[a-zA-Z0-9À-ÿ\s\(\)\-\.]+$"
                                 title="Lettres, chiffres, parenthèses et tirets uniquement."
-                                value="{{ form.product_name.value|default:warranty.product_name|default:'' }}"
-                                clearable
-                                minlength="2"
-                                maxlength="150"
-                                required>
+                                value="{{ form.product_name.value|default:warranty.product_name|default:'' }}" clearable
+                                minlength="2" maxlength="150" required>
                             </sl-input>
                             {% if form.product_name.errors %}
-                                <div class="error-text">{{ form.product_name.errors|first }}</div>
+                            <div class="error-text">{{ form.product_name.errors|first }}</div>
                             {% endif %}
                         </div>
-        
+
                         <!-- purchase_date (achat) -->
                         <div class="field-group">
-                            <sl-input class="{% if form.purchase_date.errors %}input-error{% endif %}"
-                                type="date"
-                                id="update_purchase_date_input"
-                                name="purchase_date" 
-                                placeholder="Date d'achat" 
-                                {# value="{{ form.purchase_date.value|default:warranty.purchase_date|date:'Y-m-d'|default:'' }}"  #}
+                            <sl-input class="{% if form.purchase_date.errors %}input-error{% endif %}" type="date"
+                                id="update_purchase_date_input" name="purchase_date" placeholder="Date d'achat" {#
+                                value="{{ form.purchase_date.value|default:warranty.purchase_date|date:'Y-m-d'|default:'' }}"
+                                #}
                                 value="{{ form.purchase_date.value|date:'Y-m-d'|default:form.purchase_date.value|default:'' }}"
                                 required>
                             </sl-input>
                             {% if form.purchase_date.errors %}
-                                <div class="error-text">{{ form.purchase_date.errors|first }}</div>
+                            <div class="error-text">{{ form.purchase_date.errors|first }}</div>
                             {% endif %}
                         </div>
-                        
+
                         <!-- vendor (revendeur) -->
                         <div class="field-group">
-                            <sl-input class="{% if form.vendor.errors %}input-error{% endif %}"
-                                type="text"
-                                name="vendor" 
-                                placeholder="Revendeur" 
-                                clearable 
-                                minlength="2"
-                                maxlength="100"
+                            <sl-input class="{% if form.vendor.errors %}input-error{% endif %}" type="text"
+                                name="vendor" placeholder="Revendeur" clearable minlength="2" maxlength="100"
                                 pattern="^[a-zA-Z0-9À-ÿ\s\(\)\-\.]+$"
                                 title="Lettres, chiffres, parenthèses et tirets uniquement."
                                 value="{{ form.vendor.value|default:warranty.vendor|default:'' }}">
                             </sl-input>
                             {% if form.vendor.errors %}
-                                <div class="error-text">{{ form.vendor.errors|first }}</div>
+                            <div class="error-text">{{ form.vendor.errors|first }}</div>
                             {% endif %}
                         </div>
                     </div>
@@ -101,76 +88,62 @@
                     <div class="form-column">
                         <!-- brand (marque) -->
                         <div class="field-group">
-                            <sl-input class="{% if form.brand.errors %}input-error{% endif %}"
-                                type="text"
-                                name="brand" 
-                                placeholder="Marque" 
-                                pattern="^[a-zA-Z0-9À-ÿ\s\(\)\-\.]+$"
-                                title="Lettres, chiffres, parenthèses et tirets uniquement."
-                                clearable 
-                                minlength="2"
-                                maxlength="150"
-                                value="{{ form.brand.value|default:warranty.brand|default:'' }}" 
-                                oninput="this.value = this.value.toUpperCase()"
-                                required>
+                            <sl-input class="{% if form.brand.errors %}input-error{% endif %}" type="text" name="brand"
+                                placeholder="Marque" pattern="^[a-zA-Z0-9À-ÿ\s\(\)\-\.]+$"
+                                title="Lettres, chiffres, parenthèses et tirets uniquement." clearable minlength="2"
+                                maxlength="150" value="{{ form.brand.value|default:warranty.brand|default:'' }}"
+                                oninput="this.value = this.value.toUpperCase()" required>
                             </sl-input>
                             {% if form.brand.errors %}
-                                <div class="error-text">{{ form.brand.errors|first }}</div>
+                            <div class="error-text">{{ form.brand.errors|first }}</div>
                             {% endif %}
                         </div>
-            
+
                         <!-- duration (durée) -->
                         <div class="field-group">
-                        <sl-input class="{% if form.warranty_duration_months.errors %}input-error{% endif %}"
-                            type="number" 
-                            name="warranty_duration_months" 
-                            min="0"
-                            max="240"
-                            placeholder="Durée de garantie (en mois)" 
-                            value="{{ form.warranty_duration_months.value|default:warranty.warranty_duration_months|default:'' }}"
-                            required>
-                        </sl-input>
-                        {% if form.warranty_duration_months.errors %}
+                            <sl-input class="{% if form.warranty_duration_months.errors %}input-error{% endif %}"
+                                type="number" name="warranty_duration_months" min="0" max="240"
+                                placeholder="Durée de garantie (en mois)"
+                                value="{{ form.warranty_duration_months.value|default:warranty.warranty_duration_months|default:'' }}"
+                                required>
+                            </sl-input>
+                            {% if form.warranty_duration_months.errors %}
                             <div class="error-text">{{ form.warranty_duration_months.errors|first }}</div>
-                        {% endif %}
+                            {% endif %}
                         </div>
 
                         <!-- Input pour l'image du reçu -->
                         <div class="field-group">
                             <input class="image-receipt {% if form.imageReceipt.errors %}input-error{% endif %}"
-                                    type="file" 
-                                    name="imageReceipt" 
-                                    accept="image/png, image/jpeg"
-                                    value="{{ form.imageReceipt.value|default:warranty.imageReceipt|default:'' }}">
+                                type="file" name="imageReceipt" accept="image/png, image/jpeg"
+                                value="{{ form.imageReceipt.value|default:warranty.imageReceipt|default:'' }}">
                             {% if form.imageReceipt.errors %}
-                                <div class="error-text">{{ form.imageReceipt.errors|first }}</div>
+                            <div class="error-text">{{ form.imageReceipt.errors|first }}</div>
                             {% endif %}
                         </div>
                     </div>
                 </div>
 
                 <!-- Notes (pleine largeur et composant Shoelace avec value) -->
-                <div class="field-group">  
-                    <sl-textarea class="{% if form.notes.errors %}input-error{% endif %}"
-                        name="notes" 
+                <div class="field-group">
+                    <sl-textarea class="{% if form.notes.errors %}input-error{% endif %}" name="notes"
                         title="Lettres, chiffres, parenthèses et tirets uniquement."
-                        placeholder="Notes sur le produit..." 
-                        value="{{ form.notes.value|default:warranty.notes|default:'' }}"
-                        resize="auto"
+                        placeholder="Notes sur le produit..."
+                        value="{{ form.notes.value|default:warranty.notes|default:'' }}" resize="auto"
                         rows="2"></sl-textarea>
                     {% if form.notes.errors %}
-                        <div class="error-text">{{ form.notes.errors|first }}</div>
+                    <div class="error-text">{{ form.notes.errors|first }}</div>
                     {% endif %}
                 </div>
 
                 <!-- Bouton -->
-                <div class="submit-container" >
+                <div class="submit-container">
                     <!-- bouton revenir à la liste -->
                     <sl-button href="{% url 'warranty:warranties_list' %}" class="btn btn-white"> Revenir</sl-button>
                     <!-- bouton submit -->
                     <sl-button type="submit" class="btn btn-primary">Modifier</sl-button>
                 </div>
-            </fieldset>        
+            </fieldset>
         </form>
     </sl-card>
 </section>
@@ -178,10 +151,10 @@
 
 <!-- Script pour limiter la date sélectionnable (futur =>aujourd'hui max)-->
 <script>
-  const today = new Date().toISOString().split('T')[0];
-  const dateInput = document.getElementById('update_purchase_date_input');
+    const today = new Date().toISOString().split('T')[0];
+    const dateInput = document.getElementById('update_purchase_date_input');
 
-  if (dateInput) dateInput.max = today; 
+    if (dateInput) dateInput.max = today; 
 </script>
 
 {% endblock content %}

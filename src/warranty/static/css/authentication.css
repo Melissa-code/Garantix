@@ -8,14 +8,16 @@
 }
 
 .form-card-authentication {
-  width: 90%; 
+  width: 90%;
   max-width: 800px;
   width: 100%;
   --padding: 0;
   margin: 4rem auto;
   overflow: hidden;
   border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   border: none;
 }
@@ -89,7 +91,8 @@
   font-weight: 500;
 }
 
-.btn-login, .btn-signup {
+.btn-login,
+.btn-signup {
   margin-top: 0.5rem;
   background-color: var(--primary);
   color: var(--white);
@@ -98,7 +101,9 @@
   width: 100%;
   border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
 }
 
 .btn-signup {
@@ -111,17 +116,20 @@
   text-align: start;
 }
 
-.link-to-signup, .link-to-login {
+.link-to-signup,
+.link-to-login {
   font-size: 0.95rem;
 }
 
-.link-to-signup a, .link-to-login a { 
+.link-to-signup a,
+.link-to-login a {
   color: var(--primary);
   text-decoration: none;
   font-weight: 600;
 }
 
-.link-to-signup a:hover, .link-to-login a:hover {
+.link-to-signup a:hover,
+.link-to-login a:hover {
   color: var(--info);
   font-weight: 500;
 }
@@ -148,11 +156,11 @@
   }
 
   .form-image-side img {
-    max-width: 5rem; 
+    max-width: 5rem;
   }
 
   .form-content-side {
-    padding: 1.5rem 1rem; 
+    padding: 1.5rem 1rem;
   }
 
   .form-options {

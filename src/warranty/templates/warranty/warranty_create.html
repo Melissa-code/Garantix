@@ -1,29 +1,29 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 {% load static %}
 
 {% block title %}
-  <title>Garantix - Ajouter une garantie</title>
-{% endblock title %} 
+<title>Garantix - Ajouter une garantie</title>
+{% endblock title %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="{% static 'css/form_warranty.css' %}">
+<link rel="stylesheet" href="{% static 'css/form_warranty.css' %}">
 {% endblock %}
 
 
 {% block content %}
 
 <div class="page-bg-header">
-    <div class="container-page">
-        <!-- titre  -->
-        <section class="title-badge">
-          <h1>Ajouter une garantie</h1>
-        </section>
+  <div class="container-page">
+    <!-- titre  -->
+    <section class="title-badge">
+      <h1>Ajouter une garantie</h1>
+    </section>
 
-        <!-- présentation -->
-        <section class="presentation presentation-create">
-            <p>Enregistrez une nouvelle garantie pour ne plus jamais perdre votre preuve d'achat.</p>
-        </section>
-    </div>
+    <!-- présentation -->
+    <section class="presentation presentation-create">
+      <p>Enregistrez une nouvelle garantie pour ne plus jamais perdre votre preuve d'achat.</p>
+    </section>
+  </div>
 </div>
 
 <!-- message -->
@@ -37,64 +37,46 @@
   <sl-card class="form-card">
     <!-- form novalidate pour désactiver la validation HTML par défaut -->
     <form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
+      {% csrf_token %}
 
       <!-- fieldset => regrouper les champs du formulaire -->
       <fieldset class="form-fieldset">
-      <legend class="sr-only">Informations sur le produit : </legend>
+        <legend class="sr-only">Informations sur le produit : </legend>
         <div class="form-grid">
-          
+
           <!-- Colonne de gauche -->
           <div class="form-column">
             <!-- product_name -->
             <div class="field-group">
-              <sl-input class="{% if form.product_name.errors %}input-error{% endif %}"
-                  type="text"
-                  name="product_name" 
-                  placeholder="Nom du produit" 
-                  pattern="^[a-zA-Z0-9À-ÿ\s\(\)\-\.]+$"
-                  title="Lettres, chiffres, parenthèses et tirets uniquement."
-                  value="{{ form.product_name.value|default:'' }}" 
-                  clearable
-                  minlength="2"
-                  maxlength="150"
-                  required>
+              <sl-input class="{% if form.product_name.errors %}input-error{% endif %}" type="text" name="product_name"
+                placeholder="Nom du produit" pattern="^[a-zA-Z0-9À-ÿ\s\(\)\-\.]+$"
+                title="Lettres, chiffres, parenthèses et tirets uniquement."
+                value="{{ form.product_name.value|default:'' }}" clearable minlength="2" maxlength="150" required>
               </sl-input>
               {% if form.product_name.errors %}
-                <div class="error-text">{{ form.product_name.errors|first }}</div>
+              <div class="error-text">{{ form.product_name.errors|first }}</div>
               {% endif %}
             </div>
 
             <!-- purchase_date (achat) -->
             <div class="field-group">
-              <sl-input class="{% if form.purchase_date.errors %}input-error{% endif %}"
-                  type="date"
-                  id="purchase_date_input"
-                  name="purchase_date" 
-                  placeholder="Date d'achat" 
-                  value="{{ form.purchase_date.value|default:'' }}" 
-                  required>
+              <sl-input class="{% if form.purchase_date.errors %}input-error{% endif %}" type="date"
+                id="purchase_date_input" name="purchase_date" placeholder="Date d'achat"
+                value="{{ form.purchase_date.value|default:'' }}" required>
               </sl-input>
               {% if form.purchase_date.errors %}
-                <div class="error-text">{{ form.purchase_date.errors|first }}</div>
+              <div class="error-text">{{ form.purchase_date.errors|first }}</div>
               {% endif %}
             </div>
 
             <!-- vendor (revendeur) -->
             <div class="field-group">
-              <sl-input class="{% if form.vendor.errors %}input-error{% endif %}"
-                  type="text"
-                  name="vendor" 
-                  placeholder="Revendeur" 
-                  clearable 
-                  minlength="2"
-                  maxlength="100"
-                  pattern="^[a-zA-Z0-9À-ÿ\s\(\)\-\.]+$"
-                  title="Lettres, chiffres, parenthèses et tirets uniquement."
-                  value="{{ form.vendor.value|default:'' }}">
+              <sl-input class="{% if form.vendor.errors %}input-error{% endif %}" type="text" name="vendor"
+                placeholder="Revendeur" clearable minlength="2" maxlength="100" pattern="^[a-zA-Z0-9À-ÿ\s\(\)\-\.]+$"
+                title="Lettres, chiffres, parenthèses et tirets uniquement." value="{{ form.vendor.value|default:'' }}">
               </sl-input>
               {% if form.vendor.errors %}
-                <div class="error-text">{{ form.vendor.errors|first }}</div>
+              <div class="error-text">{{ form.vendor.errors|first }}</div>
               {% endif %}
             </div>
           </div>
@@ -103,68 +85,50 @@
           <div class="form-column">
             <!-- brand (marque) -->
             <div class="field-group">
-              <sl-input class="{% if form.brand.errors %}input-error{% endif %}"
-                  type="text"
-                  name="brand" 
-                  placeholder="Marque" 
-                  pattern="^[a-zA-Z0-9À-ÿ\s\(\)\-\.]+$"
-                  title="Lettres, chiffres, parenthèses et tirets uniquement."
-                  clearable 
-                  minlength="2"
-                  maxlength="150"
-                  value="{{ form.brand.value|default:'' }}" 
-                  oninput="this.value = this.value.toUpperCase()"
-                  required>
+              <sl-input class="{% if form.brand.errors %}input-error{% endif %}" type="text" name="brand"
+                placeholder="Marque" pattern="^[a-zA-Z0-9À-ÿ\s\(\)\-\.]+$"
+                title="Lettres, chiffres, parenthèses et tirets uniquement." clearable minlength="2" maxlength="150"
+                value="{{ form.brand.value|default:'' }}" oninput="this.value = this.value.toUpperCase()" required>
               </sl-input>
               {% if form.brand.errors %}
-                <div class="error-text">{{ form.brand.errors|first }}</div>
+              <div class="error-text">{{ form.brand.errors|first }}</div>
               {% endif %}
             </div>
-            
+
             <!-- duration (durée) -->
             <div class="field-group">
-              <sl-input class="{% if form.warranty_duration_months.errors %}input-error{% endif %}"
-                  type="number" 
-                  name="warranty_duration_months" 
-                  min="0"
-                  max="240"
-                  placeholder="Durée de garantie (en mois)" 
-                  value="{{ form.warranty_duration_months.value|default:'' }}"
-                  required>
+              <sl-input class="{% if form.warranty_duration_months.errors %}input-error{% endif %}" type="number"
+                name="warranty_duration_months" min="0" max="240" placeholder="Durée de garantie (en mois)"
+                value="{{ form.warranty_duration_months.value|default:'' }}" required>
               </sl-input>
               {% if form.warranty_duration_months.errors %}
-                <div class="error-text">{{ form.warranty_duration_months.errors|first }}</div>
+              <div class="error-text">{{ form.warranty_duration_months.errors|first }}</div>
               {% endif %}
             </div>
 
             <!-- Input pour l'image du reçu -->
             <div class="field-group">
-              <input type="file" 
-                    name="imageReceipt" 
-                    accept="image/png, image/jpeg"
-                    class="image-receipt {% if form.imageReceipt.errors %}input-error{% endif %}">
+              <input type="file" name="imageReceipt" accept="image/png, image/jpeg"
+                class="image-receipt {% if form.imageReceipt.errors %}input-error{% endif %}">
               {% if form.imageReceipt.errors %}
-                <div class="error-text">{{ form.imageReceipt.errors|first }}</div>
+              <div class="error-text">{{ form.imageReceipt.errors|first }}</div>
               {% endif %}
             </div>
           </div>
         </div>
-     
+
         <!-- Notes (pleine largeur) -->
-        <div class="field-group">  
-          <sl-textarea class="{% if form.notes.errors %}input-error{% endif %}"
-              name="notes" 
-              title="Lettres, chiffres, parenthèses et tirets uniquement."
-              placeholder="Notes sur le produit..." 
-              rows="2">
-              {{ form.notes.value|default:'' }}</sl-textarea>
+        <div class="field-group">
+          <sl-textarea class="{% if form.notes.errors %}input-error{% endif %}" name="notes"
+            title="Lettres, chiffres, parenthèses et tirets uniquement." placeholder="Notes sur le produit..." rows="2">
+            {{ form.notes.value|default:'' }}</sl-textarea>
           {% if form.notes.errors %}
-            <div class="error-text">{{ form.notes.errors|first }}</div>
+          <div class="error-text">{{ form.notes.errors|first }}</div>
           {% endif %}
         </div>
 
         <!-- Boutons -->
-        <div class="submit-container" >
+        <div class="submit-container">
           <!-- bouton revenir à la liste -->
           <sl-button href="{% url 'warranty:warranties_list' %}" class="btn btn-white"> Revenir</sl-button>
           <!-- bouton submit -->

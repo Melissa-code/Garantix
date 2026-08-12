@@ -12,7 +12,7 @@ warranty detail */
 }
 
 .container-details h1 {
-    margin: 0 1rem;
+  margin: 0 1rem;
 }
 
 .title-badge {
@@ -69,7 +69,7 @@ warranty detail */
   padding: 1rem;
   border: 1px solid var(--secondary);
   border-radius: 12px;
-  height: 45vh; /* hauteur fixe pour scroll */
+  height: 50vh; /* hauteur fixe pour scroll */
   overflow-y: auto; /*  scroll */
   background: white;
 }
@@ -249,5 +249,3 @@ warranty detail */
     --width: 90vw;
   }
 }
-
-

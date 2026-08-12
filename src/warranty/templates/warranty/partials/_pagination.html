@@ -1,31 +1,31 @@
 <!-- pagination -->
 <section class="pagination-container">
 
-  <sl-button-group>
-    <!-- flèche précédente -->
-    {% if page_obj.has_previous %}
+    <sl-button-group>
+        <!-- flèche précédente -->
+        {% if page_obj.has_previous %}
         <sl-button variant="neutral" outline href="?page=1" title="Début">
             <sl-icon name="chevron-double-left"></sl-icon>
         </sl-button>
         <sl-button variant="neutral" outline href="?page={{ page_obj.previous_page_number }}">
             <sl-icon name="chevron-left"></sl-icon>
         </sl-button>
-    {% endif %}
+        {% endif %}
 
-    <!-- compteur ex 1/2 -->
-    <sl-button variant="neutral" outline disabled class="page-counter">
-        {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
-    </sl-button>
+        <!-- compteur ex 1/2 -->
+        <sl-button variant="neutral" outline disabled class="page-counter">
+            {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+        </sl-button>
 
-    <!-- flèche suivante -->
-    {% if page_obj.has_next %}
+        <!-- flèche suivante -->
+        {% if page_obj.has_next %}
         <sl-button variant="neutral" outline href="?page={{ page_obj.next_page_number }}">
             <sl-icon name="chevron-right"></sl-icon>
         </sl-button>
         <sl-button variant="neutral" outline href="?page={{ page_obj.paginator.num_pages }}" title="Fin">
             <sl-icon name="chevron-double-right"></sl-icon>
         </sl-button>
-    {% endif %}
-  </sl-button-group>
-  
+        {% endif %}
+    </sl-button-group>
+
 </section>

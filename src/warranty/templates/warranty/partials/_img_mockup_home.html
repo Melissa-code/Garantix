@@ -3,19 +3,17 @@
 
 <div class="grid-item">
   <!-- photo -->
-  <div class="photo-frame" >
-      {% with image_path="images/"|add:mockup.image %}
-        <img src="{% static image_path %}" 
-          alt="{{ mockup.description }}" 
-          class="grid-img"
-          onclick="document.getElementById('zoom-modal-{{ counter }}').show()">
-      {% endwith %}
+  <div class="photo-frame">
+    {% with image_path="images/"|add:mockup.image %}
+    <img src="{% static image_path %}" alt="{{ mockup.description }}" class="grid-img"
+      onclick="document.getElementById('zoom-modal-{{ counter }}').show()">
+    {% endwith %}
   </div>
 
   <!-- zoom photo -->
   <sl-dialog id="zoom-modal-{{ counter }}" label="Aperçu de {{ mockup.description }}" style="--width: 60vw;">
     {% with image_path="images/"|add:mockup.image %}
-      <img class="zoom-img" src="{% static image_path %}" alt="{{ mockup.description }}">
+    <img class="zoom-img" src="{% static image_path %}" alt="{{ mockup.description }}">
     {% endwith %}
     <sl-button slot="footer" class="btn btn-white" onclick="document.getElementById('zoom-modal-{{ counter }}').hide()">
       Fermer
