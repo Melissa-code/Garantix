@@ -26,7 +26,6 @@
     margin-top: .5rem;
 }
 
-
 /*****************************************************************************************
  Bannière img */
 
@@ -121,7 +120,6 @@
     margin: 3rem 0 0 0;
 }
 
-
 /* Card */
 .warranty-card {
     border-radius: 12px;
@@ -191,6 +189,12 @@ sl-card::part(footer) {
     border-top: none;
     padding-top: 0; 
 }
+
+@media (max-width: 768px) {
+    .warranties-grid {
+        margin: 2rem 1rem 0 1rem;
+    }
+}   
 
 /*****************************************************************************************
  Empty state  */

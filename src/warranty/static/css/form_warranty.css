@@ -2,7 +2,7 @@
 warranties forms (create/update) */
 
 .form-container {
-  margin: 2rem;
+  margin: 2rem 1rem;
   display: flex;
   justify-content: center;
 }
@@ -93,4 +93,27 @@ fieldset {
   justify-content: center;
   margin-top: 1.5rem;
   gap: 2rem;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+
+  }
+
+  .image-receipt {
+    width: 100%;
+  }
+
+  .submit-container .btn {
+    flex: 1; /* btn 50% de la largeur */
+    width: 100%;
+  }
+
+  .submit-container .btn::part(base) {
+    min-width: 0;
+    width: 100%;
+    padding: 0 1rem;
+  }
 }
