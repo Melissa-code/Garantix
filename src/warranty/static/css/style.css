@@ -136,9 +136,9 @@ sl-checkbox::part(control--checked) {
 }
 
 @media (max-width: 768px) {
-    .presentation {
-        font-size: 1rem;
-    }
+  .presentation {
+      font-size: 1rem;
+  }
 }
 
 /**************************************************/
@@ -157,19 +157,19 @@ sl-checkbox::part(control--checked) {
 }
 
 .container-fluid-bg-banniere {
-    background-color: var(--black-middle);
-    background-image: 
-        radial-gradient(circle, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 70%),
-        linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), 
-        url('/static/images/banniere2.png');
-    background-size: cover, contain, contain; /* cover: halo noir */
-    background-repeat: no-repeat, no-repeat, repeat-x; 
-    background-position: center;
-    width: 100%;
-    padding: 2rem 0; 
-    display: flex;
-    justify-content: center;
-    min-height: auto; 
+  background-color: var(--black-middle);
+  background-image: 
+      radial-gradient(circle, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 70%),
+      linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), 
+      url('/static/images/banniere2.png');
+  background-size: cover, contain, contain; /* cover: halo noir */
+  background-repeat: no-repeat, no-repeat, repeat-x; 
+  background-position: center;
+  width: 100%;
+  padding: 2rem 0; 
+  display: flex;
+  justify-content: center;
+  min-height: auto; 
 }
 
 .container-page {
