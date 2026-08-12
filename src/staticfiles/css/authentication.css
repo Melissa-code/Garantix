@@ -1,138 +1,163 @@
+/* ************************************************* */
 /* Login & Sign-up */
-.authentication {
+
+.form-container {
   display: flex;
-  justify-content: center;
   align-items: center;
-  min-height: 80vh;
+  justify-content: center;
 }
 
-.authentication .contain {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  max-width: 900px;
+.form-card-authentication {
+  width: 90%; 
+  max-width: 800px;
   width: 100%;
-  background: var(--white);
-  border: 1px solid var(--black-light);
-  border-radius: 5px;
+  --padding: 0;
+  margin: 4rem auto;
   overflow: hidden;
-}
-
-.authentication fieldset {
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   border: none;
-  padding: 0;
-  margin: 0;
-  min-width: 0;
-  display: contents; 
 }
 
-/* Col gauche (icon) */
-.authentication .icon-user {
+.form-card-authentication::part(base) {
+  border: none;
+}
+
+.form-card-authentication:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* grille 30/70 */
+.form-grid {
+  display: grid;
+  grid-template-columns: 0.7fr 1.3fr;
+  min-height: 300px;
+}
+
+/* gauche (noir) */
+.form-image-side {
+  background-color: var(--black);
   display: flex;
-  justify-content: center;
   align-items: center;
-  background-color: var(--secondary-light);
+  justify-content: center;
 }
 
-.authentication .icon-user sl-icon {
-  font-size: 8rem;
-  color: var(--black);
+.form-image-side img {
+  max-width: 150px;
 }
 
-/* Col droite (form) */
-.authentication-form {
+/* droite (formulaire) */
+.form-content-side {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  height: 100%;
-  padding: 1rem 2rem 3rem 2rem;
+  padding: 2rem 3rem;
 }
 
-.title-authentication {
-  margin-bottom: 2rem;
+.form-fields-wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-/* space between fields */
-.authentication-form .form-field {
-  margin-bottom: 1.5rem;
-}
-
-.authentication-form sl-input {
-  width: 100%;
-}
-
-/* error msg */
 .error-msg-field {
-  color: var(--sl-color-danger-600);
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
-}
-
-.alert-msg-danger {
-  margin-bottom: 1rem;
-}
-
-/* invalid inputs */
-sl-input.invalid::part(base) {
   border-color: var(--sl-color-danger-600);
   color: var(--sl-color-danger-600);
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  font-weight: 500;
 }
 
-sl-input.invalid::part(base):focus-within {
-  box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-danger-600);
+/* Checkbox + forgotten password */
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
 }
 
-/* btn submit */
-.authentication-btn-submit {
-  margin: 1rem 0;
+/* forgot password */
+.forgot-password {
+  text-decoration: none;
+  margin-top: 0.5rem;
+  color: var(--sl-color-neutral-700);
 }
 
-.authentication-btn-submit sl-button {
-  width: 100%;
-}
-
-/* link create account */
-.authentication .link-account {
+.forgot-password:hover {
   color: var(--primary);
+  font-weight: 500;
 }
 
+.btn-login, .btn-signup {
+  margin-top: 0.5rem;
+  background-color: var(--primary);
+  color: var(--white);
+  font-weight: 500;
+  text-align: center;
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
-/**************** Mobile ****************/ 
+.btn-signup {
+  margin-top: 2rem;
+}
 
-@media (max-width: 768px) {
+/* footer card */
+.form-footer {
+  margin-top: 1.5rem;
+  text-align: start;
+}
 
-  .authentication .contain {
-    grid-template-columns: 1fr;
-    max-width: 100%;
-    margin: 0 1rem;
-    overflow: visible;
+.link-to-signup, .link-to-login {
+  font-size: 0.95rem;
+}
+
+.link-to-signup a, .link-to-login a { 
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.link-to-signup a:hover, .link-to-login a:hover {
+  color: var(--info);
+  font-weight: 500;
+}
+
+@media screen and (min-width: 1500px) {
+  .form-card-authentication {
+    margin: 5.5rem auto;
   }
-  
-  .authentication .icon-user {
-    display: none;
-  }
-  
-  .authentication-form {
-    padding: 2rem 1.5rem;
-    overflow: visible;
+}
+
+@media screen and (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr; /* 1col */
+    min-height: auto;
   }
 
-  .authentication-form sl-input {
-    width: 100%;
-    min-width: 0;  
+  .form-card-authentication {
+    margin: 2rem 1rem;
+    width: calc(100% - 2rem);
   }
-  
-  .authentication-form sl-input::part(base) {
-    min-width: 0; 
-  }
-} 
 
-
-@media (max-width: 400px) {
-  .authentication .contain {
-    margin: 0 0.5rem; 
+  .form-image-side {
+    padding: 1.5rem;
   }
-  
-  .authentication-form {
-    padding: 1.5rem 1rem;
+
+  .form-image-side img {
+    max-width: 5rem; 
+  }
+
+  .form-content-side {
+    padding: 1.5rem 1rem; 
+  }
+
+  .form-options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
   }
 }

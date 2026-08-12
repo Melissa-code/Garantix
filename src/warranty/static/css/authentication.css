@@ -1,4 +1,4 @@
-/* **************************************************
+/* ************************************************* */
 /* Login & Sign-up */
 
 .form-container {
@@ -7,7 +7,7 @@
   justify-content: center;
 }
 
-.form-card {
+.form-card-authentication {
   width: 90%; 
   max-width: 800px;
   width: 100%;
@@ -20,11 +20,11 @@
   border: none;
 }
 
-.form-card::part(base) {
+.form-card-authentication::part(base) {
   border: none;
 }
 
-.form-card:hover {
+.form-card-authentication:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -126,15 +126,19 @@
   font-weight: 500;
 }
 
+@media screen and (min-width: 1500px) {
+  .form-card-authentication {
+    margin: 5.5rem auto;
+  }
+}
 
-
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .form-grid {
     grid-template-columns: 1fr; /* 1col */
     min-height: auto;
   }
 
-  .form-card {
+  .form-card-authentication {
     margin: 2rem 1rem;
     width: calc(100% - 2rem);
   }

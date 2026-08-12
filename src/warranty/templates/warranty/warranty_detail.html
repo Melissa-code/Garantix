@@ -2,7 +2,7 @@
 {% load static %}  
 
 {% block title %}
-    <title>Ma garantie {{ warranty.product_name|capfirst }}</title>
+    <title>Garantix - Ma garantie {{ warranty.product_name|capfirst }}</title>
 {% endblock %} 
 
 {% block extra_css %}
@@ -19,14 +19,14 @@
             <h1>Ma Garantie {{ warranty.product_name|capfirst }}</h1>
 
             <sl-badge class="badge-expiration {% if warranty.is_active %}is-active{% else %}is-expired{% endif %}" pill>
-                <sl-icon name="{% if warranty.is_active %}shield-check{% else %}shield-x{% endif %}" style="margin-right: 4px;"></sl-icon>
+                <sl-icon class="badge-icon-detail" name="{% if warranty.is_active %}shield-check{% else %}shield-x{% endif %}"></sl-icon>
                 {{ warranty.is_active|yesno:"Active,Expirée" }}
             </sl-badge>
         </section>
 
         <!-- présentation -->
         <section class="presentation">
-            <p>Retrouvez ici les informations détaillées et votre preuve d'achat.</p>
+            <p style="padding-top:1px; margin-top: 1px;">Retrouvez ici les informations détaillées et votre preuve d'achat.</p>
         </section>
     </div>
 </div>

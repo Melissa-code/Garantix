@@ -8,6 +8,12 @@
   margin: 0 auto;
 }
 
+@media (min-width: 1440px) {
+  .centered-content-wrapper {
+    margin: 5rem auto;
+  }
+}
+
 .title-badge {
     display: flex;
     justify-content: center;
@@ -17,10 +23,10 @@
 
 /* badge */
 .badge-expiration::part(base) {
-    padding: 8px 12px;
+    padding: 7px 12px;
     color: white;
     font-weight: 400;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     letter-spacing: 0.5px;
     display: flex;
@@ -53,6 +59,8 @@
     gap: 4rem;
     align-items: start;
 }
+
+
 
 /* tableau infos à gauche */
 .info-table {
