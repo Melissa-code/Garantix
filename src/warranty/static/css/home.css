@@ -81,6 +81,10 @@
             url('/static/images/banniere2.png');
     }
 
+    .cta-buttons {
+        gap: 1.2rem;
+    }
+
     .cta-authenticated {
         display: flex;
         align-items: center;
