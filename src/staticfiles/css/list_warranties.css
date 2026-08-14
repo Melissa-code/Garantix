@@ -1,0 +1,252 @@
+/*****************************************************************************************
+ Titre */
+
+.title-badge {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 2rem;
+}
+
+/* badge avec total */
+.badge-total::part(base) {
+  background-color: var(--black-light);
+  color: white;
+  font-weight: 400;
+  font-size: 0.8rem;
+  padding: 7px 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+}
+
+#warranties-list-title {
+  margin-bottom: 0;
+  margin-top: 0.5rem;
+}
+
+/*****************************************************************************************
+ Bannière img */
+
+.page-list-bg-banniere {
+  background-color: var(--black-middle);
+  background-image:
+    radial-gradient(circle, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 70%),
+    linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)),
+    url("/static/images/banniere2.png");
+  background-size: cover, contain, contain; /* cover: halo noir */
+  background-repeat: no-repeat, no-repeat, repeat-x;
+  background-position: center;
+  width: 100%;
+  padding: 3rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.search-add-warranties {
+  padding-top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.search-actions {
+  display: flex;
+  align-items: center;
+}
+
+.search-form {
+  min-width: 400px;
+}
+
+.search-form sl-input::part(base) {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: none;
+}
+
+.search-add-warranties sl-button::part(base) {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.search-form sl-input::part(base),
+.search-add-warranties sl-button::part(base) {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .page-list-bg-banniere {
+    padding: 1.5rem 0rem;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+      url("/static/images/banniere2.png");
+  }
+
+  .page-list-bg-banniere .container-page {
+    width: auto;
+    margin: 0 1rem;
+    max-width: none;
+  }
+
+  .search-add-warranties {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .search-actions {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .search-form,
+  sl-input {
+    min-width: 0;
+  }
+}
+
+/*****************************************************************************************
+ Grid System Cards */
+
+.warranties-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0 0 0;
+}
+
+/* Card */
+.warranty-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /*ombre en deux couches : une très diffuse et une plus proche */
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.warranty-card:hover {
+  transform: translateY(-6px);
+  /*ombre  plus large quand la carte bouge */
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.warranty-card::part(header) {
+  background-color: var(--secondary);
+  padding: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  padding: var(--sl-spacing-medium);
+  display: flex;
+  flex-direction: column;
+}
+
+.product-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.brand {
+  display: block;
+  color: var(--info);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--sl-color-neutral-700);
+}
+
+.card-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+sl-card::part(footer) {
+  border-top: none;
+  padding-top: 0;
+}
+
+@media (max-width: 768px) {
+  .warranties-grid {
+    margin: 2rem 1rem 0 1rem;
+  }
+}
+
+/*****************************************************************************************
+ Empty state  */
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 1rem;
+}
+
+.empty-card {
+  border-radius: 12px;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.empty-state sl-icon {
+  font-size: 2rem;
+  color: var(--sl-color-neutral-600);
+}
+
+/*****************************************************************************************
+ Pagination  */
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0;
+}
+
+/* On stylise le compteur central pour qu'il ne ressemble pas à un bouton cliquable */
+.page-counter::part(base) {
+  background-color: var(--secondary-light);
+  border-color: var(--secondary-light);
+  color: var(--black-middle);
+  font-weight: 600;
+  cursor: default;
+  opacity: 1; /* pour enlever l'effet grisé du 'disabled' */
+  border-color: var(--black-light);
+}
+
+.pagination-container sl-button:not([disabled]):hover::part(base) {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+/* icônes centrées */
+.pagination-container sl-icon {
+  font-size: 1rem;
+  vertical-align: middle;
+}

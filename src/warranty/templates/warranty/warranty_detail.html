@@ -1,45 +1,129 @@
-{% extends "base.html" %} 
-
+{% extends "base.html" %}
+{% load static %}
 
 {% block title %}
-    <title>{{ warranty.product_name }}</title>
-{% endblock %} 
+<title>Garantix - Ma garantie {{ warranty.product_name|capfirst }}</title>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/details_warranty.css' %}">
+{% endblock %}
 
 
 {% block content %}
 
-<!-- Detail warranty section -->
-<section id="warranty-section">
-  <article class="warranty-detail">
-    <header class="warranty-header">
-        <h2>{{ warranty.product_name }}</h2>
-        <h3>{{ warranty.brand }}</h3>
-    </header>
+<div class="page-details-bg-header">
+    <div class="container-details">
+        <!-- titre  -->
+        <section class="title-badge">
+            <h1>Ma Garantie {{ warranty.product_name|capfirst }}</h1>
 
-    <div class="warranty-body">
-        <div class="warranty-text">
-            <p><b>Date d'achat:</b> {{ warranty.purchase_date|date:'j F Y' }}</p>
-            <p><b>Durée de garantie:</b> {{ warranty.warranty_duration_months }} mois</p>
-            <p><b>Revendeur:</b> {{ warranty.vendor }}</p>
-            <p><b>Notes:</b> {{ warranty.notes|safe|linebreaks }}</p>
-            <p><b>Enregistré le </b> {{ warranty.created_at|date:'j F Y' }}</p>
-            
-        </div>
-        <!-- Image of receipt -->
-        {% if warranty.imageReceipt %}
-        <div class="warranty-image">
-            <img 
-                src="{{ warranty.imageReceipt.url }}" 
-                alt="photo du ticket de caisse de {{ warranty.product_name }}" 
-                width="200">
-        </div>
-        {% else %}
-            <p></p>
-        {% endif %}
-        
+            <sl-badge class="badge-expiration {% if warranty.is_active %}is-active{% else %}is-expired{% endif %}" pill>
+                <sl-icon class="badge-icon-detail"
+                    name="{% if warranty.is_active %}shield-check{% else %}shield-x{% endif %}"></sl-icon>
+                {{ warranty.is_active|yesno:"Active,Expirée" }}
+            </sl-badge>
+        </section>
+
+        <!-- présentation -->
+        <section class="presentation">
+            <p style="padding-top:1px; margin-top: 1px;">Retrouvez ici les informations détaillées et votre preuve
+                d'achat.</p>
+        </section>
     </div>
-</article>
+</div>
 
-</section>
+<!-- details -->
+<div class="container-details body-content">
+    <div class="centered-content-wrapper">
+        <div class="warranty-main-layout {% if not warranty.imageReceipt %}no-image-layout{% endif %}">
+
+            <div class="specs-column">
+                <div class="info-table">
+                    <!-- Marque -->
+                    <div class="table-row">
+                        <div class="label-cell">
+                            <sl-icon name="tag"></sl-icon>
+                            <label class="">Marque</label>
+                        </div>
+                        <div class="value-cell" id="value-brand">{{ warranty.brand }}</div>
+                    </div>
+                    <!-- date d'achat -->
+                    <div class="table-row">
+                        <div class="label-cell">
+                            <sl-icon name="calendar3"></sl-icon>
+                            <label>Acheté le</label>
+                        </div>
+                        <div class="value-cell">{{ warranty.purchase_date|date:'j F Y' }}</div>
+                    </div>
+                    <!-- durée -->
+                    <div class="table-row">
+                        <div class="label-cell">
+                            <sl-icon name="hourglass-split"></sl-icon>
+                            <label>Durée</label>
+                        </div>
+                        <div class="value-cell">{{ warranty.warranty_duration_months }} mois</div>
+                    </div>
+                    <!-- revendeur -->
+                    <div class="table-row">
+                        <div class="label-cell">
+                            <sl-icon name="shop"></sl-icon>
+                            <label>Revendeur</label>
+                        </div>
+                        <div class="value-cell">{{ warranty.vendor|default_if_none:"-"|upper }}</div>
+                    </div>
+                    <!-- notes -->
+                    <div class="table-row notes-row">
+                        <div class="label-cell">
+                            <sl-icon name="sticky"></sl-icon>
+                            <label>Notes</label>
+                        </div>
+                        <div class="value-cell notes-truncate">
+                            {{ warranty.notes|linebreaksbr|default:"-" }}
+                        </div>
+                    </div>
+
+                    <!-- boutons Actions-->
+                    <div class="actions-group">
+                        <sl-button-group>
+                            <sl-tooltip content="Modifier la garantie" placement="top">
+                                <sl-button size="small" variant="neutral" outline
+                                    href="{% url 'warranty:warranty_update' warranty.pk %}">
+                                    <sl-icon slot="prefix" name="pencil-square"
+                                        style="color: var(--sl-color-warning-600);"></sl-icon> Modifier
+                                </sl-button>
+                            </sl-tooltip>
+                            <sl-tooltip content="Supprimer la garantie" placement="top">
+                                <sl-button size="small" variant="neutral" outline
+                                    href="{% url 'warranty:warranty_delete' warranty.pk %}">
+                                    <sl-icon slot="prefix" name="trash3-fill"
+                                        style="color: var(--sl-color-danger-600);"></sl-icon> Supprimer
+                                </sl-button>
+                            </sl-tooltip>
+                        </sl-button-group>
+                    </div>
+                </div>
+            </div>
+
+            <!-- img receipt (if null img by default) -->
+            <div class="receipt-column">
+                <!-- photo-->
+                <div class="photo-frame" onclick="document.getElementById('zoom-modal').show()">
+                    <img src="{% if warranty.imageReceipt %}{{ warranty.imageReceipt.url }}{% else %}/static/images/img-ticket-default.jpg{% endif %}"
+                        alt="{% if warranty.imageReceipt %} image du ticket de caisse pour {{ warranty.product_name }}{% else %} image du ticket de caisse par défaut{% endif %}"
+                        class="equal-height-img">
+                </div>
+
+                <!-- zoom sur photo-->
+                <sl-dialog id="zoom-modal" label="Détail du justificatif" style="--width: 40vw;">
+                    <img src="{% if warranty.imageReceipt %}{{ warranty.imageReceipt.url }}{% else %}/static/images/img-ticket-default.jpg{% endif %}"
+                        alt="Zoom ticket">
+                    <sl-button slot="footer" variant="secondary"
+                        onclick="document.getElementById('zoom-modal').hide()">Fermer</sl-button>
+                </sl-dialog>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

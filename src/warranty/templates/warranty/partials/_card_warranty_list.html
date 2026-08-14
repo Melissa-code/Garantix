@@ -1,0 +1,49 @@
+<!-- Warranty card for list -->
+<sl-card class="warranty-card">
+    <!-- nom et marque -->
+    <div slot="header" class="card-header">
+        <strong class="product-name card-title">{{ warranty.product_name|truncatechars:30|capfirst }}</strong>
+        <small class="brand">{{ warranty.brand }}</small>
+    </div>
+
+    <!-- body (date et durée) -->
+    <div class="card-body">
+        <div class="info-row">
+            <!-- date d'achat -->
+            <sl-icon name="calendar3"></sl-icon>
+            <span>Acheté le : <strong>{{ warranty.purchase_date|date:"d/m/Y" }}</strong></span>
+        </div>
+        <!-- durée de la garantie -->
+        <div class="info-row">
+            <sl-icon name="hourglass-split"></sl-icon>
+            <span>Durée : <strong>{{ warranty.warranty_duration_months }} mois</strong></span>
+        </div>
+    </div>
+
+    <!-- action btns  -->
+    <div slot="footer" class="card-footer">
+        <sl-button-group>
+            <!-- Voir garantie -->
+            <sl-tooltip content="Voir la garantie" placement="top">
+                <sl-button size="small" variant="neutral" outline
+                    href="{% url 'warranty:warranty_detail' warranty.pk %}">
+                    <sl-icon name="file-earmark-fill"></sl-icon>
+                </sl-button>
+            </sl-tooltip>
+            <!-- Modifier garantie -->
+            <sl-tooltip content="Modifier la garantie" placement="top">
+                <sl-button size="small" variant="neutral" outline
+                    href="{% url 'warranty:warranty_update' warranty.pk %}">
+                    <sl-icon name="pencil-square" style="color: var(--sl-color-warning-600);"></sl-icon>
+                </sl-button>
+            </sl-tooltip>
+            <!-- supprimer garantie -->
+            <sl-tooltip content="Supprimer la garantie" placement="top">
+                <sl-button size="small" variant="neutral" outline class="delete-btn"
+                    data-url="{% url 'warranty:warranty_delete' warranty.pk %}">
+                    <sl-icon name="trash3-fill" style="color: var(--sl-color-danger-600);"></sl-icon>
+                </sl-button>
+            </sl-tooltip>
+        </sl-button-group>
+    </div>
+</sl-card>

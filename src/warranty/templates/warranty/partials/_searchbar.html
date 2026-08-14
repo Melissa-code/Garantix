@@ -1,0 +1,8 @@
+<form method="get" class="search-form">
+    <sl-input name="search" placeholder="Rechercher une garantie" clearable value="{{ request.GET.search }}">
+        <!-- button loupe -->
+        <sl-icon-button slot="suffix" name="search" style="font-size: 1.2rem; color: var(--primary);"
+            onclick="this.closest('form').submit();">
+        </sl-icon-button>
+    </sl-input>
+</form>

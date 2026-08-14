@@ -33,18 +33,21 @@ class SignupView(CreateView):
     template_name = "signup.html"
     success_url = reverse_lazy("warranty:home") 
 
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('warranty:warranties_list')
+        return super().dispatch(request, *args, **kwargs)
+
     def form_valid(self, form): 
         """appelle form.save(): create user DB"""
         response = super().form_valid(form)
         login(self.request, self.object)
         messages.success(self.request, "Bienvenue ! Votre compte a été créé avec succès.")
-
         return response
     
     # TODO : logs
     def form_invalid(self, form):
         messages.error(self.request, "Erreur lors de la création du compte. Vérifiez les informations.")
-
         return super().form_invalid(form)
 
 
@@ -54,6 +57,7 @@ class CustomLoginView(LoginView):
     - le redirige vers la page Liste des garanties
     """
     template_name = "login.html"
+    redirect_authenticated_user = True # ative de Django pour interdire l'accès aux personnes connectées
     
     def form_valid(self, form):
         user = form.get_user()
@@ -62,7 +66,7 @@ class CustomLoginView(LoginView):
         return super().form_valid(form)
    
     def remember_me(self): 
-        """ 
+        """
         Cookie de session Django à la connexion, utilisé dans la navigation (ex Cookie: sessionid=h3k5j2n4m6p8q1r9) 
         - Session destroyed by closing browser 
         - or Session 2 weeks (par défaut Django: 14j en secondes)

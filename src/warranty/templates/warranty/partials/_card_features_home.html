@@ -1,0 +1,13 @@
+<!-- 3 cards "features" in home page -->
+<sl-card class="home-feature-card custom-card">
+  <div slot="header" class="card-header card-title">
+    <strong class="card-home-feature-title">{{ feature.title }}</strong>
+    <small class="card-home-feature-subtitle">{{ feature.subtitle }}</small>
+  </div>
+  <div class="card-body">
+    <div class="card-home-feature-info-row">
+      <sl-icon name="{{ feature.icon }}" class="card-home-feature-icon"></sl-icon>
+      <span>{{ feature.description }}</span>
+    </div>
+  </div>
+</sl-card>

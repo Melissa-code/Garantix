@@ -26,3 +26,20 @@ class WarrantyForm(forms.ModelForm):
             "imageReceipt", 
             "notes"
         ]
+        error_messages = {
+            'product_name': {
+                'min_length': "Le nom est trop court.",
+                'max_length': "Le nom est trop long.",
+            },
+            'brand': {
+                'min_length': "La marque est trop courte.",
+                'max_length': "La marque est trop longue.",
+            },
+            'warranty_duration_months': {
+                'min_value': "La durée doit être un nombre positif.",
+                'max_value': "La durée est trop longue.",
+            },
+            'vendor': {
+                'max_length': "Le nom du revendeur est trop long.",
+            },
+        }

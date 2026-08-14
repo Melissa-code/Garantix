@@ -1,0 +1,251 @@
+/* **************************************************
+warranty detail */
+
+.page-details-bg-header {
+  background: var(--secondary-light);
+  padding: 1.5rem 0;
+}
+
+.container-details {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+}
+
+.container-details h1 {
+  margin: 0 1rem;
+}
+
+.title-badge {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 2rem;
+}
+
+/* badge */
+.badge-icon-detail {
+  margin-right: 4px;
+}
+
+.badge-expiration::part(base) {
+  padding: 7px 12px;
+  color: white;
+  font-weight: 400;
+  font-size: 0.8rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+}
+
+.is-active::part(base) {
+  background-color: var(--black-light);
+  color: white;
+}
+
+.is-expired::part(base) {
+  background-color: var(--secondary-light);
+  color: var(--sl-color-neutral-700);
+  border: 1px solid var(--secondary);
+}
+
+/* Layout Global */
+
+/* limite largeur du bloc total et on le centre */
+.centered-content-wrapper {
+  max-width: 900px;
+  margin: 4rem auto;
+}
+
+.warranty-main-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 280px;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* tableau infos à gauche */
+.info-table {
+  padding: 1rem;
+  border: 1px solid var(--secondary);
+  border-radius: 12px;
+  height: 50vh; /* hauteur fixe pour scroll */
+  overflow-y: auto; /*  scroll */
+  background: white;
+}
+
+.info-table::-webkit-scrollbar {
+  width: 6px;
+}
+.info-table::-webkit-scrollbar-thumb {
+  background: var(--secondary-light);
+  border-radius: 10px;
+}
+
+.table-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid var(--secondary-light);
+}
+
+.label-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px; /*entre icon et titre */
+}
+
+.label-cell sl-icon {
+  font-size: 1.2rem;
+  color: var(--sl-color-neutral-500);
+}
+
+.label-cell label {
+  font-size: 0.95rem;
+}
+
+.value-cell {
+  text-align: right;
+  font-weight: 700;
+  color: var(--sl-color-neutral-800);
+  font-size: 0.95rem;
+}
+
+#value-brand {
+  color: var(--info);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.notes-row {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.notes-row .value-cell {
+  text-align: left;
+  width: 100%;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  font-weight: 400;
+  color: var(--sl-color-neutral-500);
+}
+
+.notes-truncate {
+  text-align: left;
+  width: 100%;
+  display: -webkit-box;
+  line-clamp: 2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+/* survol (desktop) */
+.notes-truncate:hover {
+  display: block; /* Casse le blocage des 2 lignes */
+  overflow: visible;
+  color: var(--sl-color-neutral-900);
+}
+
+/* on ne coupe pas le texte sur mobile  */
+@media (max-width: 768px) {
+  .notes-truncate {
+    line-clamp: unset;
+    -webkit-line-clamp: unset;
+    display: block;
+    overflow: visible;
+  }
+}
+
+/* photo à droite */
+.photo-frame {
+  padding: 3px;
+  background: var(--secondary);
+  box-shadow: var(--sl-shadow-medium);
+  border-radius: 12px;
+  width: 100%;
+  height: 50vh;
+  min-height: 0;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+.photo-frame:hover {
+  transform: scale(1.03);
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 8px;
+}
+
+#zoom-modal img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  object-fit: contain; /* Garde tout le ticket visible sans le couper */
+}
+
+.actions-group {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  width: 100%;
+  flex-shrink: 0;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  /* une col */
+  .warranty-main-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 0 1rem;
+  }
+  .centered-content-wrapper {
+    margin: 2rem 0;
+  }
+
+  .specs-column,
+  .receipt-column {
+    width: 100%;
+  }
+
+  /* pas de limite de hauteur du tableau  */
+  .info-table {
+    max-height: auto;
+    overflow: visible;
+    overflow-y: auto; /* scroll */
+    height: auto;
+  }
+
+  .title-badge {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .photo-frame img {
+    max-height: 350px;
+  }
+
+  #zoom-modal {
+    --width: 90vw;
+  }
+}

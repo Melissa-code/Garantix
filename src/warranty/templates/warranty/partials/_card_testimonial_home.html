@@ -1,0 +1,12 @@
+<!--  3 cards "testimonials" in home page -->
+<sl-card class="testimonial-card">
+  <!-- opinion -->
+  <blockquote class="testimonial-opinion">
+    "{{ testimonial.opinion }}"
+  </blockquote>
+  <!-- rate + name client -->
+  <div slot="footer">
+    <sl-rating value="{{ testimonial.rating }}" readonly></sl-rating>
+    <span>— {{ testimonial.name }}</span>
+  </div>
+</sl-card>

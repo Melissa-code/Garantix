@@ -167,3 +167,5 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",  # ← ENLEVÉ "Manifest"
     },
 }
+
+WHITENOISE_MAX_AGE = 0  # désactive le cache en dev
