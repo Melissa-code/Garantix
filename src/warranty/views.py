@@ -9,7 +9,7 @@ from warranty.models import Warranty
 from warranty.mixins import ContextDataMixin, WarrantySearchMixin, UserWarrantyMixin
 from warranty.forms import WarrantyForm
 from warranty import services
-from django.http import JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib import messages
 from warranty.constants import FEATURES_HOME, MOCKUPS_HOME, TESTIMONIALS_HOME
 
@@ -97,6 +97,7 @@ class WarrantyUpdateView(LoginRequiredMixin, UserWarrantyMixin, UpdateView):
 class WarrantyDeleteView(LoginRequiredMixin, UserWarrantyMixin, DeleteView):
     """Page Supprimer une garantie - confirmation avant de supprimer une garantie existante"""
     model = Warranty
+    template_name = 'warranty/warranties_list.html'
     context_object_name = "warranty"
     success_url = reverse_lazy("warranty:warranties_list")
    
@@ -110,7 +111,8 @@ class WarrantyDeleteView(LoginRequiredMixin, UserWarrantyMixin, DeleteView):
                 'status': 'success',
                 'message': f'Garantie "{product_name}" supprimée avec succès'
             })
-        return super().form_valid(form)
+        # return super().form_valid(form)
+        return HttpResponseRedirect(self.get_success_url())
 
     def form_invalid(self, form):
         if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':

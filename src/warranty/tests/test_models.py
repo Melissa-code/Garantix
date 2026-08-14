@@ -8,7 +8,7 @@ class WarrantyModelTest(WarrantyTestCase):
 
     def test_warranty_creation(self):
         """Vérifie que la garantie de base créée dans la classe mère est correcte"""
-        self.assertEqual(str(self.warranty), "Produit_Test (Marque_Test)")
+        self.assertEqual(str(self.warranty), "Produit_Test (MARQUE_TEST)") # marque en MAJ comme dans le model (clean())
         self.assertEqual(self.warranty.user.username, "testuser@example.com")
 
     def test_warranty_expiry_calculation(self):

@@ -11,13 +11,13 @@ import uuid
 
 # accents, lettres, chiffres, espaces, tirets, parenthèses, points (Sécurité XSS < >)
 text_regex = RegexValidator(
-    regex=r'^[a-zA-Z0-9À-ÿ\s\(\)\-\.]+$',
+    regex=r'^[a-zA-Z0-9À-ÿ\s\(\)\-\_\.]+$',
     message="Le nom contient des caractères non autorisés (ex: < > $ # { })."
 )
 
 # \r?\n pour les sauts de ligne 
 notes_regex = RegexValidator(
-    regex=r'^[a-zA-Z0-9À-ÿ\s\(\)\-\.\,\!\?\:\' \r?\n]+$',
+    regex=r'^[a-zA-Z0-9À-ÿ\s\(\)\-\_\.,\!\?\:\' \r?\n]+$',
     message="Les notes contiennent des caractères spéciaux non autorisés."
 )
 

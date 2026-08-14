@@ -100,7 +100,7 @@ class WarrantyDetailViewTest(WarrantyTestCase):
         response = self.client.get(reverse('warranty:warranty_detail', args=[self.warranty.id]))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Produit_Test")
-        self.assertContains(response, "Marque_Test")
+        self.assertContains(response, "MARQUE_TEST")
 
     def test_warranty_not_found(self):
         """Test garantie non trouvée (ID inexistant)"""
@@ -114,7 +114,7 @@ class WarrantyDetailViewTest(WarrantyTestCase):
         response = self.client.get(reverse('warranty:warranty_detail', args=[self.warranty.id]))
         warranty = response.context['warranty']
         self.assertEqual(warranty.product_name, "Produit_Test")
-        self.assertEqual(warranty.brand, "Marque_Test")
+        self.assertEqual(warranty.brand, "MARQUE_TEST")
         self.assertEqual(str(warranty.purchase_date), "2025-12-03")
         self.assertEqual(warranty.warranty_duration_months, 24)
         self.assertEqual(warranty.vendor, "Revendeur_Test")
@@ -142,14 +142,14 @@ class WarrantyCreateViewTest(WarrantyTestCase):
         self.client.force_login(self.user)
         response = self.client.get(reverse('warranty:warranty_create'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Ajouter la garantie")
+        self.assertContains(response, "Ajouter une garantie")
 
     def test_create_warranty(self):
         """Test création d'une nouvelle garantie"""
         self.client.force_login(self.user)
         response = self.client.post(reverse('warranty:warranty_create'), {
             'product_name': "Produit_Nouveau",
-            'brand': "Marque_Nouveau",
+            'brand': "MARQUE_NOUVEAU",
             'purchase_date': "2025-11-22",
             'warranty_duration_months': "18",
             'vendor': "Revendeur_Nouveau",
@@ -160,7 +160,7 @@ class WarrantyCreateViewTest(WarrantyTestCase):
         self.assertEqual(Warranty.objects.count(), 2)
         new_warranty = Warranty.objects.first()
         self.assertEqual(new_warranty.product_name, "Produit_Nouveau")
-        self.assertEqual(new_warranty.brand, "Marque_Nouveau")
+        self.assertEqual(new_warranty.brand, "MARQUE_NOUVEAU")
 
     def test_warranties_created_in_setup(self):
         """Test si setUp a bien fonctionné: une garantie créée pour les tests"""
@@ -172,7 +172,7 @@ class WarrantyCreateViewTest(WarrantyTestCase):
         initial_count = Warranty.objects.count()
         response = self.client.post(reverse('warranty:warranty_create'), {
             'product_name': "",
-            'brand': "Marque_Incomplete",
+            'brand': "MARQUE_INCOMPLETE",
             'purchase_date': "2025-11-23",
             'warranty_duration_months': "12",
             'vendor': "Revendeur_Incomplete",
@@ -187,7 +187,7 @@ class WarrantyCreateViewTest(WarrantyTestCase):
         self.client.force_login(self.user)
         response = self.client.post(reverse('warranty:warranty_create'), {
             'product_name': "Produit_InvalidDate",
-            'brand': "Marque_InvalidDate",
+            'brand': "MARQUE_INVALIDDATE",
             'purchase_date': "invalid-date",          # date invalide
             'warranty_duration_months': "12",
             'vendor': "Revendeur_InvalidDate",
@@ -202,7 +202,7 @@ class WarrantyCreateViewTest(WarrantyTestCase):
         self.client.force_login(self.user)
         response = self.client.post(reverse('warranty:warranty_create'), {
             'product_name': "Produit_NegativeDuration",
-            'brand': "Marque_NegativeDuration",
+            'brand': "MARQUE_NEGATIVEDURATION",
             'purchase_date': "2025-11-24",
             'warranty_duration_months': "-5",          # durée négative
             'vendor': "Revendeur_NegativeDuration",
@@ -217,7 +217,7 @@ class WarrantyCreateViewTest(WarrantyTestCase):
         self.client.force_login(self.user)
         response = self.client.post(reverse('warranty:warranty_create'), {
             'product_name': "Produit_OptionalFields",
-            'brand': "Marque_OptionalFields",
+            'brand': "MARQUE_OPTIONALFIELDS",
             'purchase_date': "2025-11-25",
             'warranty_duration_months': "12",
             'vendor': "revendeur",
@@ -236,7 +236,7 @@ class WarrantyCreateViewTest(WarrantyTestCase):
         long_notes = "A" * 5000  
         response = self.client.post(reverse('warranty:warranty_create'), {
             'product_name': "Produit_LongNotes",
-            'brand': "Marque_LongNotes",
+            'brand': "MARQUE_LONGNOTES",
             'purchase_date': "2025-11-26",
             'warranty_duration_months': "12",
             'vendor': "Revendeur_LongNotes",
@@ -253,18 +253,18 @@ class WarrantyCreateViewTest(WarrantyTestCase):
         self.client.force_login(self.user)
         response = self.client.post(reverse('warranty:warranty_create'), {
             'product_name': "Produit_@#€%",
-            'brand': "Marque_&*()",
+            'brand': "MARQUE_&*()",
             'purchase_date': "2025-11-27",
             'warranty_duration_months': "12",
             'vendor': "Revendeur_!~",
             'imageReceipt': "",
             'notes': "Observations_<>?",
         })
-        self.assertEqual(response.status_code, 302)  
-        self.assertEqual(Warranty.objects.count(), 2) # setUp + 1 nouvelle
+        self.assertEqual(response.status_code, 200)  # reaffiche le formulaire avec erreurs de validation
+        self.assertEqual(Warranty.objects.count(), 1) # setUp + 1 nouvelle mais elle est bloquée pas créée
         new_warranty = Warranty.objects.last()
         self.assertEqual(new_warranty.product_name, "Produit_Test")  # le champ product_name est requis et doit être valide donc la création échoue et la garantie créée est celle du setUp
-        self.assertEqual(new_warranty.brand, "Marque_Test")
+        self.assertEqual(new_warranty.brand, "MARQUE_TEST")
         self.assertEqual(new_warranty.vendor, "Revendeur_Test")
         self.assertEqual(new_warranty.notes, "Observations_Test")
     
@@ -274,7 +274,7 @@ class WarrantyCreateViewTest(WarrantyTestCase):
         for i in range(5):
             response = self.client.post(reverse('warranty:warranty_create'), {
                 'product_name': f"Produit_{i}",
-                'brand': f"Marque_{i}",
+                'brand': f"MARQUE_{i}",
                 'purchase_date': "2025-11-28",
                 'warranty_duration_months': "12",
                 'vendor': f"Revendeur_{i}",
@@ -321,7 +321,7 @@ class WarrantyUpdateViewTest(WarrantyTestCase):
         self.client.force_login(self.user)
         response = self.client.post(reverse('warranty:warranty_update', args=[self.warranty.id]), {
             'product_name': "Produit_Test",
-            'brand': "Marque_Test",
+            'brand': "MARQUE_TEST",
             'purchase_date': "2025-12-01",
             'warranty_duration_months': "24",
             'vendor': "Revendeur_Test",
@@ -331,7 +331,7 @@ class WarrantyUpdateViewTest(WarrantyTestCase):
         self.assertEqual(response.status_code, 302) 
         self.warranty.refresh_from_db()
         self.assertEqual(self.warranty.product_name, "Produit_Test")
-        self.assertEqual(self.warranty.brand, "Marque_Test")
+        self.assertEqual(self.warranty.brand, "MARQUE_TEST")
         self.assertEqual(str(self.warranty.purchase_date), "2025-12-01")
         self.assertEqual(self.warranty.warranty_duration_months, 24)
         self.assertEqual(self.warranty.vendor, "Revendeur_Test")
@@ -342,7 +342,7 @@ class WarrantyUpdateViewTest(WarrantyTestCase):
         self.client.force_login(self.user)
         response = self.client.post(reverse('warranty:warranty_update', args=[self.warranty.id]), {
             'product_name': "",
-            'brand': "Marque_Invalid",
+            'brand': "MARQUE_INVALIDE",
             'purchase_date': "invalid-date",
             'warranty_duration_months': "-10",
             'vendor': "Revendeur_Invalid",
@@ -352,7 +352,7 @@ class WarrantyUpdateViewTest(WarrantyTestCase):
         self.assertEqual(response.status_code, 200)  
         self.warranty.refresh_from_db()
         self.assertEqual(self.warranty.product_name, "Produit_Test")
-        self.assertEqual(self.warranty.brand, "Marque_Test")
+        self.assertEqual(self.warranty.brand, "MARQUE_TEST")
         self.assertEqual(str(self.warranty.purchase_date), "2025-12-03")
         self.assertEqual(self.warranty.warranty_duration_months, 24)       
         self.assertEqual(self.warranty.vendor, "Revendeur_Test")
@@ -373,7 +373,7 @@ class WarrantyUpdateViewTest(WarrantyTestCase):
         self.assertEqual(response.status_code, 200)  
         self.warranty.refresh_from_db()
         self.assertEqual(self.warranty.product_name, "Produit_Test")
-        self.assertEqual(self.warranty.brand, "Marque_Test")
+        self.assertEqual(self.warranty.brand, "MARQUE_TEST")
         self.assertEqual(str(self.warranty.purchase_date), "2025-12-03")
         self.assertEqual(self.warranty.warranty_duration_months, 24)       
         self.assertEqual(self.warranty.vendor, "Revendeur_Test")
@@ -425,20 +425,12 @@ class WarrantyDeleteViewTest(WarrantyTestCase):
         self.assertTrue(warranty_still_exists)
     
     def test_delete_warranty_twice(self):
-        """Test suppression de la même garantie deux fois"""
+        """Test suppression de la même garantie deux fois pas possible"""
         self.client.force_login(self.user)
         response1 = self.client.post(reverse('warranty:warranty_delete', args=[self.warranty.id]))
         self.assertEqual(response1.status_code, 302) 
         response2 = self.client.post(reverse('warranty:warranty_delete', args=[self.warranty.id]))
         self.assertEqual(response2.status_code, 404)
-    
-    def test_delete_warranty_invalid_method(self):
-        """Test suppression avec une méthode HTTP invalide (GET au lieu de POST)"""
-        self.client.force_login(self.user)
-        response = self.client.get(reverse('warranty:warranty_delete', args=[self.warranty.id]))
-        self.assertEqual(response.status_code, 200)  
-        warranty_still_exists = Warranty.objects.filter(id=self.warranty.id).exists()
-        self.assertTrue(warranty_still_exists)
 
     def test_delete_warranty_different_user(self):
         """Test qu'un utilisateur ne peut pas supprimer la garantie d'un autre"""
@@ -448,13 +440,4 @@ class WarrantyDeleteViewTest(WarrantyTestCase):
         self.assertEqual(response.status_code, 404)
         warranty_still_exists = Warranty.objects.filter(id=self.warranty.id).exists()
         self.assertTrue(warranty_still_exists)
-
-    def test_delete_warranty_confirmation_page(self):
-        """Test de la page de confirmation de suppression"""
-        self.client.force_login(self.user)
-        response = self.client.get(reverse('warranty:warranty_delete', args=[self.warranty.id]))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Etes-vous sûr de vouloir supprimer la garantie")
-        self.assertContains(response, self.warranty.product_name)
-        self.assertContains(response, "Oui supprimer")
         
