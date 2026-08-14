@@ -120,17 +120,17 @@ class WarrantyDeleteView(LoginRequiredMixin, UserWarrantyMixin, DeleteView):
    
     def form_valid(self, form) -> HttpResponse:
         product_name: str = self.object.product_name
-        is_ajax = self.request.headers.get('x-requested-with') == 'XMLHttpRequest'
+        is_ajax: bool = self.request.headers.get('x-requested-with') == 'XMLHttpRequest'
 
         try: 
             self.object.delete()
-            msg = f'Garantie "{product_name}" supprimée avec succès.'
+            msg: str= f'Garantie "{product_name}" supprimée avec succès.'
             messages.success(self.request, msg)
 
             if is_ajax:
-                message_html = render_to_string('partials/_messages.html', request=self.request)
+                message_html: str = render_to_string('partials/_messages.html', request=self.request)
                 # vide la session pour éviter le doublon au refresh
-                storage = messages.get_messages(self.request)
+                storage: messages.MessageStorage = messages.get_messages(self.request)
                 storage.used = True
 
                 return JsonResponse({
@@ -140,13 +140,13 @@ class WarrantyDeleteView(LoginRequiredMixin, UserWarrantyMixin, DeleteView):
             return HttpResponseRedirect(self.get_success_url())
 
         except Exception:
-            err_msg = f'Erreur lors de la suppression de la garantie "{product_name}".'
+            err_msg: str = f'Erreur lors de la suppression de la garantie "{product_name}".'
             messages.error(self.request, err_msg)
 
             if is_ajax:
-                message_html = render_to_string('partials/_messages.html', request=self.request)
-                storage = messages.get_messages(self.request)
+                message_html: str = render_to_string('partials/_messages.html', request=self.request)
+                storage: messages.MessageStorage = messages.get_messages(self.request)
                 storage.used = True
-                
+
                 return JsonResponse({'status': 'error', 'message': err_msg}, status=400)    
             return super().form_invalid(form) 

@@ -6,18 +6,18 @@ from .models import Warranty
 
 class CustomUserCreationForm(UserCreationForm):
     """ Formulaire de création d'utilisateur personnalisé qui utilise l'email comme nom d'utilisateur"""
-    username = forms.EmailField(label="Email", required=True)
+    username: forms.EmailField = forms.EmailField(label="Email", required=True)
 
     class Meta:
-        model = User
-        fields = ("username", "password1", "password2")
+        model: type[User] = User
+        fields: tuple[str, ...] = ("username", "password1", "password2")
 
 
 class WarrantyForm(forms.ModelForm):
     """ Formulaire pour créer ou mettre à jour une garantie """
     class Meta:
-        model = Warranty
-        fields = [
+        model: type[Warranty] = Warranty
+        fields: list[str] = [
             "product_name", 
             "brand", 
             "purchase_date", 
@@ -26,7 +26,7 @@ class WarrantyForm(forms.ModelForm):
             "imageReceipt", 
             "notes"
         ]
-        error_messages = {
+        error_messages: dict[str, dict[str, str]] = {
             'product_name': {
                 'min_length': "Le nom est trop court.",
                 'max_length': "Le nom est trop long.",
