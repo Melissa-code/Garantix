@@ -1,21 +1,27 @@
-from django.db.models import Q
+from django.db.models import Q, QuerySet
 from django.conf import settings
 from datetime import datetime
+from typing import Any, Dict
+from warranty.models import Warranty
 
 class ContextDataMixin:
     """ Mixin pour afficher le context (media année courante user connecté total) """
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> Dict[str, Any]:
         # media 
-        context = super().get_context_data(**kwargs)
+        context: Dict[str, Any] = super().get_context_data(**kwargs)
         context['media_url'] = settings.MEDIA_URL
+
         # annee courante 
-        annee_courante = datetime.now().year
+        annee_courante: int = datetime.now().year
         context['current_year'] = annee_courante
+
         # nom du user connecté
         if self.request.user.is_authenticated:
-            context['nom_complet'] = f"{self.request.user.first_name} {self.request.user.last_name}".strip()
+            nom_complet: str = f"{self.request.user.first_name} {self.request.user.last_name}".strip()
+            context['nom_complet'] = nom_complet 
             context['nom_affichage'] = context['nom_complet'] if context['nom_complet'] else self.request.user.username
+
         # total de garanties
         if hasattr(self, 'model') and self.model: 
             context['total_warranties'] = self.model.objects.count()
@@ -25,14 +31,15 @@ class ContextDataMixin:
 
 class WarrantySearchMixin:
     """ Mixin pour rechercher une garnatie via un paramètre GET """
-    search_param = "search"
+    search_param: str = "search"
 
     def get_queryset(self): 
-        queryset = super().get_queryset()
-        search_query = self.request.GET.get(self.search_param, "").strip()
+        queryset: QuerySet[Warranty] = super().get_queryset()
+        search_query: str = self.request.GET.get(self.search_param, "").strip()
 
         if search_query:
             queryset = queryset.filter(
+                # __icontains permet de faire une recherche insensible à la casse
                 Q(product_name__icontains=search_query) |
                 Q(brand__icontains=search_query) |
                 Q(vendor__icontains=search_query) 
@@ -44,6 +51,6 @@ class WarrantySearchMixin:
 class UserWarrantyMixin:
     """ Filtre les garanties par utilisateur connecté """
     
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet[Warranty]:
         return super().get_queryset().filter(user=self.request.user)
     
