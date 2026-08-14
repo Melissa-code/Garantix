@@ -14,6 +14,7 @@ from django.contrib import messages
 from warranty.constants import FEATURES_HOME, MOCKUPS_HOME, TESTIMONIALS_HOME
 from typing import Any, Dict
 from typing import Type
+from django.template.loader import render_to_string
 import logging
 
 logger = logging.getLogger(__name__)
@@ -112,25 +113,40 @@ class WarrantyUpdateView(LoginRequiredMixin, UserWarrantyMixin, UpdateView):
         
 class WarrantyDeleteView(LoginRequiredMixin, UserWarrantyMixin, DeleteView):
     """Page Supprimer une garantie - confirmation avant de supprimer une garantie existante"""
-    model = Warranty
-    template_name = 'warranty/warranties_list.html'
-    context_object_name = "warranty"
-    success_url = reverse_lazy("warranty:warranties_list")
+    model: Type[Warranty] = Warranty
+    template_name: str = 'warranty/warranties_list.html'
+    context_object_name: str = "warranty"
+    success_url: str = reverse_lazy("warranty:warranties_list")
    
-    def form_valid(self, form):
-        product_name = self.object.product_name
-        self.object.delete()
-        
-        # req AJAX pour supprimer la garantie sans recharger la page
-        if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            return JsonResponse({
-                'status': 'success',
-                'message': f'Garantie "{product_name}" supprimée avec succès'
-            })
-        # return super().form_valid(form)
-        return HttpResponseRedirect(self.get_success_url())
+    def form_valid(self, form) -> HttpResponse:
+        product_name: str = self.object.product_name
+        is_ajax = self.request.headers.get('x-requested-with') == 'XMLHttpRequest'
 
-    def form_invalid(self, form):
-        if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            return JsonResponse({'status': 'error', 'message': 'Erreur lors de la suppression.'}, status=400)
-        return super().form_invalid(form)
+        try: 
+            self.object.delete()
+            msg = f'Garantie "{product_name}" supprimée avec succès.'
+            messages.success(self.request, msg)
+
+            if is_ajax:
+                message_html = render_to_string('partials/_messages.html', request=self.request)
+                # vide la session pour éviter le doublon au refresh
+                storage = messages.get_messages(self.request)
+                storage.used = True
+
+                return JsonResponse({
+                    'status': 'success',
+                    'message_html': message_html
+                })
+            return HttpResponseRedirect(self.get_success_url())
+
+        except Exception:
+            err_msg = f'Erreur lors de la suppression de la garantie "{product_name}".'
+            messages.error(self.request, err_msg)
+
+            if is_ajax:
+                message_html = render_to_string('partials/_messages.html', request=self.request)
+                storage = messages.get_messages(self.request)
+                storage.used = True
+                
+                return JsonResponse({'status': 'error', 'message': err_msg}, status=400)    
+            return super().form_invalid(form) 
