@@ -1,4 +1,4 @@
-from django.db import IntegrityError
+from django.db.models import QuerySet
 from django.shortcuts import render
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -9,17 +9,20 @@ from warranty.models import Warranty
 from warranty.mixins import ContextDataMixin, WarrantySearchMixin, UserWarrantyMixin
 from warranty.forms import WarrantyForm
 from warranty import services
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib import messages
 from warranty.constants import FEATURES_HOME, MOCKUPS_HOME, TESTIMONIALS_HOME
+from typing import Any, Dict
+from typing import Type
+from django.template.loader import render_to_string
 
 
-class HomeView(TemplateView): 
+class HomeView(TemplateView):
     """Accueil - redirige vers la liste des garanties si connecté sinon affiche une page d'accueil"""
-    template_name = "warranty/home.html"
+    template_name: str = "warranty/home.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_context_data(self, **kwargs) -> Dict[str, Any]:
+        context: Dict[str, Any] = super().get_context_data(**kwargs)
         context['media_url'] = settings.MEDIA_URL
         context['features'] = FEATURES_HOME
         context['mockups'] = MOCKUPS_HOME
@@ -29,54 +32,61 @@ class HomeView(TemplateView):
 
 class WarrantiesListView(LoginRequiredMixin, ContextDataMixin, WarrantySearchMixin, UserWarrantyMixin, ListView):
     """Liste des garanties de l'utilisateur connecté avec barre de recherche"""
-    context_object_name = "warranties" 
-    template_name = "warranty/warranties_list.html"
-    paginate_by = 3
+    context_object_name: str = "warranties"
+    template_name: str = "warranty/warranties_list.html"
+    paginate_by: int = 3
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet[Warranty]:
         """Récupère les garanties de l'utilisateur connecté filtrées par la barre de recherche"""
-        queryset = services.get_user_warranties(user=self.request.user)
-        self.queryset = queryset 
+        queryset: QuerySet[Warranty] = services.get_user_warranties(user=self.request.user)
+        self.queryset = queryset
         return super().get_queryset()
 
 
 class WarrantyDetailView(LoginRequiredMixin, UserWarrantyMixin, DetailView):
     """Page Détail de la garantie - affiche les détails d'une garantie spécifique"""
-    model = Warranty
-    context_object_name = "warranty"
-    template_name = "warranty/warranty_detail.html"
+    model: Type[Warranty] = Warranty
+    context_object_name: str = "warranty"
+    template_name: str = "warranty/warranty_detail.html"
   
 
 class WarrantyCreateView(LoginRequiredMixin, UserWarrantyMixin, CreateView):
     """Page Créer une nouvelle garantie - formulaire pour ajouter une nouvelle garantie"""
-    model = Warranty
-    form_class = WarrantyForm
-    template_name = "warranty/warranty_create.html"
+    model: Type[Warranty] = Warranty
+    form_class: Type[WarrantyForm] = WarrantyForm
+    template_name: str = "warranty/warranty_create.html"
 
-    def form_valid(self, form):
-        product = form.cleaned_data.get('product_name')
-        brand = form.cleaned_data.get('brand')
+    def form_valid(self, form) -> HttpResponse:
+        product: str = form.cleaned_data.get('product_name')
+        brand: str = form.cleaned_data.get('brand')
         user = self.request.user
-        exists = Warranty.objects.filter(user=user, product_name=product, brand=brand).exists()
-
+        
+        # vérification doublon pour le même utilisateur, produit et marque
+        exists: bool = Warranty.objects.filter(user=user, product_name=product, brand=brand).exists()
         if exists:
             messages.error(self.request, "Ce produit est déjà enregistré pour cette marque.")
             return self.form_invalid(form)
 
         form.instance.user = user
-        messages.success(self.request, "Garantie ajoutée avec succès.")
-        return super().form_valid(form)
-   
+
+        try: 
+            response = super().form_valid(form)
+            messages.success(self.request, "Garantie ajoutée avec succès.")
+            return response
+        except Exception :
+            messages.error(self.request, f"Erreur lors de l'ajout de la garantie.")
+            return self.form_invalid(form)
+
 
 class WarrantyUpdateView(LoginRequiredMixin, UserWarrantyMixin, UpdateView):
     """Page Modifier une garantie - formulaire pré-rempli pour éditer une garantie existante"""
-    model = Warranty
-    form_class = WarrantyForm
-    template_name = "warranty/warranty_update.html"
+    model: Type[Warranty] = Warranty
+    form_class: Type[WarrantyForm] = WarrantyForm
+    template_name: str = "warranty/warranty_update.html"
 
-    def form_valid(self, form):
-        product = form.cleaned_data.get('product_name')
-        brand = form.cleaned_data.get('brand')
+    def form_valid(self, form) -> HttpResponse:
+        product: str = form.cleaned_data.get('product_name')
+        brand: str = form.cleaned_data.get('brand')
         user = self.request.user
         duplicate = Warranty.objects.filter(
             user=user, 
@@ -89,32 +99,51 @@ class WarrantyUpdateView(LoginRequiredMixin, UserWarrantyMixin, UpdateView):
             form.add_error('product_name', "Ce nom est déjà utilisé pour cette marque.")
             return self.form_invalid(form)
 
-        messages.success(self.request, "Garantie modifiée avec succès.")
-        return super().form_valid(form)
+        try: 
+            response = super().form_valid(form)
+            messages.success(self.request, "Garantie modifiée avec succès.")
+            return response
+        except Exception:
+            messages.error(self.request, f"Erreur lors de la modification de la garantie.")
+            return self.form_invalid(form)
 
-        
         
 class WarrantyDeleteView(LoginRequiredMixin, UserWarrantyMixin, DeleteView):
     """Page Supprimer une garantie - confirmation avant de supprimer une garantie existante"""
-    model = Warranty
-    template_name = 'warranty/warranties_list.html'
-    context_object_name = "warranty"
-    success_url = reverse_lazy("warranty:warranties_list")
+    model: Type[Warranty] = Warranty
+    template_name: str = 'warranty/warranties_list.html'
+    context_object_name: str = "warranty"
+    success_url: str = reverse_lazy("warranty:warranties_list")
    
-    def form_valid(self, form):
-        product_name = self.object.product_name
-        self.object.delete()
-        
-        # req AJAX pour supprimer la garantie sans recharger la page
-        if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            return JsonResponse({
-                'status': 'success',
-                'message': f'Garantie "{product_name}" supprimée avec succès'
-            })
-        # return super().form_valid(form)
-        return HttpResponseRedirect(self.get_success_url())
+    def form_valid(self, form) -> HttpResponse:
+        product_name: str = self.object.product_name
+        is_ajax: bool = self.request.headers.get('x-requested-with') == 'XMLHttpRequest'
 
-    def form_invalid(self, form):
-        if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            return JsonResponse({'status': 'error', 'message': 'Erreur lors de la suppression.'}, status=400)
-        return super().form_invalid(form)
+        try: 
+            self.object.delete()
+            msg: str= f'Garantie "{product_name}" supprimée avec succès.'
+            messages.success(self.request, msg)
+
+            if is_ajax:
+                message_html: str = render_to_string('partials/_messages.html', request=self.request)
+                # vide la session pour éviter le doublon au refresh
+                storage: messages.MessageStorage = messages.get_messages(self.request)
+                storage.used = True
+
+                return JsonResponse({
+                    'status': 'success',
+                    'message_html': message_html
+                })
+            return HttpResponseRedirect(self.get_success_url())
+
+        except Exception:
+            err_msg: str = f'Erreur lors de la suppression de la garantie "{product_name}".'
+            messages.error(self.request, err_msg)
+
+            if is_ajax:
+                message_html: str = render_to_string('partials/_messages.html', request=self.request)
+                storage: messages.MessageStorage = messages.get_messages(self.request)
+                storage.used = True
+
+                return JsonResponse({'status': 'error', 'message': err_msg}, status=400)    
+            return super().form_invalid(form) 

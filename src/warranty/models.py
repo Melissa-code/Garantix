@@ -17,7 +17,7 @@ text_regex = RegexValidator(
 
 # \r?\n pour les sauts de ligne 
 notes_regex = RegexValidator(
-    regex=r'^[a-zA-Z0-9À-ÿ\s\(\)\-\_\.,\!\?\:\' \r?\n]+$',
+    regex=r'^[a-zA-Z0-9À-ÿ\s\(\)\-\_\.,\°\!\?\:\'€%"\/&\+]+$',
     message="Les notes contiennent des caractères spéciaux non autorisés."
 )
 

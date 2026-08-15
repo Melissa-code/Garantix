@@ -55,8 +55,8 @@
 
 <div class="container-page">
 
-    <!-- message -->
-    <section class="section-message">
+    <!-- message (id pour delete ajax) -->
+    <section id="alert-box" class="section-message">
         {% include 'partials/_messages.html' %}
     </section>
 
@@ -97,13 +97,11 @@
         e.preventDefault();
 
         const url = btn.getAttribute('data-url');
-        console.log("Tentative de suppression sur :", url);
         if (!url) return;
         if (!confirm("Supprimer cette garantie ?")) return;
 
         const tokenInput = document.querySelector('[name=csrfmiddlewaretoken]');
         if (!tokenInput) {
-            console.error("Token CSRF manquant dans le HTML !");
             return;
         }
         const csrftoken = tokenInput.value;
@@ -122,6 +120,12 @@
             if (response.ok) {
                 const data = await response.json();
                 if (data.status === 'success') {
+                    // message success
+                    const messageSection = document.querySelector('.section-message');
+                    if (messageSection && data.message_html) {
+                        messageSection.innerHTML = data.message_html; 
+                    }
+
                     // remove la card
                     const card = btn.closest('.warranty-card');
                     if (card) {
@@ -133,14 +137,12 @@
                 }
 
             } else {
-                console.error("Erreur serveur: ", response.status);
                 btn.loading = false;
             }
         } catch (err) {
-            console.error("Erreur réseau: ", err);
             btn.loading = false;
         }
-    });
+    }); 
 
 </script>
 

@@ -1,9 +1,9 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% load static %}
 
 {% block title %}
   <title>Garantix - Se connecter</title>
-{% endblock title %} 
+{% endblock title %}
 
 {% block extra_css %}
   <link rel="stylesheet" href="{% static 'css/authentication.css' %}">
@@ -14,30 +14,20 @@
 
   <section class="page-bg-header">
     <div class="container-page">
-        <!-- titre  -->
-        <div class="title">
-          <h1>Se connecter</h1>
-        </div>
-        <!-- présentation -->
-        <div class="presentation">
-            <p>Connectez-vous à votre compte pour accéder à vos garanties.</p>
-        </div>
+      <!-- titre  -->
+      <div class="title">
+        <h1>Se connecter</h1>
+      </div>
+      <!-- présentation -->
+      <div class="presentation">
+        <p>Connectez-vous à votre compte pour accéder à vos garanties.</p>
+      </div>
     </div>
   </section>
 
   <!-- Messages d'alerte -->
   <section class="section-message">
     {% include 'partials/_messages.html' %}
-  
-    <!-- Errors messages sl-alert -->
-    {% if form.non_field_errors %}
-      <sl-alert variant="danger" open class="alert-msg-danger">
-        <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
-        {% for error in form.non_field_errors %}
-          <div>{{ error }}</div>
-        {% endfor %}
-      </sl-alert>
-    {% endif %}
   </section>
 
   <!-- Login form -->
@@ -59,43 +49,33 @@
 
             <div class="form-content-side">
               <div class="form-fields-wrapper">
-            
+
                 <!-- input username -->
-                <sl-input 
-                  name="username"
-                  type="email" 
-                  placeholder="Entrez votre e-mail" 
-                  size="medium"
-                  value="{{ form.username.value|default:'' }}"
-                  {% if form.username.errors %}class="invalid"{% endif %}>
+                <sl-input name="username" type="email" placeholder="Entrez votre e-mail" size="medium"
+                  value="{{ form.username.value|default:'' }}" {% if form.username.errors %}class="invalid" {% endif %}>
                   <sl-icon name="envelope-fill" slot="prefix"></sl-icon>
                 </sl-input>
                 {% if form.username.errors %}
-                  <div class="error-msg-field">
-                    {% for error in form.username.errors %}
-                      {{ error }}
-                    {% endfor %}
-                  </div>
+                <div class="error-msg-field">
+                  {% for error in form.username.errors %}
+                  {{ error }}
+                  {% endfor %}
+                </div>
                 {% endif %}
-  
-                <!-- input password -->  
-                <sl-input 
-                  name="password"
-                  type="password" 
-                  placeholder="Entrez votre mot de passe" 
-                  password-toggle 
-                  size="medium"
-                  {% if form.password.errors %}class="invalid"{% endif %}>
+
+                <!-- input password -->
+                <sl-input name="password" type="password" placeholder="Entrez votre mot de passe" password-toggle
+                  size="medium" {% if form.password.errors %}class="invalid" {% endif %}>
                   <sl-icon name="shield-lock-fill" slot="prefix"></sl-icon>
                 </sl-input>
                 {% if form.password.errors %}
-                  <div class="error-msg-field">
-                    {% for error in form.password.errors %}
-                      {{ error }}
-                    {% endfor %}
-                  </div>
+                <div class="error-msg-field">
+                  {% for error in form.password.errors %}
+                  {{ error }}
+                  {% endfor %}
+                </div>
                 {% endif %}
-          
+
                 <!-- remember me -->
                 <div class="form-options">
                   <sl-checkbox name="remember_me">
@@ -103,7 +83,7 @@
                   </sl-checkbox>
                   <!-- forgot-password -->
                   {# <a href="#" class="forgot-password">Mot de passe oublié</a> #}
-                </div>  
+                </div>
 
                 <!-- submit -->
                 <div class="authentication-btn-submit">
@@ -111,21 +91,21 @@
                 </div>
               </div>
 
-              <!-- link signup --> 
+              <!-- link signup -->
               <div class="form-footer">
                 <p class="link-to-signup">
-                  Pas encore de compte, 
+                  Pas encore de compte,
                   <a href="{% url 'accounts:signup' %}">
                     s'inscrire !
-                  </a></p>
+                  </a>
+                </p>
               </div>
-           </div>
+            </div>
 
-        </div><!-- end form-grid -->
-      </fieldset> 
-    </form>
-  </sl-card>
-</section>
-
+          </div><!-- end form-grid -->
+        </fieldset>
+      </form>
+    </sl-card>
+  </section>
 
 {% endblock content %}

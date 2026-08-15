@@ -117,11 +117,16 @@
           </div>
         </div>
 
-        <!-- Notes (pleine largeur) -->
+        <!-- Notes (pleine largeur) et value pour textarea Shoelace -->
         <div class="field-group">
-          <sl-textarea class="{% if form.notes.errors %}input-error{% endif %}" name="notes"
-            title="Lettres, chiffres, parenthèses et tirets uniquement." placeholder="Notes sur le produit..." rows="2">
-            {{ form.notes.value|default:'' }}</sl-textarea>
+          <sl-textarea 
+            class="{% if form.notes.errors %}input-error{% endif %}" 
+            name="notes"
+            title="Lettres, chiffres, parenthèses et tirets uniquement." 
+            placeholder="Notes sur le produit..." 
+            rows="2"
+            value="{{ form.notes.value|default:'' }}">
+          </sl-textarea>
           {% if form.notes.errors %}
           <div class="error-text">{{ form.notes.errors|first }}</div>
           {% endif %}

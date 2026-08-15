@@ -1,9 +1,9 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% load static %}
 
 {% block title %}
   <title>Garantix - Créer un compte</title>
-{% endblock title %} 
+{% endblock title %}
 
 {% block extra_css %}
   <link rel="stylesheet" href="{% static 'css/authentication.css' %}">
@@ -14,36 +14,24 @@
 
   <section class="page-bg-header">
     <div class="container-page">
-        <!-- titre  -->
-        <div class="title">
-          <h1>Créer un compte</h1>
-        </div>
-        <!-- présentation -->
-        <div class="presentation">
-            <p>Créez votre compte pour pouvoir gérer vos garanties.</p>
-        </div>
+      <!-- titre  -->
+      <div class="title">
+        <h1>Créer un compte</h1>
+      </div>
+      <!-- présentation -->
+      <div class="presentation">
+        <p>Créez votre compte pour pouvoir gérer vos garanties.</p>
+      </div>
     </div>
   </section>
 
   <!-- Messages d'alerte -->
   <section class="section-message">
     {% include 'partials/_messages.html' %}
-
-            <!-- Errors messages sl-alert -->
-        {% if form.non_field_errors %}
-          <sl-alert variant="danger" open class="alert-msg-danger">
-            <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
-            {% for error in form.non_field_errors %}
-              <div>{{ error }}</div>
-            {% endfor %}
-          </sl-alert>
-        {% endif %}
   </section>
 
-
   <!-- section sign up -->
-
- <section class="form-container">
+  <section class="form-container">
     <!-- card -->
     <sl-card class="form-card-authentication">
       <!-- form novalidate pour désactiver la validation HTML par défaut -->
@@ -62,67 +50,49 @@
             <!-- Colonne de droite : contenu du formulaire -->
             <div class="form-content-side">
               <div class="form-fields-wrapper">
-          
+
                 <!-- input username (email) -->
                 <div class="form-field">
-                  <sl-input
-                    id="username"
-                    type="email"
-                    placeholder="Entrez votre Email"
-                    name="username"
-                    size="medium"
-                    value="{{ form.username.value|default:'' }}"
-                    {% if form.username.errors %}class="invalid"{% endif %}>
+                  <sl-input id="username" type="email" placeholder="Entrez votre Email" name="username" size="medium"
+                    value="{{ form.username.value|default:'' }}" {% if form.username.errors %}class="invalid" {% endif %}>
                     <sl-icon name="envelope-fill" slot="prefix"></sl-icon>
                   </sl-input>
                   {% if form.username.errors %}
-                    <div class="error-msg-field">
-                      {% for error in form.username.errors %}
-                        {{ error }}
-                      {% endfor %}
-                    </div>
+                  <div class="error-msg-field">
+                    {% for error in form.username.errors %}
+                    {{ error }}
+                    {% endfor %}
+                  </div>
                   {% endif %}
                 </div>
-          
-                <!-- input password  -->  
+
+                <!-- input password  -->
                 <div class="form-field">
-                  <sl-input
-                    id="password1"
-                    type="password"
-                    placeholder="Entrez votre mot de passe"
-                    name="password1"
-                    password-toggle
-                    size="medium"
-                    {% if form.password1.errors %}class="invalid"{% endif %}>
+                  <sl-input id="password1" type="password" placeholder="Entrez votre mot de passe" name="password1"
+                    password-toggle size="medium" {% if form.password1.errors %}class="invalid" {% endif %}>
                     <sl-icon name="shield-lock-fill" slot="prefix"></sl-icon>
                   </sl-input>
                   {% if form.password1.errors %}
-                    <div class="error-msg-field">
-                      {% for error in form.password1.errors %}
-                        {{ error }}
-                      {% endfor %}
-                    </div>
+                  <div class="error-msg-field">
+                    {% for error in form.password1.errors %}
+                    {{ error }}
+                    {% endfor %}
+                  </div>
                   {% endif %}
                 </div>
-          
-                <!-- Confirm password input -->  
+
+                <!-- Confirm password input -->
                 <div class="form-field">
-                  <sl-input
-                    id="password2"
-                    type="password"
-                    placeholder="Confirmez votre mot de passe"
-                    name="password2"
-                    password-toggle
-                    size="medium"
-                    {% if form.password2.errors %}class="invalid"{% endif %}>
+                  <sl-input id="password2" type="password" placeholder="Confirmez votre mot de passe" name="password2"
+                    password-toggle size="medium" {% if form.password2.errors %}class="invalid" {% endif %}>
                     <sl-icon name="shield-lock-fill" slot="prefix"></sl-icon>
                   </sl-input>
                   {% if form.password2.errors %}
-                    <div class="error-msg-field">
-                      {% for error in form.password2.errors %}
-                        {{ error }}
-                      {% endfor %}
-                    </div>
+                  <div class="error-msg-field">
+                    {% for error in form.password2.errors %}
+                    {{ error }}
+                    {% endfor %}
+                  </div>
                   {% endif %}
                 </div>
               </div>
@@ -132,21 +102,21 @@
                 <sl-button type="submit" class="btn btn-primary btn-signup" size="medium">Créer un compte</sl-button>
               </div>
 
-              <!-- link login --> 
+              <!-- link login -->
               <div class="form-footer">
                 <p class="link-to-login">
-                  Déjà client chez nous, 
+                  Déjà client chez nous,
                   <a href="{% url 'accounts:login' %}">
                     se connecter !
-                  </a></p>
+                  </a>
+                </p>
               </div>
             </div>
 
-        </div><!-- end form-grid -->
-      </fieldset> 
-    </form>
-  </sl-card>
-</section>
-
+          </div><!-- end form-grid -->
+        </fieldset>
+      </form>
+    </sl-card>
+  </section>
 
 {% endblock content %}
