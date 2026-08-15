@@ -15,9 +15,6 @@ from warranty.constants import FEATURES_HOME, MOCKUPS_HOME, TESTIMONIALS_HOME
 from typing import Any, Dict
 from typing import Type
 from django.template.loader import render_to_string
-import logging
-
-logger = logging.getLogger(__name__)
 
 
 class HomeView(TemplateView):
