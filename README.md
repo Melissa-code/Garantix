@@ -1,9 +1,6 @@
-# <img src="./src/staticfiles/images/logo.svg" width="30" style="margin-right:10px;">Garantix 
+# <img src="./src/warranty/static/images/logo.svg" width="30">&nbsp;Garantix
 
 Application web de gestion de garanties permettant aux utilisateurs de centraliser, suivre et gérer les garanties de leurs produits.
-
-<!-- !Wiki -->
-<!-- ![Aperçu de Garantix]screenshot.png) -->
 
 
 **Les objectifs du projet :**
@@ -18,8 +15,8 @@ Au-delà de la gestion de garanties, ce projet a été l'occasion de mettre en p
 
 **Aperçu :**
 
-<img src="./src/staticfiles/images/home_page.png" width="600" style="margin-right:15px;">
-<img src="./src/staticfiles/images/home_page_mobile.png" width="150">
+<img src="./src/warranty/static/images/home_page.png" width="400" style="margin-right:5px;">
+<img src="./src/warranty/static/images/home_page_mobile.png" width="110">
 
 
 ## Sommaire

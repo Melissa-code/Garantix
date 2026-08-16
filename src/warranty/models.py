@@ -7,6 +7,8 @@ from django.urls import reverse
 from datetime import timedelta
 from django.utils import timezone
 import os
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 import uuid
 
 # accents, lettres, chiffres, espaces, tirets, parenthèses, points (Sécurité XSS < >)
@@ -29,7 +31,6 @@ def get_file_path(instance, filename):
 
 class Warranty(models.Model): 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='warranties', verbose_name="Utilisateur")
-    
     product_name = models.CharField(max_length=150, validators=[MinLengthValidator(2), text_regex], verbose_name="Nom du produit")
     brand = models.CharField(max_length=150, validators=[MinLengthValidator(2), text_regex], verbose_name="Nom de la marque")
     purchase_date = models.DateField(verbose_name="Date d'achat")
@@ -58,7 +59,6 @@ class Warranty(models.Model):
             )
         ]
        
-    
     def clean(self):
         """Validations personnalisées pour les champs de la garantie"""
         super().clean()
@@ -84,11 +84,10 @@ class Warranty(models.Model):
         self.full_clean()
         super().save(*args, **kwargs)
 
-
     def get_absolute_url(self):
         """redirection après ajout/modification d'une garantie vers la liste des garanties"""
         return reverse('warranty:warranties_list') 
-    
+
 
     @property
     def warranty_expiry_date(self): 
@@ -96,13 +95,21 @@ class Warranty(models.Model):
         -> Python transforme cette fonction en attribut "virtuel"""
         return self.purchase_date + timedelta(days=self.warranty_duration_months * 30)
     
-    
     @property
     def is_active(self):
         """Vérifie si la garantie est toujours valide à la date d'aujourd'hui"""
         return self.warranty_expiry_date >= timezone.now().date()
 
-
     def __str__(self):
         """methode d'affichage d'une garantie dans l'admin et les listes - affiche le nom du produit et la marque"""
         return f"{self.product_name} ({self.brand})"
+
+
+#------------- supprime image du dossier "media" lorsque l'objet Warranty est supprimé --------------------#
+
+@receiver(post_delete, sender=Warranty)
+def delete_warranty_image(sender, instance, **kwargs):
+    """Supprime le fichier image du disque quand l'objet Warranty est supprimé"""
+    if instance.imageReceipt:
+        if os.path.isfile(instance.imageReceipt.path):
+            os.remove(instance.imageReceipt.path)
