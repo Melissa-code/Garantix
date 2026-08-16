@@ -11,6 +11,7 @@
 
 
 {% block content %}
+{% csrf_token %}
 
 <div class="page-details-bg-header">
     <div class="container-details">
@@ -86,6 +87,7 @@
                     <!-- boutons Actions-->
                     <div class="actions-group">
                         <sl-button-group>
+                            <!-- Modifier -->
                             <sl-tooltip content="Modifier la garantie" placement="top">
                                 <sl-button size="small" variant="neutral" outline
                                     href="{% url 'warranty:warranty_update' warranty.pk %}">
@@ -93,9 +95,10 @@
                                         style="color: var(--sl-color-warning-600);"></sl-icon> Modifier
                                 </sl-button>
                             </sl-tooltip>
+                            <!-- Supprimer -->
                             <sl-tooltip content="Supprimer la garantie" placement="top">
-                                <sl-button size="small" variant="neutral" outline
-                                    href="{% url 'warranty:warranty_delete' warranty.pk %}">
+                                <sl-button size="small" variant="neutral" outline class="delete-btn"
+                                    data-url="{% url 'warranty:warranty_delete' warranty.pk %}">
                                     <sl-icon slot="prefix" name="trash3-fill"
                                         style="color: var(--sl-color-danger-600);"></sl-icon> Supprimer
                                 </sl-button>
@@ -125,5 +128,51 @@
         </div>
     </div>
 </div>
+
+<script>
+    // AJAX delete warranty
+    document.addEventListener('click', async (e) => {
+        const btn = e.target.closest('.delete-btn');
+        if (!btn) return;
+
+        e.preventDefault();
+
+        const url = btn.getAttribute('data-url');
+        if (!url) return;
+
+        // alert navigateur de confirmation avant suppression
+        if (!confirm("Supprimer cette garantie ?")) return;
+
+        const tokenInput = document.querySelector('[name=csrfmiddlewaretoken]');
+        if (!tokenInput) return;
+
+        //sécurité CSRF token pour la requête AJAX
+        const csrftoken = tokenInput.value;
+
+        try {
+            btn.loading = true;
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrftoken,
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.status === 'success') {
+                    // redirection vers la liste après suppression
+                    window.location.href = "{% url 'warranty:warranties_list' %}";
+                }
+            } else {
+                btn.loading = false;
+            }
+        } catch (err) {
+            btn.loading = false;
+        }
+    });
+</script>
 
 {% endblock %}
