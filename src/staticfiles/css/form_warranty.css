@@ -62,7 +62,7 @@ fieldset {
 }
 
 .image-receipt {
-  width: 95%;
+  width: 100%;
   font-size: 0.9rem;
   border: 1px solid var(--sl-color-neutral-300);
   border-radius: var(--sl-border-radius-medium);
